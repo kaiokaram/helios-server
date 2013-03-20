@@ -12,7 +12,7 @@ DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
-    ('Ben Adida', 'ben@adida.net'),
+    ('Kaio Karam', 'kaio.karam@gmail.com'),
 )
 
 MANAGERS = ADMINS
@@ -29,7 +29,7 @@ DATABASES = {
 # although not all choices may be available on all operating systems.
 # If running in a Windows environment this must be set to the same as your
 # system time zone.
-TIME_ZONE = 'America/Los_Angeles'
+TIME_ZONE = 'America/Sao_Paulo'
 
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html
@@ -106,8 +106,8 @@ VOTER_UPLOAD_REL_PATH = "voters/%Y/%m/%d"
 
 
 # Change your email settings
-DEFAULT_FROM_EMAIL = get_from_env('DEFAULT_FROM_EMAIL', 'ben@adida.net')
-DEFAULT_FROM_NAME = get_from_env('DEFAULT_FROM_NAME', 'Ben for Helios')
+DEFAULT_FROM_EMAIL = get_from_env('DEFAULT_FROM_EMAIL', 'kaio.karam@gmail.com')
+DEFAULT_FROM_NAME = get_from_env('DEFAULT_FROM_NAME', 'Kaio Karam for Helios')
 SERVER_EMAIL = '%s <%s>' % (DEFAULT_FROM_NAME, DEFAULT_FROM_EMAIL)
 
 LOGIN_URL = '/auth/'
@@ -115,29 +115,29 @@ LOGOUT_ON_CONFIRMATION = True
 
 # The two hosts are here so the main site can be over plain HTTP
 # while the voting URLs are served over SSL.
-URL_HOST = get_from_env("URL_HOST", "http://localhost:8000")
+URL_HOST = get_from_env("URL_HOST", "http://143.106.167.66:8000")
 
 # IMPORTANT: you should not change this setting once you've created
 # elections, as your elections' cast_url will then be incorrect.
 # SECURE_URL_HOST = "https://localhost:8443"
-SECURE_URL_HOST = get_from_env("SECURE_URL_HOST", "http://localhost:8000")
+SECURE_URL_HOST = get_from_env("SECURE_URL_HOST", "http://143.106.167.66:8000")
 
 # this additional host is used to iframe-isolate the social buttons,
 # which usually involve hooking in remote JavaScript, which could be
 # a security issue. Plus, if there's a loading issue, it blocks the whole
 # page. Not cool.
-SOCIALBUTTONS_URL_HOST= get_from_env("SOCIALBUTTONS_URL_HOST", "http://localhost:8000")
+SOCIALBUTTONS_URL_HOST= get_from_env("SOCIALBUTTONS_URL_HOST", "http://143.106.167.66:8000")
 
 # election stuff
-SITE_TITLE = get_from_env('SITE_TITLE', 'Helios Election Server')
+SITE_TITLE = get_from_env('SITE_TITLE', 'Helios Election Server for Unicamp')
 
 # FOOTER links
 FOOTER_LINKS = []
 FOOTER_LOGO = False
 
-WELCOME_MESSAGE = get_from_env('WELCOME_MESSAGE', "This is the default message")
+WELCOME_MESSAGE = get_from_env('WELCOME_MESSAGE', "Welcome to Helios for Unicamp")
 
-HELP_EMAIL_ADDRESS = get_from_env('HELP_EMAIL_ADDRESS', 'help@heliosvoting.org')
+HELP_EMAIL_ADDRESS = get_from_env('HELP_EMAIL_ADDRESS', 'kaio.karam@gmail.com')
 
 AUTH_TEMPLATE_BASE = "server_ui/templates/base.html"
 HELIOS_TEMPLATE_BASE = "server_ui/templates/base.html"
