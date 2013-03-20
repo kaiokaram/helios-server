@@ -8,14 +8,15 @@ You have uploaded a file of voters. The first few rows of this file are:
 </p>
 
 <table>
-<tr><th>Voter Login</th><th>Email Address</th><th>Name</th></tr>
+<tr><th>Voter Login</th><th>Email Address</th><th>Name</th><th>Group</th></tr>
 {% for v in voters %}
-<tr><td>{{v.voter_id}}</td><td>{{v.email}}</td><td>{{v.name}}</td></tr>
+<tr><td>{{v.voter_id}}</td><td>{{v.email}}</td><td>{{v.name}}</td><td>{{v.group}}</td></tr>
 {% endfor %}
 </table>
 
 <p></p>
 <form method="post" action="" id="upload_form">
+  If the election has voter groups, make sure each voter has a <b>valid group</b> by specifying the group's short name.<br/>
   Does this look right to you?
   <input type="hidden" name="confirm_p" value="1" />
   <input type="submit" value="Yes, let's go" />

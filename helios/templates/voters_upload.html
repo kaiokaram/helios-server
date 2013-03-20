@@ -11,13 +11,15 @@
     Please prepare a text file of comma-separated values, as follows:
   </p>
   <pre>
-      benadida,ben@adida.net,Ben Adida
-      bob,bob@acme.org,Bob Acme
+      benadida,ben@adida.net,Ben Adida,professor
+      bob,bob@acme.org,Bob Acme,funcionario
+      ana,ana@acme.org,Ana Acme,aluno
       ...
   </pre> 
 
   <p>
-    The easiest way to prepare such a file is to use a spreadsheet program and to export as "CSV".
+    The easiest way to prepare such a file is to use a spreadsheet program and to export as "CSV".<br/>
+    If the election has voter groups, make sure each voter has a <b>valid group</b> by specifying the group's short name.
   </p>
   {% if error %}
   <div style="color: red;">{{error}}</div>

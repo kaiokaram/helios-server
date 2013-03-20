@@ -670,6 +670,9 @@ class VoterFile(models.Model):
       if len(voter_fields) > 2:
         return_dict['name'] = voter_fields[2]
 
+      if len(voter_fields) > 3:
+        return_dict['group'] = voter_fields[3]
+
       yield return_dict
     
   def process(self):
@@ -700,6 +703,7 @@ class VoterFile(models.Model):
       voter_id = voter[0].strip()
       name = voter_id
       email = voter_id
+      group = voter_id
     
       if len(voter) > 1:
         email = voter[1].strip()
@@ -707,6 +711,16 @@ class VoterFile(models.Model):
       if len(voter) > 2:
         name = voter[2].strip()
     
+      if len(voter) > 3:
+        group = voter[3].strip()
+    
+      # get the voter group
+      voter_group_count = VoterGroup.objects.filter(election = election).count();
+      try:
+        voter_group = VoterGroup.objects.get(election = election, group_short_name = group)
+      except VoterGroup.DoesNotExist:
+        voter_group = None
+
       # create the user -- NO MORE
       # user = User.update_or_create(user_type='password', user_id=email, info = {'name': name})
     
@@ -714,10 +728,12 @@ class VoterFile(models.Model):
       voter = Voter.get_by_election_and_voter_id(election, voter_id)
     
       # create the voter
-      if not voter:
+      # voter is NOT created if the group is not valid
+      if not voter and (voter_group != None or voter_group_count == 0):
         voter_uuid = str(uuid.uuid4())
         voter = Voter(uuid= voter_uuid, user = None, voter_login_id = voter_id,
-                      voter_name = name, voter_email = email, election = election)
+                      voter_name = name, voter_email = email, voter_group = voter_group,
+                      election = election)
         voter.generate_password()
         new_voters.append(voter)
         voter.save()
