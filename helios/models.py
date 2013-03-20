@@ -737,6 +737,26 @@ class VoterFile(models.Model):
 
 
     
+class VoterGroup(models.Model):
+  # should we add this field?
+  #uuid = models.CharField(max_length = 50)
+
+  # should group name be unique?
+  group_short_name = models.CharField(max_length = 50, null=False)
+  group_name = models.CharField(max_length = 100)
+  #group_description = models.TextField()
+  group_weight = models.IntegerField(null=False)
+  
+  election = models.ForeignKey(Election, null=False)
+  
+  class Meta:
+    unique_together = (('election', 'group_short_name'))
+
+  def __unicode__(self):
+    return self.group_name
+
+
+
 class Voter(HeliosModel):
   election = models.ForeignKey(Election)
   
@@ -757,6 +777,8 @@ class Voter(HeliosModel):
   voter_password = models.CharField(max_length = 100, null=True)
   voter_name = models.CharField(max_length = 200, null=True)
   voter_email = models.CharField(max_length = 250, null=True)
+
+  voter_group = models.ForeignKey(VoterGroup, null=True)
   
   # if election uses aliases
   alias = models.CharField(max_length = 100, null=True)
