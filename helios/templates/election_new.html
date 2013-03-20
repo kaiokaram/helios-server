@@ -13,6 +13,21 @@
   <form class="prettyform" action="" method="POST" id="create_election_form">
     <table class="pretty">
      {{election_form.as_table}}
+<tr>
+<th><label for="id_voter_groups_0">Voter groups:</label></th>
+<td>{{ group_formset.management_form }}
+<ol style="margin-bottom:0;">
+    {% for group_form in group_formset.forms %}
+      <li><!--{{ group_form.errors }}-->
+          {{ group_form.short_name.errors }}{{ group_form.name.errors }}{{ group_form.weight.errors }}
+          {{ group_form.short_name.label_tag }}: {{ group_form.short_name }}&nbsp;&nbsp;&nbsp;&nbsp;
+          {{ group_form.name.label_tag }}: {{ group_form.name }}&nbsp;&nbsp;&nbsp;&nbsp;
+          {{ group_form.weight.label_tag }}: {{ group_form.weight }}<br /><br /></li>
+    {% endfor %}
+</ol>
+Short name must have <b>no spaces</b> and <b>no special characters</b>.
+</td>
+</tr>
      </table>
   <div>
   <label for="">&nbsp;</label><input type="submit" value="Next &gt;&gt;" id="next_button" />

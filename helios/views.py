@@ -10,6 +10,7 @@ from django.core.mail import send_mail
 from django.core.paginator import Paginator
 from django.http import *
 from django.db import transaction
+from django.forms.formsets import formset_factory
 
 from mimetypes import guess_type
 
@@ -218,13 +219,17 @@ def election_new(request):
     return HttpResponseForbidden('only an administrator can create an election')
     
   error = None
+  VoterGroupFormSet = formset_factory(forms.VoterGroupForm, extra=4)
   
   if request.method == "GET":
     election_form = forms.ElectionForm(initial={'private_p': settings.HELIOS_PRIVATE_DEFAULT})
+    group_formset = VoterGroupFormSet();
+    #group_formset = VoterGroupFormSet(initial=[{'short_name': u'default', 'name': u'Default', 'weight': u'1'}])
   else:
     election_form = forms.ElectionForm(request.POST)
+    group_formset = VoterGroupFormSet(request.POST)
     
-    if election_form.is_valid():
+    if election_form.is_valid() and group_formset.is_valid():
       # create the election obj
       election_params = dict(election_form.cleaned_data)
       
@@ -245,13 +250,27 @@ def election_new(request):
           # add Helios as a trustee by default
           election.generate_trustee(ELGAMAL_PARAMS)
           
+          # save the groups of this election with the respective weights
+          for group_data in group_formset.cleaned_data:
+            short_name = group_data.get('short_name');
+            name = group_data.get('name');
+            weight = group_data.get('weight');
+            if name == '' or name == None:
+              continue            
+            # verify if group already exists for election
+            if VoterGroup.objects.filter(election = election, group_short_name = short_name).count() > 0:
+              continue
+            group = VoterGroup(group_short_name = short_name, group_name = name,
+              group_weight = weight, election = election)
+            group.save()
+          
           return HttpResponseRedirect(reverse(one_election_view, args=[election.uuid]))
         else:
           error = "An election with short name %s already exists" % election_params['short_name']
       else:
         error = "No special characters allowed in the short name."
     
-  return render_template(request, "election_new", {'election_form': election_form, 'error': error})
+  return render_template(request, "election_new", {'election_form': election_form, 'error': error, 'group_formset': group_formset})
   
 @election_admin(frozen=False)
 def one_election_edit(request, election):

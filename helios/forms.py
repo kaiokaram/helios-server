@@ -18,6 +18,12 @@ class ElectionForm(forms.Form):
   private_p = forms.BooleanField(required=False, initial=False, label="Private?", help_text='A private election is only visible to registered voters.')
   
 
+class VoterGroupForm(forms.Form):
+  short_name = forms.SlugField(max_length=20, required=True)
+  name = forms.CharField(max_length=100, required=False)
+  weight = forms.IntegerField(min_value=1, required=True, widget=forms.TextInput(attrs={'size':'4'}))
+
+
 class ElectionTimesForm(forms.Form):
   # times
   voting_starts_at = SplitDateTimeField(help_text = 'UTC date and time when voting begins',
