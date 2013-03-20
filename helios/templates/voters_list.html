@@ -13,6 +13,19 @@
 {% endif %}
 </p>
 
+<p style="margin-bottom:0;">
+<b>Voter Groups:</b>
+{% if voter_groups %}
+  <ul style="margin:0;">
+  {% for group in voter_groups %}
+  <li><em>{{ group.group_short_name }} ({{ group.group_name }}) - weight: {{ group.group_weight }}</em></li>
+  {% endfor %}
+  </ul>
+{% else %}
+  <em>none</em>.<br/><br/>
+{% endif %}
+</p>
+
 {% if admin_p and not election.frozen_at %}
 {% if election.private_p %}
 <em>Your election is marked private, which means you cannot open registration up more widely</em>.<br />
@@ -114,6 +127,8 @@ Voters {{voters_page.start_index}} - {{voters_page.end_index}} (of {{total_voter
 <th>Name</th>
 {% endif %}
 
+<th>Group</th>
+
 {% if election.use_voter_aliases %}
 <th>Alias</th>
 {% endif %}
@@ -129,6 +144,7 @@ Voters {{voters_page.start_index}} - {{voters_page.end_index}} (of {{total_voter
 {% endif %}
 <img border="0" height="20" src="/static/auth/login-icons/{{voter.voter_type}}.png" alt="{{voter.voter_type}}" /> {{voter.name}}</td>
 {% endif %}
+<td>{{voter.voter_group.group_name}}</td>
 {% if election.use_voter_aliases %}
 <td>{{voter.alias}}</td>
 {% endif %}

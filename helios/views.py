@@ -1151,9 +1151,13 @@ def voters_list_pretty(request, election):
 
   total_voters = voter_paginator.count
     
+  #voter_groups = VoterGroup.objects.filter(election=election)
+  voter_groups = election.votergroup_set.all()
+
   return render_template(request, 'voters_list', 
                          {'election': election, 'voters_page': voters_page,
                           'voters': voters_page.object_list, 'admin_p': admin_p, 
+                          'voter_groups': voter_groups,
                           'email_voters': helios.VOTERS_EMAIL,
                           'limit': limit, 'total_voters': total_voters,
                           'upload_p': helios.VOTERS_UPLOAD, 'q' : q,
