@@ -10,6 +10,15 @@
 {% else %}
   QUESTIONS = [];
 {% endif %}
+{% if voter_groups %}
+  GROUPS = [
+  {% for group in voter_groups %}
+    { "id": "{{ group.id }}", "name": "{{ group.group_name }}", "short_name": "{{ group.group_short_name }}" },
+  {% endfor %}
+  ];
+{% else %}
+  GROUPS = [];
+{% endif %}
 {% if admin_p and not election.frozen_at %}
   ADMIN_P = true;
 {% else %}
@@ -19,9 +28,16 @@
   CSRF_TOKEN = '{{csrf_token}}';
 
   function refresh() {
-      $('#questions').processTemplate({'questions' : QUESTIONS, 'admin_p' : ADMIN_P}); 
+      $('#questions').processTemplate({'questions' : QUESTIONS, 'admin_p' : ADMIN_P, 'groups': GROUPS}); 
 
       add_answers($('#answer_table'),DEFAULT_NUM_ANSWERS);
+      add_groups($('#answer_table'));
+
+      // add groups to the questions
+      for (var q_num = 0; q_num < QUESTIONS.length; q_num++) {
+        var answer_table = $('#answer_table_' + q_num);
+        add_groups(answer_table);
+      }
  }
   
   function save_questions(callback) {
@@ -35,7 +51,7 @@
       if (form.max.value != "")
         max = parseInt(form.max.value);
         
-      var new_q = {'question' : form.question.value, 'min': parseInt(form.min.value), 'max': max, 'short_name': form.question.value, 'answers': [], 'answer_urls': [], 'choice_type': form.choice_type.value, 'tally_type': 'homomorphic', 'result_type': form.result_type.value};
+      var new_q = {'question' : form.question.value, 'min': parseInt(form.min.value), 'max': max, 'rules': [], 'short_name': form.question.value, 'answers': [], 'answer_urls': [], 'choice_type': form.choice_type.value, 'tally_type': 'homomorphic', 'result_type': form.result_type.value};
       var i = 0;
       while(true) {
           i += 1;
@@ -45,7 +61,18 @@
           new_q.answer_urls[i-1] = null;
       }
       
-     return new_q;
+      var rule = null;
+      for (i = 0; i < GROUPS.length; i++) {
+          var min = parseInt(form['min_' + GROUPS[i].short_name].value);
+          var max = null;
+          if (form['max_' + GROUPS[i].short_name].value != "")
+            max = parseInt(form['max_' + GROUPS[i].short_name].value);
+          rule = {"group_id": GROUPS[i].id, "group_short_name": GROUPS[i].short_name, 
+            "group_name": GROUPS[i].name, "min": min, "max": max};
+          new_q.rules[i] = rule;
+      }
+
+      return new_q;
   }
 
   function question_add(form) {
@@ -79,10 +106,22 @@
 
     // add the answers
     var answer_table = $('#answer_table_' + q_num);
-    add_answers(answer_table, q_data.answers.length);
+    var num_answers_form = answer_table.find('input.answer').length;
+    if (q_data.answers.length > num_answers_form)
+      add_answers(answer_table, q_data.answers.length - num_answers_form);
     $(q_data.answers).each(function(i, a) {
      form[0]['answer_' + (i+1)].value = a;
     });
+
+    // add the rules
+    for (var i = 0; i < q_data.rules.length; i++) {
+      var short_name = q_data.rules[i]['group_short_name'];
+      var min = q_data.rules[i]['min'];
+      var max = q_data.rules[i]['max'];
+      form[0]['min_' + short_name].value = min;
+      form[0]['max_' + short_name].value = max;
+    }
+  
   }
 
   function question_edit_cancel(q_num) {
@@ -116,12 +155,97 @@
     save_questions(refresh);
   }
 
+  function add_groups(el) {
+
+    var num = GROUPS.length;
+    if (num == 0) return;
+
+    var tbody = el.find('tbody');
+
+    tbody.prepend('<tr><th>&nbsp;</th><th>&nbsp;</th><th>&nbsp;</th></tr>');
+    for (var i = num - 1; i >= 0; i--) {
+      /* add group to table */
+      var tr = $('<tr></tr>');
+
+      var th = $('<th>' + GROUPS[i]['name'] + ':</th>');
+      th.attr('colspan', '2');
+      th.css('text-align', 'right');
+
+      var temp_string = select_fields_string.replace(/#short_name#/g, GROUPS[i]['short_name']);
+      var td = $('<td>' + temp_string + '</td>');
+      td.css('border', '0');
+
+      th.appendTo(tr);
+      td.appendTo(tr);
+      tr.prependTo(tbody);
+    }
+    var tr = $('<tr><th colspan="2" style="text-align: right;"></th>\
+                <th colspan="1" style="text-align: left;">&nbsp;&nbsp;&nbsp;Rules</th></tr>');
+    tr.prependTo(tbody);
+    //tbody.prepend('<tr><th>&nbsp;</th><th>&nbsp;</th><th>&nbsp;</th></tr>');
+  }
+
   $(document).ready(function() {
       $('#questions').setTemplateURL("/static/helios/static_templates/question.html");
 
       refresh();
   });
   
+var select_fields_string = 
+'&nbsp;&nbsp;&nbsp;select between &nbsp;&nbsp;\n\
+<select name="min_#short_name#">\n\
+    <option selected>0</option>\n\
+    <option>1</option>\n\
+    <option>2</option>\n\
+    <option>3</option>\n\
+    <option>4</option>\n\
+    <option>5</option>\n\
+    <option>6</option>\n\
+    <option>7</option>\n\
+    <option>8</option>\n\
+    <option>9</option>\n\
+    <option>10</option>\n\
+    <option>11</option>\n\
+    <option>12</option>\n\
+    <option>13</option>\n\
+    <option>14</option>\n\
+    <option>15</option>\n\
+    <option>16</option>\n\
+    <option>17</option>\n\
+    <option>18</option>\n\
+    <option>19</option>\n\
+    <option>20</option>\n\
+</select>\n\
+\n\
+&nbsp;&nbsp; and  &nbsp;&nbsp;\n\
+\n\
+<select name="max_#short_name#">\n\
+    <option>0</option>\n\
+    <option selected>1</option>\n\
+    <option>2</option>\n\
+    <option>3</option>\n\
+    <option>4</option>\n\
+    <option>5</option>\n\
+    <option>6</option>\n\
+    <option>7</option>\n\
+    <option>8</option>\n\
+    <option>9</option>\n\
+    <option>10</option>\n\
+    <option>11</option>\n\
+    <option>12</option>\n\
+    <option>13</option>\n\
+    <option>14</option>\n\
+    <option>15</option>\n\
+    <option>16</option>\n\
+    <option>17</option>\n\
+    <option>18</option>\n\
+    <option>19</option>\n\
+    <option>20</option>\n\
+    <option value="">- (approval)</option>\n\
+</select>\n\
+\n\
+&nbsp;&nbsp;\n\
+answers.'
 
   </script>
 

@@ -940,10 +940,13 @@ def one_election_archive(request, election):
 @election_view()
 def one_election_questions(request, election):
   questions_json = utils.to_json(election.questions)
+  #voter_groups = VoterGroup.objects.filter(election = election)
+  voter_groups = election.votergroup_set.all()
   user = get_user(request)
   admin_p = security.user_can_admin_election(user, election)
 
-  return render_template(request, 'election_questions', {'election': election, 'questions_json' : questions_json, 'admin_p': admin_p})
+  return render_template(request, 'election_questions', 
+    {'election': election, 'questions_json' : questions_json, 'admin_p': admin_p, 'voter_groups': voter_groups})
 
 def _check_eligibility(election, user):
   # prevent password-users from signing up willy-nilly for other elections, doesn't make sense
