@@ -1293,6 +1293,7 @@ def voters_email(request, election):
                 'name': '<VOTER_NAME>',
                 'voter_login_id': '<VOTER_LOGIN_ID>',
                 'voter_password': '<VOTER_PASSWORD>',
+                'voter_group': '<VOTER_GROUP>',
                 'voter_type' : election.voter_set.all()[0].voter_type,
                 'election' : election}
       })
