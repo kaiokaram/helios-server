@@ -1223,8 +1223,8 @@ def voters_upload(request, election):
   if request.method == "POST":
     if bool(request.POST.get('confirm_p', 0)):
       # launch the background task to parse that file
-      tasks.voter_file_process.delay(voter_file_id = request.session['voter_file_id'])
-      #tasks.voter_file_process(voter_file_id = request.session['voter_file_id'])
+      #tasks.voter_file_process.delay(voter_file_id = request.session['voter_file_id'])
+      tasks.voter_file_process(voter_file_id = request.session['voter_file_id'])
       del request.session['voter_file_id']
 
       return HttpResponseRedirect(reverse(voters_list_pretty, args=[election.uuid]))

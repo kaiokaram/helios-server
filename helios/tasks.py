@@ -118,17 +118,17 @@ Helios
 def voter_file_process(voter_file_id):
     voter_file = VoterFile.objects.get(id = voter_file_id)
     voter_file.process()
-    election_notify_admin.delay(election_id = voter_file.election.id, 
-                                subject = 'voter file processed',
-                                body = """
-Your voter file upload for election %s
-has been processed.
-
-%s voters have been created.
-
---
-Helios
-""" % (voter_file.election.name, voter_file.num_voters))
+#    election_notify_admin.delay(election_id = voter_file.election.id, 
+#                                subject = 'voter file processed',
+#                                body = """
+#Your voter file upload for election %s
+#has been processed.
+#
+#%s voters have been created.
+#
+#--
+#Helios
+#""" % (voter_file.election.name, voter_file.num_voters))
 
 @task()
 def election_notify_admin(election_id, subject, body):
