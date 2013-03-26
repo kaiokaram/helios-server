@@ -25,6 +25,13 @@ Proceed to log in and cast your encrypted ballot for tallying.
 </li>
 </ol>
 
-<div align="center"><button onclick="BOOTH.show_question(0);">Start</button></div>
+<p>Before starting, please <b>select your group</b> for this election:<br/>
+<select name="voter_group" id="id_voter_group">
+    {#foreach $T.election.questions[0].rules as rule}
+    <option value="{$T.rule.group_id}">{$T.rule.group_name}</option>
+    {#/for}
+</select>
+<p/>
+<div align="center"><button onclick="BOOTH.voter_group_id = $('#id_voter_group').val(); BOOTH.show_question(0);">Start</button></div>
 </div>
 
