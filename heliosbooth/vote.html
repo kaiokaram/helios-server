@@ -246,6 +246,23 @@ BOOTH.previous = function(question_num) {
     }
 };
 
+BOOTH.get_rule = function(question_num, voter_group_id) {
+  var rules = BOOTH.election.questions[question_num].rules;
+  //alert(rules);
+  if (!rules) return [];
+  
+  for (var i = 0; i < rules.length; i++) {
+    if (rules[i].group_id == voter_group_id) {
+      //alert(rules[i])
+      return rules[i];
+    }
+  }
+  
+  return null;
+}
+
+BOOTH.voter_group_id = '';
+
 BOOTH.show_question = function(question_num) {
   BOOTH.started_p = true;
 
@@ -253,9 +270,14 @@ BOOTH.show_question = function(question_num) {
   if (question_num == BOOTH.election.questions.length -1)
     BOOTH.all_questions_seen = true;
 
+  var rule = BOOTH.get_rule(question_num, BOOTH.voter_group_id);
+  // Replace min and max numbers of answers by the specific rule for the voter group
+  BOOTH.election.questions[question_num].max = rule.max;
+  BOOTH.election.questions[question_num].min = rule.min;
+
   BOOTH.show_progress('1');
   BOOTH.show($('#question_div')).processTemplate({'question_num' : question_num,
-                      'last_question_num' : BOOTH.election.questions.length - 1,
+                      'last_question_num' : BOOTH.election.questions.length - 1, 'group_name': rule.group_name,
                       'question' : BOOTH.election.questions[question_num], 'show_reviewall' : BOOTH.all_questions_seen
                 });
 
