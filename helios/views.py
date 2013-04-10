@@ -170,6 +170,8 @@ def _election_vote_shortcut(request, election):
 def election_vote_shortcut(request, election_short_name):
   election = Election.get_by_short_name(election_short_name)
   if election:
+    if (request.session.has_key('voter_group_id')):
+      del request.session['voter_group_id']
     return _election_vote_shortcut(request, election_uuid=election.uuid)
   else:
     raise Http404
@@ -319,6 +321,10 @@ def election_badge(request, election):
 
 @election_view()
 def one_election_view(request, election):
+  # Why it does not work?
+  if (request.session.has_key('voter_group_id')):
+    del request.session['voter_group_id']
+  
   user = get_user(request)
   admin_p = security.user_can_admin_election(user, election)
   can_feature_p = security.user_can_feature_election(user, election)
@@ -591,6 +597,14 @@ def password_voter_login(request, election):
   bad_voter_login = (request.GET.get('bad_voter_login', "0") == "1")
   bad_voter_group = (request.GET.get('bad_voter_group', "0") == "1")
 
+  
+  if (request.session.get('voter_group_id', None) != None):
+    voter_group_id = request.session['voter_group_id']
+    voter_group_name = VoterGroup.objects.get(id=voter_group_id).group_name.encode('utf-8')
+  else:
+    voter_group_id = None
+    voter_group_name = ""
+  
   if request.method == "GET":
     # if user logged in somehow in the interim, e.g. using the login link for administration,
     # then go!
@@ -600,10 +614,12 @@ def password_voter_login(request, election):
     password_login_form = forms.VoterPasswordForm()
     return render_template(request, 'password_voter_login',
                            {'election': election,
-                            'return_url' : return_url,
+                            'return_url': return_url,
                             'password_login_form': password_login_form,
-                            'bad_voter_login' : bad_voter_login,
-                            'bad_voter_group' : bad_voter_group})
+                            'voter_group_id': voter_group_id,
+                            'voter_group_name': voter_group_name,
+                            'bad_voter_login': bad_voter_login,
+                            'bad_voter_group': bad_voter_group})
   
   login_url = request.REQUEST.get('login_url', None)
 
@@ -642,11 +658,11 @@ def password_voter_login(request, election):
         #return HttpResponseRedirect(redirect_url)      
     
     except Voter.DoesNotExist:
-      voter_group_id = request.session['voter_group_id']
+      #voter_group_id = request.session['voter_group_id']
       redirect_url = login_url + "?" + urllib.urlencode({
           'bad_voter_login' : '1',
           'voter_group_id' : voter_group_id,
-          'voter_group_name': VoterGroup.objects.get(id=voter_group_id).group_name,
+          'voter_group_name': voter_group_name,
           'return_url' : return_url
           })
       
@@ -752,13 +768,13 @@ def one_election_cast_confirm(request, election):
       
     if (voter):
       bad_voter_group = (voter.voter_group_id != long(voter_group_id))
-      
+    
     return render_template(request, 'election_cast_confirm', {
         'login_box': login_box, 'election' : election, 'vote_fingerprint': vote_fingerprint,
         'past_votes': past_votes, 'issues': issues, 'voter' : voter,
         'return_url': return_url,
         'voter_group_id': voter_group_id,
-        'voter_group_name': voter_group_name,
+        'voter_group_name': voter_group_name.encode('utf-8'),
         'status_update_label': status_update_label, 'status_update_message': status_update_message,
         'show_password': show_password, 'password_only': password_only, 'password_login_form': password_login_form,
         'bad_voter_login': bad_voter_login, 'bad_voter_group': bad_voter_group})

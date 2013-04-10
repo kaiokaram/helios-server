@@ -344,7 +344,9 @@ class Election(HeliosModel):
     tally = self.init_tally()
     for voter in self.voter_set.all():
       if voter.vote:
-        tally.add_vote(voter.vote, verify_p=False)
+        weight = voter.voter_group.group_weight;
+        for i in range(weight):
+          tally.add_vote(voter.vote, verify_p=False)
 
     self.encrypted_tally = tally
     self.save()    
