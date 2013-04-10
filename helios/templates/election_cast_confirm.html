@@ -44,7 +44,18 @@ Your smart ballot tracker is:<br /><br />
 
 {% if voter %}
 
-{% include "_castconfirm_docast.html" %}
+    {% if bad_voter_group %}
+
+<p style="color:red; font-size:1.2em;">
+The <b>voter group</b> of the authenticated user is <b>different</b> from the informed voter group.<br/>
+Please, <b>sign out</b> and try again.
+</p>
+
+    {% else %}
+
+        {% include "_castconfirm_docast.html" %}
+
+    {% endif %}
 
 {% else %}
 

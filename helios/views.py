@@ -575,6 +575,9 @@ def one_election_cast(request, election):
 
   save_in_session_across_logouts(request, 'encrypted_vote', encrypted_vote)
 
+  voter_group_id = request.POST.get('voter_group_id')
+  save_in_session_across_logouts(request, 'voter_group_id', voter_group_id)
+
   return HttpResponseRedirect("%s%s" % (settings.SECURE_URL_HOST, reverse(one_election_cast_confirm, args=[election.uuid])))
 
 @election_view(allow_logins=True)
@@ -586,6 +589,7 @@ def password_voter_login(request, election):
   # the URL to send the user to after they've logged in
   return_url = request.REQUEST.get('return_url', reverse(one_election_cast_confirm, args=[election.uuid]))
   bad_voter_login = (request.GET.get('bad_voter_login', "0") == "1")
+  bad_voter_group = (request.GET.get('bad_voter_group', "0") == "1")
 
   if request.method == "GET":
     # if user logged in somehow in the interim, e.g. using the login link for administration,
@@ -595,10 +599,11 @@ def password_voter_login(request, election):
 
     password_login_form = forms.VoterPasswordForm()
     return render_template(request, 'password_voter_login',
-                           {'election': election, 
+                           {'election': election,
                             'return_url' : return_url,
                             'password_login_form': password_login_form,
-                            'bad_voter_login' : bad_voter_login})
+                            'bad_voter_login' : bad_voter_login,
+                            'bad_voter_group' : bad_voter_group})
   
   login_url = request.REQUEST.get('login_url', None)
 
@@ -618,14 +623,37 @@ def password_voter_login(request, election):
                                      voter_password = password_login_form.cleaned_data['password'].strip())
 
       request.session['CURRENT_VOTER'] = voter
+      #voter_name = voter.voter_name
+      #group_id = voter.voter_group_id
+
+      # verify voter group
+      #voter_group_id = request.session['voter_group_id']
+      #if (True): #(voter.voter_group_id != voter_group_id):
+      #redirect_url = login_url + "?" + urllib.urlencode({
+      #      'bad_voter_group' : '1',
+      #      'bad_voter_login' : '1',
+      #      'voter_group_id' : voter_group_id,
+      #      'voter_name' : 'voter.voter_name',
+      #      'election' : election,
+      #      'voter_group_name': VoterGroup.objects.get(id=voter_group_id).group_name,
+      #      'return_url' : return_url
+      #      })
+        
+        #return HttpResponseRedirect(redirect_url)      
+    
     except Voter.DoesNotExist:
+      voter_group_id = request.session['voter_group_id']
       redirect_url = login_url + "?" + urllib.urlencode({
           'bad_voter_login' : '1',
+          'voter_group_id' : voter_group_id,
+          'voter_group_name': VoterGroup.objects.get(id=voter_group_id).group_name,
           'return_url' : return_url
           })
-
+      
       return HttpResponseRedirect(redirect_url)
-  
+    
+    
+    
   return HttpResponseRedirect(return_url)
 
 @election_view(frozen=True)
@@ -649,7 +677,13 @@ def one_election_cast_confirm(request, election):
   encrypted_vote = request.session['encrypted_vote']
   vote_fingerprint = cryptoutils.hash_b64(encrypted_vote)
 
-  # if this user is a voter, prepare some stuff
+  if (request.session.has_key('voter_group_id')):
+    voter_group_id = request.session['voter_group_id']
+  else:
+    voter_group_id = request.POST.get('voter_group_id', None)
+    request.session['voter_group_id'] = voter_group_id
+
+# if this user is a voter, prepare some stuff
   if voter:
     vote = datatypes.LDObject.fromDict(utils.from_json(encrypted_vote), type_hint='legacy/EncryptedVote').wrapped_obj
 
@@ -680,6 +714,7 @@ def one_election_cast_confirm(request, election):
       issues = None
 
     bad_voter_login = (request.GET.get('bad_voter_login', "0") == "1")
+    bad_voter_group = (request.GET.get('bad_voter_group', "0") == "1")
 
     # status update this vote
     if voter and voter.user.can_update_status():
@@ -710,13 +745,23 @@ def one_election_cast_confirm(request, election):
     return_url = reverse(one_election_cast_confirm, args=[election.uuid])
     login_box = auth_views.login_box_raw(request, return_url=return_url, auth_systems = auth_systems)
 
+    if (voter_group_id != None):
+      voter_group_name = VoterGroup.objects.get(id=voter_group_id).group_name
+    else:
+      voter_group_name = ''
+      
+    if (voter):
+      bad_voter_group = (voter.voter_group_id != long(voter_group_id))
+      
     return render_template(request, 'election_cast_confirm', {
         'login_box': login_box, 'election' : election, 'vote_fingerprint': vote_fingerprint,
         'past_votes': past_votes, 'issues': issues, 'voter' : voter,
         'return_url': return_url,
+        'voter_group_id': voter_group_id,
+        'voter_group_name': voter_group_name,
         'status_update_label': status_update_label, 'status_update_message': status_update_message,
         'show_password': show_password, 'password_only': password_only, 'password_login_form': password_login_form,
-        'bad_voter_login': bad_voter_login})
+        'bad_voter_login': bad_voter_login, 'bad_voter_group': bad_voter_group})
       
   if request.method == "POST":
     check_csrf(request)

@@ -445,6 +445,7 @@ BOOTH._after_ballot_encryption = function() {
       $('#seal_div').processTemplate({'cast_url': BOOTH.election.cast_url,
         'encrypted_vote_json': BOOTH.encrypted_vote_json,
         'encrypted_vote_hash' : BOOTH.encrypted_ballot_hash,
+        'voter_group_id' : BOOTH.voter_group_id,
         'election_uuid' : BOOTH.election.uuid,
         'election_hash' : BOOTH.election_hash,
         'election': BOOTH.election});
