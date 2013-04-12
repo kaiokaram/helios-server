@@ -344,7 +344,15 @@ class Election(HeliosModel):
     tally = self.init_tally()
     for voter in self.voter_set.all():
       if voter.vote:
-        tally.add_vote(voter.vote, verify_p=False)
+        tally.add_vote(encrypted_vote=voter.vote, weight=voter.voter_group.group_weight, verify_p=False)
+## DEBUG ##
+#        self.admin.send_message("voter weight", """
+#Voter: %s
+#Voter Group: %s
+#Group Weight: %d
+#Vote: %s
+#""" % (voter.voter_name, voter.voter_group.group_short_name, voter.voter_group.group_weight, voter.vote))
+        
 
     self.encrypted_tally = tally
     self.save()    

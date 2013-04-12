@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """
 homomorphic workflow and algorithms for Helios
 
@@ -287,15 +288,20 @@ class Tally(WorkflowObject):
     self.questions = election.questions
     self.public_key = election.public_key
     
-  def add_vote_batch(self, encrypted_votes, verify_p=True):
+  def add_vote_batch(self, encrypted_votes, weight=1, verify_p=True):
     """
     Add a batch of votes. Eventually, this will be optimized to do an aggregate proof verification
     rather than a whole proof verif for each vote.
     """
     for vote in encrypted_votes:
-      self.add_vote(vote, verify_p)
+      self.add_vote(vote, weight, verify_p)
+## DEBUG ##
+#      election.admin.send_message("voter weight (batch)", """
+#Group Weight: %d
+#Vote: %s
+#""" % (weight, vote))
     
-  def add_vote(self, encrypted_vote, verify_p=True):
+  def add_vote(self, encrypted_vote, weight=1, verify_p=True):
     # do we verify?
     if verify_p:
       if not encrypted_vote.verify(self.election):
@@ -311,7 +317,11 @@ class Tally(WorkflowObject):
         # do the homomorphic addition into the tally
         enc_vote_choice = encrypted_vote.encrypted_answers[question_num].choices[answer_num]
         enc_vote_choice.pk = self.public_key
-        self.tally[question_num][answer_num] = encrypted_vote.encrypted_answers[question_num].choices[answer_num] * self.tally[question_num][answer_num]
+        
+        # maybe change to a direct exponentiation: choice ** weight
+        # Operator ** apparently does not work on the type of variable choices[answer_num]. Maybe overload operator?
+        for cont in range(weight):
+          self.tally[question_num][answer_num] = encrypted_vote.encrypted_answers[question_num].choices[answer_num] * self.tally[question_num][answer_num]
 
     self.num_tallied += 1
 
