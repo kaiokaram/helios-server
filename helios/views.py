@@ -1090,7 +1090,10 @@ def one_election_compute_tally(request, election):
   election.tallying_started_at = datetime.datetime.utcnow()
   election.save()
 
-  tasks.election_compute_tally.delay(election_id = election.id)
+  # When using .delay, weight is not considered in computing tally. WHY?
+  # Keep it without .delay for the moment.
+  #tasks.election_compute_tally.delay(election_id = election.id)
+  tasks.election_compute_tally(election_id = election.id)
 
   return HttpResponseRedirect(reverse(one_election_view,args=[election.uuid]))
 
