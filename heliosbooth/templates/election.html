@@ -3,6 +3,17 @@
 <p>
     To cast a vote, you will be led through the following steps.<br />
     If you have not yet logged in, you will be asked to do so at the very end of the process.
+
+<p style="font-size:120%">
+    First of all, please <b>select your group</b> for this election:<br/>
+    <select name="voter_group" id="id_voter_group" style="font-size:70%">
+        <option value="none">--</option>
+        {#foreach $T.election.questions[0].rules as rule}
+        <option value="{$T.rule.group_id}">{$T.rule.group_name}</option>
+        {#/for}
+    </select>
+    <span id="id_select_group_error" style="display:none; font-size:80%; color:red;">Please, select your group.</span>
+
 <p>
     
 <ol>
@@ -25,13 +36,8 @@ Proceed to log in and cast your encrypted ballot for tallying.
 </li>
 </ol>
 
-<p>Before starting, please <b>select your group</b> for this election:<br/>
-<select name="voter_group" id="id_voter_group">
-    {#foreach $T.election.questions[0].rules as rule}
-    <option value="{$T.rule.group_id}">{$T.rule.group_name}</option>
-    {#/for}
-</select>
-<p/>
-<div align="center"><button onclick="BOOTH.voter_group_id = $('#id_voter_group').val(); BOOTH.show_question(0);">Start</button></div>
+<div align="center">
+<button onclick="return(BOOTH.check_group_selection())">Start</button>
 </div>
 
+</div>

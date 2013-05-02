@@ -295,6 +295,18 @@ BOOTH.show_question = function(question_num) {
 };
 
 
+BOOTH.check_group_selection = function() {
+  BOOTH.voter_group_id = $('#id_voter_group').val();
+  if (BOOTH.voter_group_id == 'none') {
+    //alert('NONE!');
+    $('#id_select_group_error').show();//style.display = '';
+  }
+  else {
+    BOOTH.show_question(0);
+  }
+  return false;
+}
+
 
 BOOTH.click_checkbox_script = function(question_num, answer_num) {
   document.forms['answer_form']['answer_'+question_num+'_'+answer_num].click();
