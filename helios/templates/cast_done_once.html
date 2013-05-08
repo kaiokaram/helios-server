@@ -1,0 +1,20 @@
+{% extends TEMPLATE_BASE %}
+
+{% block content %}
+
+  <h2 class="title">You already cast a vote for this election <!--{{election.name}}--> before</h2>
+
+  <p style="font-size: 1.3em;">
+      <span style="color:red;">The ballot was <b>NOT</b> recorded!</span><br/>
+      Vote cast is allowed only <b>once</b> per election:
+      <u>you can no longer cast a vote for this election</u>.
+  </p>
+  
+  <p style="font-size: 1.1em;">
+      If you are not <u>{{voter.display_html_big|safe}}</u>, please <b>sign out</b> and try again.
+  </p>
+  <p style="font-size: 1.2em;">
+      [ <a href="{% url helios.views.one_election_view election.uuid %}">see election info</a> ]
+  </p>
+
+{% endblock %}

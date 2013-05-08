@@ -791,6 +791,11 @@ def one_election_cast_confirm(request, election):
     if not voter:
       return HttpResponseRedirect(reverse(one_election_cast_confirm, args=[election.uuid]))
     
+    # voter already cast a vote for this election
+    if voter:
+      if (CastVote.objects.filter(voter=voter).count() > 0):
+        return render_template(request, 'cast_done_once', {'election': election, 'voter' : voter})
+    
     # don't store the vote in the voter's data structure until verification
     cast_vote.save()
 
