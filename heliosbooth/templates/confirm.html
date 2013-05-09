@@ -5,7 +5,7 @@
 <p>
 <u>Question #{$T.question$index + 1}</u>: {$T.question.short_name}<br />
 
-<b style="font-size:1.4em;">{#foreach $T.choices[$T.question$index] as choice}
+<b style="font-size:1.0em;">{#foreach $T.choices[$T.question$index] as choice}
 {$T.choice}{#if !$T.choice$last}, {#/if}
 {#/for}</b>
 &nbsp;&nbsp;&nbsp;
