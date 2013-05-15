@@ -12,7 +12,7 @@ DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
-    ('Kaio Karam', 'kaio.karam@gmail.com'),
+    ('Helios for Unicamp', ''),
 )
 
 MANAGERS = ADMINS
@@ -20,7 +20,11 @@ MANAGERS = ADMINS
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'helios'
+        'NAME': 'helios_dev',
+        'USER': 'helios',
+        'PASSWORD': 'helios',
+        'HOST': '',
+        'PORT': ''
     }
 }
 
@@ -110,7 +114,7 @@ DEFAULT_FROM_EMAIL = get_from_env('DEFAULT_FROM_EMAIL', 'kaio.karam@gmail.com')
 DEFAULT_FROM_NAME = get_from_env('DEFAULT_FROM_NAME', 'Kaio Karam for Helios')
 SERVER_EMAIL = '%s <%s>' % (DEFAULT_FROM_NAME, DEFAULT_FROM_EMAIL)
 
-LOGIN_URL = '/auth/'
+LOGIN_URL = 'auth/'
 LOGOUT_ON_CONFIRMATION = True
 
 # The two hosts are here so the main site can be over plain HTTP
@@ -129,7 +133,7 @@ SECURE_URL_HOST = get_from_env("SECURE_URL_HOST", "http://143.106.167.66:8000")
 SOCIALBUTTONS_URL_HOST= get_from_env("SOCIALBUTTONS_URL_HOST", "http://143.106.167.66:8000")
 
 # election stuff
-SITE_TITLE = get_from_env('SITE_TITLE', 'Helios Election Server for Unicamp')
+SITE_TITLE = get_from_env('SITE_TITLE', 'Helios Election Server for Unicamp - DEV')
 
 # FOOTER links
 FOOTER_LINKS = []

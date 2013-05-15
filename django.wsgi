@@ -1,7 +1,7 @@
 import os
 import sys
 
-sys.path.append('/web/helios-server')
+sys.path.append('/home/helios/kaio-helios/helios-server')
 
 os.environ['DJANGO_SETTINGS_MODULE'] = 'settings'
 
