@@ -19,9 +19,10 @@ class ElectionForm(forms.Form):
   
 
 class VoterGroupForm(forms.Form):
-  short_name = forms.SlugField(max_length=20, required=True)
-  name = forms.CharField(max_length=100, required=False)
-  weight = forms.IntegerField(min_value=1, required=True, widget=forms.TextInput(attrs={'size':'4'}))
+  short_name = forms.SlugField(max_length=20, required=True, error_messages={'required': 'A Short Name is required for this group'})
+  name = forms.CharField(max_length=100, required=True, error_messages={'required': 'A Name is required for this group'})
+  weight = forms.IntegerField(min_value=1, required=True, widget=forms.TextInput(attrs={'size':'4'}), 
+      error_messages={'required': 'A Weight is required for this group'})
 
 
 class ElectionTimesForm(forms.Form):
