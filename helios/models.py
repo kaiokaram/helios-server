@@ -344,15 +344,7 @@ class Election(HeliosModel):
     tally = self.init_tally()
     for voter in self.voter_set.all():
       if voter.vote:
-        tally.add_vote(encrypted_vote=voter.vote, weight=voter.voter_group.group_weight, verify_p=False)
-## DEBUG ##
-#        self.admin.send_message("voter weight", """
-#Voter: %s
-#Voter Group: %s
-#Group Weight: %d
-#Vote: %s
-#""" % (voter.voter_name, voter.voter_group.group_short_name, voter.voter_group.group_weight, voter.vote))
-        
+        tally.add_vote(encrypted_vote=voter.vote, group=voter.voter_group, verify_p=False)
 
     self.encrypted_tally = tally
     self.save()    
@@ -379,7 +371,12 @@ class Election(HeliosModel):
     trustees = Trustee.get_by_election(self)
     decryption_factors = [t.decryption_factors for t in trustees]
     
-    self.result = self.encrypted_tally.decrypt_from_factors(decryption_factors, self.public_key)
+    max_weight = 1
+    for group in self.votergroup_set.all():
+      if group.group_weight > max_weight:
+        max_weight = group.group_weight
+
+    self.result = self.encrypted_tally.decrypt_from_factors(decryption_factors, self.public_key, max_weight)
 
     self.append_log(ElectionLog.DECRYPTIONS_COMBINED)
 

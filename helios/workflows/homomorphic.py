@@ -288,20 +288,17 @@ class Tally(WorkflowObject):
     self.questions = election.questions
     self.public_key = election.public_key
     
-  def add_vote_batch(self, encrypted_votes, weight=1, verify_p=True):
+  def add_vote_batch(self, encrypted_votes, group, verify_p=True):
     """
     Add a batch of votes. Eventually, this will be optimized to do an aggregate proof verification
     rather than a whole proof verif for each vote.
     """
     for vote in encrypted_votes:
-      self.add_vote(vote, weight, verify_p)
-## DEBUG ##
-#      election.admin.send_message("voter weight (batch)", """
-#Group Weight: %d
-#Vote: %s
-#""" % (weight, vote))
+      self.add_vote(vote, group, verify_p)
     
-  def add_vote(self, encrypted_vote, weight=1, verify_p=True):
+  def add_vote(self, encrypted_vote, group, verify_p=True):
+    weight = group.group_weight;
+    
     # do we verify?
     if verify_p:
       if not encrypted_vote.verify(self.election):
@@ -320,11 +317,26 @@ class Tally(WorkflowObject):
         
         # maybe change to a direct exponentiation: choice ** weight
         # Operator ** apparently does not work on the type of variable choices[answer_num]. Maybe overload operator?
+        #before = self.tally[question_num][answer_num]
         for cont in range(weight):
-          self.tally[question_num][answer_num] = encrypted_vote.encrypted_answers[question_num].choices[answer_num] * self.tally[question_num][answer_num]
+          self.tally[question_num][answer_num] = enc_vote_choice * self.tally[question_num][answer_num]
+
+        ## DEBUG ##
+#        if question_num == 1 and answer_num == 0:
+#          election.admin.send_message("vote tally", """
+#Voter: %s
+#Group Weight: %d
+#Vote number: %d
+#Vote:\n%s
+#Partial result:
+#    before: %s
+#    after: %s
+#""" % (voter_id, weight, self.num_tallied + 1, enc_vote_choice, before, self.tally[question_num][answer_num]))
+
 
     self.num_tallied += 1
 
+  
   def decryption_factors_and_proofs(self, sk):
     """
     returns an array of decryption factors and a corresponding array of decryption proofs.
@@ -405,7 +417,7 @@ class Tally(WorkflowObject):
     
     return True
     
-  def decrypt_from_factors(self, decryption_factors, public_key):
+  def decrypt_from_factors(self, decryption_factors, public_key, max_weight):
     """
     decrypt a tally given decryption factors
     
@@ -415,7 +427,7 @@ class Tally(WorkflowObject):
     
     # pre-compute a dlog table
     dlog_table = DLogTable(base = public_key.g, modulus = public_key.p)
-    dlog_table.precompute(self.num_tallied)
+    dlog_table.precompute(self.num_tallied * max_weight)
     
     result = []
     
@@ -429,6 +441,10 @@ class Tally(WorkflowObject):
         raw_value = self.tally[q_num][a_num].decrypt(dec_factor_list, public_key)
         
         q_result.append(dlog_table.lookup(raw_value))
+        lookup = dlog_table.lookup(raw_value)
+        ## DEBUG ##
+        #if q_num == 1:
+        #  election.admin.send_message("decrypt tally", "Answer: %d\nRaw_value: %s\nLookup: %s\n" % (a_num, raw_value, lookup))
 
       result.append(q_result)
     
