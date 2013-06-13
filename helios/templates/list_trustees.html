@@ -1,31 +1,32 @@
 {% extends "helios/templates/cryptobase.html" %}
+{% load i18n %}
 
-{% block title %}Trustees for {{election.name}}{% endblock %}
+{% block title %}{% trans "Trustees for" %} {{election.name}}{% endblock %}
 
 {% block content %}
-  <h2 class="title">{{election.name}} &mdash; Trustees <span style="font-size:0.7em;">[<a href="{% url helios.views.one_election_view election.uuid %}">back to election</a>]</span></h2>
+  <h2 class="title">{{election.name}} &mdash; {% trans "Trustees" %} <span style="font-size:0.7em;">[<a href="{% url helios.views.one_election_view election.uuid %}">{% trans "back to election" %}</a>]</span></h2>
 
 <p>
-    Trustees are responsible for decrypting the election result.<br />
+    {% blocktrans %}Trustees are responsible for decrypting the election result.<br />
     Each trustee generates a keypair and submits the public portion to Helios.<br />
-    When it's time to decrypt, each trustee needs to provide his secret key.
+    When it's time to decrypt, each trustee needs to provide his secret key.{% endblocktrans %}
 </p>
 
 {% if not election.frozen_at %}
 
 <p>
-  Helios is automatically your first trustee and will handle its keypair generation and decryption automatically.<br />
+  {% blocktrans %}Helios is automatically your first trustee and will handle its keypair generation and decryption automatically.<br />
   You may add additional trustees if you want, and you can even remove the Helios trustee.<br />
-  However, we recommend you do this only if you have a solid understanding of the trustee's role.
+  However, we recommend you do this only if you have a solid understanding of the trustee's role.{% endblocktrans %}
 </p>
 
 {% if admin_p %}
 <p>
-    [ <a onclick="return(confirm('Adding your own trustee requires a good bit more work to tally the election.\nYou will need to have trustees generate keypairs and safeguard their secret key.\n\nIf you are not sure what that means, we strongly recommend\nclicking Cancel and letting Helios tally the election for you.'));" href="{% url helios.views.new_trustee election.uuid %}">add a trustee</a> ]
+    [ <a onclick="return(confirm('Adding your own trustee requires a good bit more work to tally the election.\nYou will need to have trustees generate keypairs and safeguard their secret key.\n\nIf you are not sure what that means, we strongly recommend\nclicking Cancel and letting Helios tally the election for you.'));" href="{% url helios.views.new_trustee election.uuid %}">{% trans "add a trustee" %}</a> ]
 </p>
 {% if not election.has_helios_trustee %}
 <p>
-    <a href="{% url helios.views.new_trustee_helios election.uuid %}">add Helios as a trustee</a>
+    <a href="{% url helios.views.new_trustee_helios election.uuid %}">{% trans "add Helios as a trustee" %}</a>
 </p>
 {% endif %}
 {% endif %}
@@ -36,7 +37,7 @@
 
 {% else %}
 {% for t in trustees %}
-<h3> Trustee #{{forloop.counter}}: {{t.name}} 
+<h3> {% trans "Trustee" %} #{{forloop.counter}}: {{t.name}} 
 {% if admin_p %}
 {% if t.secret_key %}
 {% if not election.frozen_at %}[<a onclick="return confirm('Are you sure you want to remove Helios as a trustee?');" href="{% url helios.views.delete_trustee election.uuid %}?uuid={{t.uuid}}">x</a>]{% endif %}
@@ -50,17 +51,17 @@
 
 <p>
 {% if t.public_key_hash %}
-  Public Key Fingerprint: <tt style="font-size:1.5em;">{{t.public_key_hash}}</tt>
+  {% trans "Public Key Fingerprint" %}: <tt style="font-size:1.5em;">{{t.public_key_hash}}</tt>
 {% else %}
-No public key uploaded yet.
+{% trans "No public key uploaded yet" %}.
 {% endif %}
 </p>
 
 {% if election.encrypted_tally %}
 {% if t.decryption_factors %}
-<b>tally recorded for this trustee.</b>
+<b>{% trans "tally recorded for this trustee" %}.</b>
 {% else %}
-<em>waiting for this trustee's tally</em>
+<em>{% trans "waiting for this trustee's tally" %}</em>
 {% endif %}
 {% endif %}
 </li>

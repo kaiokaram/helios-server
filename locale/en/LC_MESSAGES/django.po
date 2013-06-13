@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-05-15 13:33-0300\n"
+"POT-Creation-Date: 2013-06-13 15:07-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,6 +20,11 @@ msgstr ""
 #: helios/templates/_castconfirm_docast.html:20
 #, python-format
 msgid "I am <u>%(voter.display_html_big|safe)s</u>, cast this ballot"
+msgstr ""
+
+#: helios/templates/_castconfirm_docast.html:21
+msgid ""
+"You can cast as many ballots as you want.<br />Only the last one counts."
 msgstr ""
 
 #: helios/templates/_castconfirm_docast.html:26
@@ -48,6 +53,60 @@ msgstr ""
 msgid "bad voter ID or password, please try again."
 msgstr ""
 
+#: helios/templates/cast_done.html:6
+msgid "Vote Successfully Cast"
+msgstr ""
+
+#: helios/templates/cast_done.html:9
+msgid "Congratulations, your vote has been <b><u>successfully cast</u></b>!"
+msgstr ""
+
+#: helios/templates/cast_done.html:13
+msgid "Your smart ballot tracker is:"
+msgstr ""
+
+#: helios/templates/cast_done.html:22
+msgid "For your safety, we have logged you out."
+msgstr ""
+
+#: helios/templates/cast_done.html:28
+msgid "return to election info"
+msgstr ""
+
+#: helios/templates/castvote.html:6
+msgid "Cast Vote"
+msgstr ""
+
+#: helios/templates/castvote.html:7
+msgid "cast in"
+msgstr ""
+
+#: helios/templates/castvote.html:8
+msgid "Fingerprint:"
+msgstr ""
+
+#: helios/templates/castvote.html:9 helios/templates/stats_elections.html:23
+msgid "by"
+msgstr ""
+
+#: helios/templates/castvote.html:17
+msgid "details"
+msgstr ""
+
+#: helios/templates/combine_decryptions.html:4
+#: helios/templates/combine_decryptions.html:6
+msgid "Release Tally"
+msgstr ""
+
+#: helios/templates/combine_decryptions.html:6
+#: helios/templates/election_edit.html:6 helios/templates/new_trustee.html:5
+msgid "cancel"
+msgstr ""
+
+#: helios/templates/combine_decryptions.html:9
+msgid "You are about to release the tally for this election"
+msgstr ""
+
 #: helios/templates/election_audited_ballots.html:4
 msgid "Audited Ballots for"
 msgstr ""
@@ -62,9 +121,10 @@ msgstr ""
 #: helios/templates/election_build.html:5
 #: helios/templates/election_compute_tally.html:28
 #: helios/templates/election_questions.html:6
-#: helios/templates/voters_email.html:13 helios/templates/voters_email.html:59
-#: helios/templates/voters_list.html:6 helios/templates/voters_manage.html:5
-#: helios/templates/voters_search.html:5 helios/templates/voters_upload.html:5
+#: helios/templates/list_trustees.html:7 helios/templates/voters_email.html:13
+#: helios/templates/voters_email.html:59 helios/templates/voters_list.html:6
+#: helios/templates/voters_manage.html:5 helios/templates/voters_search.html:5
+#: helios/templates/voters_upload.html:5
 #: helios/templates/voters_upload_confirm.html:5
 msgid "back to election"
 msgstr ""
@@ -101,6 +161,7 @@ msgstr ""
 #: helios/templates/election_audited_ballots.html:35
 #: helios/templates/election_bboard.html:20
 #: helios/templates/election_bboard.html:28
+#: helios/templates/stats_elections.html:17
 msgid "next"
 msgstr ""
 
@@ -164,7 +225,7 @@ msgid "Alias"
 msgstr ""
 
 #: helios/templates/election_bboard.html:35
-#: helios/templates/voters_list.html:115
+#: helios/templates/new_trustee.html:8 helios/templates/voters_list.html:115
 #: helios/templates/voters_upload_confirm.html:12
 msgid "Name"
 msgstr ""
@@ -276,10 +337,6 @@ msgstr ""
 
 #: helios/templates/election_edit.html:6
 msgid "Update"
-msgstr ""
-
-#: helios/templates/election_edit.html:6
-msgid "cancel"
 msgstr ""
 
 #: helios/templates/election_freeze.html:5
@@ -722,6 +779,343 @@ msgstr ""
 
 #: helios/templates/elections_voted.html:5
 msgid "Elections where you voted"
+msgstr ""
+
+#: helios/templates/list_trustees.html:4
+msgid "Trustees for"
+msgstr ""
+
+#: helios/templates/list_trustees.html:7
+msgid "Trustees"
+msgstr ""
+
+#: helios/templates/list_trustees.html:10
+msgid ""
+"Trustees are responsible for decrypting the election result.<br />\n"
+"    Each trustee generates a keypair and submits the public portion to "
+"Helios.<br />\n"
+"    When it's time to decrypt, each trustee needs to provide his secret key."
+msgstr ""
+
+#: helios/templates/list_trustees.html:18
+msgid ""
+"Helios is automatically your first trustee and will handle its keypair "
+"generation and decryption automatically.<br />\n"
+"  You may add additional trustees if you want, and you can even remove the "
+"Helios trustee.<br />\n"
+"  However, we recommend you do this only if you have a solid understanding "
+"of the trustee's role."
+msgstr ""
+
+#: helios/templates/list_trustees.html:25
+msgid "add a trustee"
+msgstr ""
+
+#: helios/templates/list_trustees.html:29
+msgid "add Helios as a trustee"
+msgstr ""
+
+#: helios/templates/list_trustees.html:40
+msgid "Trustee"
+msgstr ""
+
+#: helios/templates/list_trustees.html:54
+msgid "Public Key Fingerprint"
+msgstr ""
+
+#: helios/templates/list_trustees.html:56
+msgid "No public key uploaded yet"
+msgstr ""
+
+#: helios/templates/list_trustees.html:62
+msgid "tally recorded for this trustee"
+msgstr ""
+
+#: helios/templates/list_trustees.html:64
+msgid "waiting for this trustee's tally"
+msgstr ""
+
+#: helios/templates/new_trustee.html:5
+msgid "New Trustee"
+msgstr ""
+
+#: helios/templates/new_trustee.html:9
+msgid "Email"
+msgstr ""
+
+#: helios/templates/nocookies.html:4
+msgid "Cookies are required for Helios use"
+msgstr ""
+
+#: helios/templates/nocookies.html:7
+msgid "Cookies are Required for Helios"
+msgstr ""
+
+#: helios/templates/nocookies.html:10
+#, python-format
+msgid ""
+"It appears your browser does not support cookies or is set up to block "
+"cookies from this site. Helios needs to set a session cookie so that it can "
+"save your vote, let you log in, etc. Enable cookies and then <a href="
+"\"%(retest_url)s\">proceed to preparing your ballot</a>"
+msgstr ""
+
+#: helios/templates/nocookies.html:13
+msgid ""
+"If you keep getting sent back to this page, it's probably because you "
+"haven't enabled cookies successfully."
+msgstr ""
+
+#: helios/templates/password_voter_login.html:4
+msgid "Log In to View Election"
+msgstr ""
+
+#: helios/templates/password_voter_login.html:6
+msgid "Private Election - Please Log In"
+msgstr ""
+
+#: helios/templates/password_voter_login.html:9
+#, python-format
+msgid ""
+"This election, with fingerprint <tt>%(election.hash)s</tt>, is private, and "
+"can only be viewed by eligible voters."
+msgstr ""
+
+#: helios/templates/socialbuttons.html:4
+msgid "Share"
+msgstr ""
+
+#: helios/templates/socialbuttons.html:6
+msgid "Tweet"
+msgstr ""
+
+#: helios/templates/stats.html:4 helios/templates/stats.html.py:7
+#: helios/templates/stats_elections.html:4
+#: helios/templates/stats_problem_elections.html:4
+msgid "Statistics"
+msgstr ""
+
+#: helios/templates/stats.html:10
+msgid "elections"
+msgstr ""
+
+#: helios/templates/stats.html:11
+msgid "recent votes"
+msgstr ""
+
+#: helios/templates/stats.html:12
+msgid "recent problem elections"
+msgstr ""
+
+#: helios/templates/stats.html:15
+msgid "votes in queue."
+msgstr ""
+
+#: helios/templates/stats.html:15
+msgid "force it"
+msgstr ""
+
+#: helios/templates/stats_elections.html:7
+#: helios/templates/stats_elections.html:14
+msgid "Elections"
+msgstr ""
+
+#: helios/templates/stats_elections.html:11
+msgid "previous"
+msgstr ""
+
+#: helios/templates/stats_elections.html:23
+#, python-format
+msgid "%(election.num_voters)s voters / %(election.num_cast_votes)s cast votes"
+msgstr ""
+
+#: helios/templates/stats_problem_elections.html:7
+msgid "Problematic Elections"
+msgstr ""
+
+#: helios/templates/stats_problem_elections.html:9
+msgid "Unfrozen for more than a day."
+msgstr ""
+
+#: helios/templates/stats_problem_elections.html:13
+msgid "voters"
+msgstr ""
+
+#: helios/templates/stats_recent_votes.html:7
+msgid "Recent Votes"
+msgstr ""
+
+#: helios/templates/stats_recent_votes.html:9
+msgid "Last 24 hours"
+msgstr ""
+
+#: helios/templates/stats_recent_votes.html:13
+msgid "recently cast votes"
+msgstr ""
+
+#: helios/templates/trustee_check_sk.html:47
+#, python-format
+msgid ""
+"<h2 class=\"title\">%(election.name)s &mdash; Trustee %(trustee.name)s "
+"&mdash; Check Secret Key <span style=\"font-size:0.7em;\">[<a href=\"./home"
+"\">back to trustee home</a>]</span></h2>"
+msgstr ""
+
+#: helios/templates/trustee_check_sk.html:50
+#: helios/templates/trustee_home.html:10
+msgid "Your public key fingerprint is:"
+msgstr ""
+
+#: helios/templates/trustee_check_sk.html:54
+msgid "loading crypto functions..."
+msgstr ""
+
+#: helios/templates/trustee_check_sk.html:59
+msgid "To verify that you have the right secret key, paste it here:"
+msgstr ""
+
+#: helios/templates/trustee_check_sk.html:71
+msgid "checking your secret key..."
+msgstr ""
+
+#: helios/templates/trustee_decrypt_and_prove.html:138
+msgid "Trustee:"
+msgstr ""
+
+#: helios/templates/trustee_decrypt_and_prove.html:139
+msgid "Public Key Fingerprint:"
+msgstr ""
+
+#: helios/templates/trustee_decrypt_and_prove.html:140
+msgid "Encrypted Tally Fingerprint:"
+msgstr ""
+
+#: helios/templates/trustee_decrypt_and_prove.html:144
+msgid "The encrypted tally for your election has been computed."
+msgstr ""
+
+#: helios/templates/trustee_decrypt_and_prove.html:145
+msgid "Now it's time to compute and submit your partial decryption."
+msgstr ""
+
+#: helios/templates/trustee_decrypt_and_prove.html:149
+msgid ""
+"This process is performed in two steps.<br /><br />\n"
+"      <u>First</u>, your secret key is used to decrypt the tally <em>inside</"
+"em> your browser, without connecting to the network.<br />\n"
+"      You can choose to take your browser \"offline\" for this step, if "
+"you'd like.<br /><br />\n"
+"      <u>Second</u>, once your decryption factors have been computed, your "
+"browser will need to be \"online\" to submit them to the server.<br />\n"
+"      If you'd like, you can compute your decryption factors, copy them to "
+"your clipboard, restart your browser, and<br />\n"
+"      skip to the second step so that your browser is never online when you "
+"enter your secret key."
+msgstr ""
+
+#: helios/templates/trustee_decrypt_and_prove.html:160
+msgid "FIRST STEP: enter your secret key"
+msgstr ""
+
+#: helios/templates/trustee_decrypt_and_prove.html:164
+msgid "Generate partial decryption"
+msgstr ""
+
+#: helios/templates/trustee_decrypt_and_prove.html:168
+msgid "skip to the second step"
+msgstr ""
+
+#: helios/templates/trustee_decrypt_and_prove.html:169
+msgid "(you need to have already computed your decryption factors.)"
+msgstr ""
+
+#: helios/templates/trustee_decrypt_and_prove.html:174
+msgid "Generating partial decryption factors and proofs..."
+msgstr ""
+
+#: helios/templates/trustee_decrypt_and_prove.html:179
+msgid "Submitting and checking your decryption factors and proofs..."
+msgstr ""
+
+#: helios/templates/trustee_decrypt_and_prove.html:184
+msgid "SECOND STEP: upload your partial decryption"
+msgstr ""
+
+#: helios/templates/trustee_decrypt_and_prove.html:186
+msgid "Your partial decryption factors and proofs have been generated below."
+msgstr ""
+
+#: helios/templates/trustee_decrypt_and_prove.html:187
+msgid "Your secret key has been cleared from memory."
+msgstr ""
+
+#: helios/templates/trustee_decrypt_and_prove.html:188
+msgid "When you're ready, you can submit this result to the server."
+msgstr ""
+
+#: helios/templates/trustee_decrypt_and_prove.html:190
+msgid "Your partial decryption:"
+msgstr ""
+
+#: helios/templates/trustee_decrypt_and_prove.html:196
+msgid "reset and restart decryption process"
+msgstr ""
+
+#: helios/templates/trustee_decrypt_and_prove.html:201
+msgid "Done!"
+msgstr ""
+
+#: helios/templates/trustee_decrypt_and_prove.html:201
+msgid "Back to election"
+msgstr ""
+
+#: helios/templates/trustee_decrypt_and_prove.html:205
+msgid "Error: your secret key was likely incorrect."
+msgstr ""
+
+#: helios/templates/trustee_home.html:5
+#, python-format
+msgid "Trustee %(trustee.name)s Home"
+msgstr ""
+
+#: helios/templates/trustee_home.html:9
+msgid "You have successfully uploaded your public key."
+msgstr ""
+
+#: helios/templates/trustee_home.html:11
+msgid "You can"
+msgstr ""
+
+#: helios/templates/trustee_home.html:11
+msgid "verify that you have the right secret key"
+msgstr ""
+
+#: helios/templates/trustee_home.html:13
+msgid "setup your key"
+msgstr ""
+
+#: helios/templates/trustee_home.html:20
+msgid "You have successfully uploaded your decryption."
+msgstr ""
+
+#: helios/templates/trustee_home.html:22
+msgid "The encrypted tally for this election is ready."
+msgstr ""
+
+#: helios/templates/trustee_home.html:23
+msgid "decrypt with your key"
+msgstr ""
+
+#: helios/templates/trustee_home.html:26
+msgid ""
+"Once the tally is computed, come back here to provide your secret key for "
+"decryption purposes."
+msgstr ""
+
+#: helios/templates/trustee_home.html:27
+msgid ""
+"You should keep the email with your trustee homepage link, which contains "
+"the credentials needed to get back here."
 msgstr ""
 
 #: helios/templates/voters_eligibility.html:6
