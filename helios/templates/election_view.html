@@ -162,13 +162,33 @@ all voters will be notified that the tally is ready.
     This election is complete.
 </span><br />
 
-<br />
 <h3 class="highlight-box">Tally</h3>
 {% for question in election.pretty_result %}
 <b><span style="font-size:0.8em;">Question #{{forloop.counter}}</span><br />{{question.question}}</b><br />
-<table class="pretty" style="width: auto;">
+<table class="pretty" style="width: auto; border-width:2pt" border="2">
+<tr>
+  <th rowspan="1" style="vertical-align:top; text-align:right;">Groups</th>
+{% for group in groups %}
+  <td colspan="2" style="text-align:center;">{{group.group_name}}</td>
+{% endfor %}
+  <th rowspan="2" style="vertical-align:middle;">Total Votes</th>
+  <th rowspan="2" style="vertical-align:middle;">Weighted Total</th>
+</tr>
+<tr>
+  <th rowspan="1" style="vertical-align:bottom; text-align:left;">Answers</th>
+  {% for group in groups %}
+  <td>total</td><td>weighted</td>
+  {% endfor %}
+</tr>
 {% for answer in question.answers %}
-<tr><td style="padding-right:80px;{% if answer.winner %}font-weight:bold;{% endif %}">{{answer.answer}}</td><td align="right" style="{% if answer.winner %}font-weight:bold;{% endif %}">{{answer.count}}</td></tr>
+<tr>
+  <td style="padding-right:80px;{% if answer.winner %}font-weight:bold;{% endif %}">{{answer.answer}}</td>
+  {% for group in groups %}
+  <td> </td><td> </td>
+  {% endfor %}
+  <td> </td>
+  <td align="right" style="{% if answer.winner %}font-weight:bold;{% endif %}">{{answer.count}}</td>
+</tr>
 {% endfor %}
 </table>
 {% endfor %}

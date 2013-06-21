@@ -376,6 +376,7 @@ def one_election_view(request, election):
 
   return render_template(request, 'election_view',
                          {'election' : election, 'trustees': trustees, 'admin_p': admin_p, 'user': user,
+                          'groups' : election.votergroup_set.order_by('id'),
                           'voter': voter, 'votes': votes, 'notregistered': notregistered, 'eligible_p': eligible_p,
                           'can_feature_p': can_feature_p, 'election_url' : election_url, 
                           'vote_url': vote_url, 'election_badge_url' : election_badge_url,
