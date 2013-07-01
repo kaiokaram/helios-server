@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-06-21 16:58-0300\n"
+"POT-Creation-Date: 2013-07-01 13:09-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -543,11 +543,11 @@ msgstr ""
 
 #: helios/templates/election_view.html:70
 msgid "questions"
-msgstr ""
+msgstr "questões"
 
 #: helios/templates/election_view.html:72
 msgid "voters &amp; ballots"
-msgstr ""
+msgstr "eleitores &amp; ballots"
 
 #: helios/templates/election_view.html:74
 msgid "trustees"
@@ -645,7 +645,7 @@ msgstr ""
 
 #: helios/templates/election_view.html:163
 msgid "This election is complete"
-msgstr ""
+msgstr "Esta eleição está completa"
 
 #: helios/templates/election_view.html:169
 msgid "Question"
