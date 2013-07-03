@@ -10,6 +10,7 @@ from django.core.mail import send_mail
 from django.core.paginator import Paginator
 from django.http import *
 from django.db import transaction
+from django.db import connection
 from django.forms.formsets import formset_factory
 
 from mimetypes import guess_type
@@ -374,9 +375,13 @@ def one_election_view(request, election):
 
   trustees = Trustee.get_by_election(election)
 
+  cursor = connection.cursor()
+  cursor.execute("select encrypted_tally from helios_election where id=1")
+  row = cursor.fetchone()
+  
   return render_template(request, 'election_view',
                          {'election' : election, 'trustees': trustees, 'admin_p': admin_p, 'user': user,
-                          'groups' : election.votergroup_set.order_by('id'),
+                          'groups' : election.votergroup_set.order_by('id'), 'tally' : row[0],
                           'voter': voter, 'votes': votes, 'notregistered': notregistered, 'eligible_p': eligible_p,
                           'can_feature_p': can_feature_p, 'election_url' : election_url, 
                           'vote_url': vote_url, 'election_badge_url' : election_badge_url,
@@ -1098,8 +1103,8 @@ def one_election_compute_tally(request, election):
 
   # When using .delay, weight is not considered in computing tally. WHY?
   # Keep it without .delay for the moment.
-  #tasks.election_compute_tally.delay(election_id = election.id)
-  tasks.election_compute_tally(election_id = election.id)
+  tasks.election_compute_tally.delay(election_id = election.id)
+  #tasks.election_compute_tally(election_id = election.id)
 
   return HttpResponseRedirect(reverse(one_election_view,args=[election.uuid]))
 

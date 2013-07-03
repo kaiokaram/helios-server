@@ -194,9 +194,10 @@ class Questions(ListObject, LegacyObject):
 
 class Tally(LegacyObject):
     WRAPPED_OBJ_CLASS = homomorphic.Tally
-    FIELDS = ['tally', 'num_tallied']
+    FIELDS = ['tally', 'tally_w', 'num_tallied']
     STRUCTURED_FIELDS = {
-        'tally': arrayOf(arrayOf('legacy/EGCiphertext'))}
+        'tally': arrayOf(arrayOf('legacy/EGCiphertext')), 
+        'tally_w': arrayOf(arrayOf('legacy/EGCiphertext'))}
 
 class Eligibility(ListObject, LegacyObject):
     WRAPPED_OBJ = list

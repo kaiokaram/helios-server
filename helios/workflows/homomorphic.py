@@ -270,15 +270,18 @@ class Tally(WorkflowObject):
     
     election = kwargs.get('election',None)
     self.tally = None
+    self.tally_w = None
     self.num_tallied = 0    
 
     if election:
       self.init_election(election)
       self.tally = [[0 for a in q['answers']] for q in self.questions]
+      self.tally_w = [[0 for a in q['answers']] for q in self.questions]
     else:
       self.questions = None
       self.public_key = None
       self.tally = None
+      self.tally_w = None
 
   def init_election(self, election):
     """
@@ -288,16 +291,16 @@ class Tally(WorkflowObject):
     self.questions = election.questions
     self.public_key = election.public_key
     
-  def add_vote_batch(self, encrypted_votes, group, verify_p=True):
+  def add_vote_batch(self, encrypted_votes, verify_p=True):
     """
     Add a batch of votes. Eventually, this will be optimized to do an aggregate proof verification
     rather than a whole proof verif for each vote.
     """
     for vote in encrypted_votes:
-      self.add_vote(vote, group, verify_p)
+      self.add_vote(vote, verify_p)
     
-  def add_vote(self, encrypted_vote, group, verify_p=True):
-    weight = group.group_weight;
+  def add_vote(self, encrypted_vote, voter_group, verify_p=True):
+    weight = voter_group.group_weight
     
     # do we verify?
     if verify_p:
@@ -314,29 +317,36 @@ class Tally(WorkflowObject):
         # do the homomorphic addition into the tally
         enc_vote_choice = encrypted_vote.encrypted_answers[question_num].choices[answer_num]
         enc_vote_choice.pk = self.public_key
-        
-        # maybe change to a direct exponentiation: choice ** weight
-        # Operator ** apparently does not work on the type of variable choices[answer_num]. Maybe overload operator?
-        #before = self.tally[question_num][answer_num]
-        for cont in range(weight):
-          self.tally[question_num][answer_num] = enc_vote_choice * self.tally[question_num][answer_num]
-
-        ## DEBUG ##
-#        if question_num == 1 and answer_num == 0:
-#          election.admin.send_message("vote tally", """
-#Voter: %s
-#Group Weight: %d
-#Vote number: %d
-#Vote:\n%s
-#Partial result:
-#    before: %s
-#    after: %s
-#""" % (voter_id, weight, self.num_tallied + 1, enc_vote_choice, before, self.tally[question_num][answer_num]))
-
+        #for counter in range(weight):
+        self.tally[question_num][answer_num] = encrypted_vote.encrypted_answers[question_num].choices[answer_num] * self.tally[question_num][answer_num]
 
     self.num_tallied += 1
-
+        
   
+  def add_vote_w(self, encrypted_vote, voter_group, verify_p=True):
+    weight = voter_group.group_weight
+    
+    # do we verify?
+    if verify_p:
+      if not encrypted_vote.verify(self.election):
+        raise Exception('Bad Vote')
+
+    # for each question
+    for question_num in range(len(self.questions)):
+      question = self.questions[question_num]
+      answers = question['answers']
+      
+      # for each possible answer to each question
+      for answer_num in range(len(answers)):
+        # do the homomorphic addition into the tally
+        enc_vote_choice = encrypted_vote.encrypted_answers[question_num].choices[answer_num]
+        enc_vote_choice.pk = self.public_key
+        for counter in range(weight):
+          self.tally_w[question_num][answer_num] = encrypted_vote.encrypted_answers[question_num].choices[answer_num] * self.tally_w[question_num][answer_num]
+
+    self.num_tallied += 1
+        
+
   def decryption_factors_and_proofs(self, sk):
     """
     returns an array of decryption factors and a corresponding array of decryption proofs.
@@ -417,7 +427,43 @@ class Tally(WorkflowObject):
     
     return True
     
-  def decrypt_from_factors(self, decryption_factors, public_key, max_weight):
+  def decrypt_from_factors(self, decryption_factors, public_key):
+    """
+    decrypt a tally given decryption factors
+    
+    The decryption factors are a list of decryption factor sets, for each trustee.
+    Each decryption factor set is a list of lists of decryption factors (questions/answers).
+    """
+    
+    # pre-compute a dlog table
+    dlog_table = DLogTable(base = public_key.g, modulus = public_key.p)
+    dlog_table.precompute(self.num_tallied)
+    
+    result = []
+    
+    # go through each one
+    for q_num, q in enumerate(self.tally):
+      q_result = []
+
+      for a_num, a in enumerate(q):
+        # coalesce the decryption factors into one list
+        dec_factor_list = [df[q_num][a_num] for df in decryption_factors]
+        dec_factor_list_w = [df[q_num][a_num] for df in decryption_factors]
+        raw_value = self.tally[q_num][a_num].decrypt(dec_factor_list, public_key)
+
+        q_result.append(dlog_table.lookup(raw_value))
+
+      result.append(q_result)
+    
+    return result
+        
+        #lookup = dlog_table.lookup(raw_value)
+        ## DEBUG ##
+        #if q_num == 1:
+        #  election.admin.send_message("decrypt tally", "Answer: %d\nRaw_value: %s\nLookup: %s\n" % (a_num, raw_value, lookup))
+
+
+  def decrypt_from_factors_w(self, decryption_factors, public_key, max_weight):
     """
     decrypt a tally given decryption factors
     
@@ -429,32 +475,32 @@ class Tally(WorkflowObject):
     dlog_table = DLogTable(base = public_key.g, modulus = public_key.p)
     dlog_table.precompute(self.num_tallied * max_weight)
     
-    result = []
+    result_w = []
     
     # go through each one
     for q_num, q in enumerate(self.tally):
-      q_result = []
+      q_result_w = []
 
       for a_num, a in enumerate(q):
         # coalesce the decryption factors into one list
-        dec_factor_list = [df[q_num][a_num] for df in decryption_factors]
-        raw_value = self.tally[q_num][a_num].decrypt(dec_factor_list, public_key)
-        
-        q_result.append(dlog_table.lookup(raw_value))
-        lookup = dlog_table.lookup(raw_value)
-        ## DEBUG ##
-        #if q_num == 1:
-        #  election.admin.send_message("decrypt tally", "Answer: %d\nRaw_value: %s\nLookup: %s\n" % (a_num, raw_value, lookup))
+        dec_factor_list_w = [df[q_num][a_num] for df in decryption_factors]
+        raw_value_w = self.tally_w[q_num][a_num].decrypt(dec_factor_list_w, public_key)
 
-      result.append(q_result)
+        q_result_w.append(dlog_table.lookup(raw_value_w))
+
+      result_w.append(q_result_w)
     
-    return result
-
+    return result_w
+        
   def _process_value_in(self, field_name, field_value):
     if field_name == 'tally':
+      return [[algs.EGCiphertext.fromJSONDict(a) for a in q] for q in field_value]
+    if field_name == 'tally_w':
       return [[algs.EGCiphertext.fromJSONDict(a) for a in q] for q in field_value]
       
   def _process_value_out(self, field_name, field_value):
     if field_name == 'tally':
+      return [[a.toJSONDict() for a in q] for q in field_value]    
+    if field_name == 'tally_w':
       return [[a.toJSONDict() for a in q] for q in field_value]    
         

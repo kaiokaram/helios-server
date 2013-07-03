@@ -162,6 +162,13 @@ all voters will be notified that the tally is ready.
     This election is complete.
 </span><br />
 
+<!--
+<br />
+Tally:<br />
+{{tally}}
+<br />
+-->
+
 <h3 class="highlight-box">Tally</h3>
 {% for question in election.pretty_result %}
 <b><span style="font-size:0.8em;">Question #{{forloop.counter}}</span><br />{{question.question}}</b><br />
