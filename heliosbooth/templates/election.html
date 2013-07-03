@@ -6,13 +6,20 @@
 
 <p style="font-size:120%">
     First of all, please <b>select your group</b> for this election:<br/>
-    <select name="voter_group" id="id_voter_group" style="font-size:70%">
+    <!--<select name="voter_group" id="id_voter_group" style="font-size:70%">
         <option value="none">--</option>
         {#foreach $T.election.questions[0].rules as rule}
         <option value="{$T.rule.group_id}">{$T.rule.group_name}</option>
         {#/for}
-    </select>
-    <span id="id_select_group_error" style="display:none; font-size:80%; color:red;">Please, select your group.</span>
+    </select><br/>-->
+    <ul>
+        {#foreach $T.election.questions[0].rules as rule}
+        <input type="radio" name="voter_group" id="id_voter_group_{$T.rule.group_id}" value="{$T.rule.group_id}">
+        <label for="id_voter_group_{$T.rule.group_id}">{$T.rule.group_name}</label><br/>
+        {#/for}
+        <span id="id_select_group_error" style="display:none; font-size:90%; color:red;">Please, select your group.</span>
+        <span id="id_select_group_error_aux" style="font-size:90%; color:white;">Please, select your group.</span>
+    </ul>
 
 <p>
     

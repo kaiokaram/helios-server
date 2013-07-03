@@ -296,10 +296,13 @@ BOOTH.show_question = function(question_num) {
 
 
 BOOTH.check_group_selection = function() {
-  BOOTH.voter_group_id = $('#id_voter_group').val();
-  if (BOOTH.voter_group_id == 'none') {
+  //BOOTH.voter_group_id = $('#id_voter_group').val();
+  BOOTH.voter_group_id = $('input:radio[name=voter_group]:checked').val();
+  //if (BOOTH.voter_group_id == 'none') {
+  if (BOOTH.voter_group_id == null) {
     //alert('NONE!');
     $('#id_select_group_error').show();//style.display = '';
+    $('#id_select_group_error_aux').hidde();
   }
   else {
     BOOTH.show_question(0);
