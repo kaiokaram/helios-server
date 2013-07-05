@@ -98,13 +98,17 @@ class CastVote(LegacyObject):
         return self.instantiate(self.wrapped_obj, datatype='legacy/ShortCastVote')
 
 class Trustee(LegacyObject):
-    FIELDS = ['uuid', 'public_key', 'public_key_hash', 'pok', 'decryption_factors', 'decryption_proofs', 'email']
+    FIELDS = ['uuid', 'public_key', 'public_key_hash', 'pok', 'decryption_factors', 'decryption_proofs', 'decryption_factors_w', 'decryption_proofs_w', 'decryption_factors_g', 'decryption_proofs_g', 'email']
 
     STRUCTURED_FIELDS = {
         'public_key' : 'legacy/EGPublicKey',
         'pok': 'legacy/DLogProof',
         'decryption_factors': arrayOf(arrayOf('core/BigInteger')),
-        'decryption_proofs' : arrayOf(arrayOf('legacy/EGZKProof'))}
+        'decryption_proofs' : arrayOf(arrayOf('legacy/EGZKProof')),
+        'decryption_factors_w': arrayOf(arrayOf('core/BigInteger')),
+        'decryption_proofs_w' : arrayOf(arrayOf('legacy/EGZKProof')),
+        'decryption_factors_g': arrayOf(arrayOf('core/BigInteger')),
+        'decryption_proofs_g' : arrayOf(arrayOf('legacy/EGZKProof'))}
 
 class EGParams(LegacyObject):
     WRAPPED_OBJ_CLASS = crypto_elgamal.Cryptosystem
@@ -194,10 +198,11 @@ class Questions(ListObject, LegacyObject):
 
 class Tally(LegacyObject):
     WRAPPED_OBJ_CLASS = homomorphic.Tally
-    FIELDS = ['tally', 'tally_w', 'num_tallied']
+    FIELDS = ['tally', 'tally_w', 'tally_g', 'num_tallied']
     STRUCTURED_FIELDS = {
         'tally': arrayOf(arrayOf('legacy/EGCiphertext')), 
-        'tally_w': arrayOf(arrayOf('legacy/EGCiphertext'))}
+        'tally_w': arrayOf(arrayOf('legacy/EGCiphertext')), 
+        'tally_g': arrayOf(arrayOf('legacy/EGCiphertext'))}
 
 class Eligibility(ListObject, LegacyObject):
     WRAPPED_OBJ = list

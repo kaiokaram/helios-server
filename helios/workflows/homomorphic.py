@@ -271,17 +271,20 @@ class Tally(WorkflowObject):
     election = kwargs.get('election',None)
     self.tally = None
     self.tally_w = None
+    self.tally_g = None
     self.num_tallied = 0    
 
     if election:
       self.init_election(election)
       self.tally = [[0 for a in q['answers']] for q in self.questions]
       self.tally_w = [[0 for a in q['answers']] for q in self.questions]
+      self.tally_g = [[0 for a in q['answers']] for q in self.questions]
     else:
       self.questions = None
       self.public_key = None
       self.tally = None
       self.tally_w = None
+      self.tally_g = None
 
   def init_election(self, election):
     """
@@ -301,6 +304,7 @@ class Tally(WorkflowObject):
     
   def add_vote(self, encrypted_vote, voter_group, verify_p=True):
     weight = voter_group.group_weight
+    short_name = voter_group.group_short_name
     
     # do we verify?
     if verify_p:
@@ -317,35 +321,14 @@ class Tally(WorkflowObject):
         # do the homomorphic addition into the tally
         enc_vote_choice = encrypted_vote.encrypted_answers[question_num].choices[answer_num]
         enc_vote_choice.pk = self.public_key
-        #for counter in range(weight):
         self.tally[question_num][answer_num] = encrypted_vote.encrypted_answers[question_num].choices[answer_num] * self.tally[question_num][answer_num]
-
-    self.num_tallied += 1
-        
-  
-  def add_vote_w(self, encrypted_vote, voter_group, verify_p=True):
-    weight = voter_group.group_weight
-    
-    # do we verify?
-    if verify_p:
-      if not encrypted_vote.verify(self.election):
-        raise Exception('Bad Vote')
-
-    # for each question
-    for question_num in range(len(self.questions)):
-      question = self.questions[question_num]
-      answers = question['answers']
-      
-      # for each possible answer to each question
-      for answer_num in range(len(answers)):
-        # do the homomorphic addition into the tally
-        enc_vote_choice = encrypted_vote.encrypted_answers[question_num].choices[answer_num]
-        enc_vote_choice.pk = self.public_key
         for counter in range(weight):
           self.tally_w[question_num][answer_num] = encrypted_vote.encrypted_answers[question_num].choices[answer_num] * self.tally_w[question_num][answer_num]
+        if short_name == "professor":
+          self.tally_g[question_num][answer_num] = encrypted_vote.encrypted_answers[question_num].choices[answer_num] * self.tally_g[question_num][answer_num]
 
     self.num_tallied += 1
-        
+  
 
   def decryption_factors_and_proofs(self, sk):
     """
@@ -364,6 +347,62 @@ class Tally(WorkflowObject):
       for answer_num, answer in enumerate(answers):
         # do decryption and proof of it
         dec_factor, proof = sk.decryption_factor_and_proof(self.tally[question_num][answer_num])
+
+        # look up appropriate discrete log
+        # this is the string conversion
+        question_factors.append(dec_factor)
+        question_proof.append(proof)
+        
+      decryption_factors.append(question_factors)
+      decryption_proof.append(question_proof)
+    
+    return decryption_factors, decryption_proof
+    
+  def decryption_factors_and_proofs_w(self, sk):
+    """
+    returns an array of decryption factors and a corresponding array of decryption proofs.
+    makes the decryption factors into strings, for general Helios / JS compatibility.
+    """
+    # for all choices of all questions (double list comprehension)
+    decryption_factors = []
+    decryption_proof = []
+    
+    for question_num, question in enumerate(self.questions):
+      answers = question['answers']
+      question_factors = []
+      question_proof = []
+
+      for answer_num, answer in enumerate(answers):
+        # do decryption and proof of it
+        dec_factor, proof = sk.decryption_factor_and_proof(self.tally_w[question_num][answer_num])
+
+        # look up appropriate discrete log
+        # this is the string conversion
+        question_factors.append(dec_factor)
+        question_proof.append(proof)
+        
+      decryption_factors.append(question_factors)
+      decryption_proof.append(question_proof)
+    
+    return decryption_factors, decryption_proof
+    
+  def decryption_factors_and_proofs_g(self, sk):
+    """
+    returns an array of decryption factors and a corresponding array of decryption proofs.
+    makes the decryption factors into strings, for general Helios / JS compatibility.
+    """
+    # for all choices of all questions (double list comprehension)
+    decryption_factors = []
+    decryption_proof = []
+    
+    for question_num, question in enumerate(self.questions):
+      answers = question['answers']
+      question_factors = []
+      question_proof = []
+
+      for answer_num, answer in enumerate(answers):
+        # do decryption and proof of it
+        dec_factor, proof = sk.decryption_factor_and_proof(self.tally_g[question_num][answer_num])
 
         # look up appropriate discrete log
         # this is the string conversion
@@ -456,12 +495,6 @@ class Tally(WorkflowObject):
       result.append(q_result)
     
     return result
-        
-        #lookup = dlog_table.lookup(raw_value)
-        ## DEBUG ##
-        #if q_num == 1:
-        #  election.admin.send_message("decrypt tally", "Answer: %d\nRaw_value: %s\nLookup: %s\n" % (a_num, raw_value, lookup))
-
 
   def decrypt_from_factors_w(self, decryption_factors, public_key, max_weight):
     """
@@ -492,15 +525,48 @@ class Tally(WorkflowObject):
     
     return result_w
         
+  def decrypt_from_factors_g(self, decryption_factors, public_key, max_weight):
+    """
+    decrypt a tally given decryption factors
+    
+    The decryption factors are a list of decryption factor sets, for each trustee.
+    Each decryption factor set is a list of lists of decryption factors (questions/answers).
+    """
+    
+    # pre-compute a dlog table
+    dlog_table = DLogTable(base = public_key.g, modulus = public_key.p)
+    dlog_table.precompute(self.num_tallied * max_weight)
+    
+    result_g = []
+    
+    # go through each one
+    for q_num, q in enumerate(self.tally):
+      q_result_g = []
+
+      for a_num, a in enumerate(q):
+        # coalesce the decryption factors into one list
+        dec_factor_list_g = [df[q_num][a_num] for df in decryption_factors]
+        raw_value_g = self.tally_g[q_num][a_num].decrypt(dec_factor_list_g, public_key)
+
+        q_result_g.append(dlog_table.lookup(raw_value_g))
+
+      result_g.append(q_result_g)
+    
+    return result_g
+        
   def _process_value_in(self, field_name, field_value):
     if field_name == 'tally':
       return [[algs.EGCiphertext.fromJSONDict(a) for a in q] for q in field_value]
     if field_name == 'tally_w':
+      return [[algs.EGCiphertext.fromJSONDict(a) for a in q] for q in field_value]
+    if field_name == 'tally_g':
       return [[algs.EGCiphertext.fromJSONDict(a) for a in q] for q in field_value]
       
   def _process_value_out(self, field_name, field_value):
     if field_name == 'tally':
       return [[a.toJSONDict() for a in q] for q in field_value]    
     if field_name == 'tally_w':
+      return [[a.toJSONDict() for a in q] for q in field_value]    
+    if field_name == 'tally_g':
       return [[a.toJSONDict() for a in q] for q in field_value]    
         

@@ -172,7 +172,7 @@ Tally:<br />
 <h3 class="highlight-box">Tally</h3>
 {% for question in election.pretty_result %}
 <b><span style="font-size:0.8em;">Question #{{forloop.counter}}</span><br />{{question.question}}</b><br />
-<table class="pretty" style="width: auto; border-width:2pt" border="2">
+<table class="pretty" style="width: auto; border:3px solid">
 <tr>
   <th rowspan="1" style="vertical-align:top; text-align:right;">Groups</th>
 {% for group in groups %}
@@ -184,17 +184,24 @@ Tally:<br />
 <tr>
   <th rowspan="1" style="vertical-align:bottom; text-align:left;">Answers</th>
   {% for group in groups %}
-  <td>total</td><td>weighted</td>
+  <td>total</td><td>weighted ({{group.group_weight}})</td>
   {% endfor %}
 </tr>
 {% for answer in question.answers %}
 <tr>
   <td style="padding-right:80px;{% if answer.winner %}font-weight:bold;{% endif %}">{{answer.answer}}</td>
   {% for group in groups %}
-  <td> </td><td> </td>
+    {% if group.group_short_name == "professor" %}
+      <td align="right" style="{% if answer.winner %}font-weight:bold;{% endif %}">{{answer.count_g}}</td>
+      <td align="right" style="{% if answer.winner %}font-weight:bold;{% endif %}">
+        <script>document.write({{answer.count_g}} * {{group.group_weight}})</script>
+      </td>
+    {% else %}
+      <td> </td><td> </td>
+    {% endif %}
   {% endfor %}
-  <td> </td>
   <td align="right" style="{% if answer.winner %}font-weight:bold;{% endif %}">{{answer.count}}</td>
+  <td align="right" style="{% if answer.winner %}font-weight:bold;{% endif %}">{{answer.count_w}}</td>
 </tr>
 {% endfor %}
 </table>
