@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-06 13:02-0300\n"
+"POT-Creation-Date: 2013-07-06 13:52-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -62,8 +62,20 @@ msgstr ""
 msgid "A private election is only visible to registered voters."
 msgstr ""
 
+#: helios/forms.py:24
+msgid "A Short Name is required for this group"
+msgstr ""
+
+#: helios/forms.py:25
+msgid "A Name is required for this group"
+msgstr ""
+
 #: helios/forms.py:26
-msgid "Peso"
+msgid "Weight"
+msgstr ""
+
+#: helios/forms.py:27
+msgid "A Weight is required for this group"
 msgstr ""
 
 #: helios/templates/_castconfirm_docast.html:20
@@ -161,7 +173,7 @@ msgid "Audited Ballots for"
 msgstr ""
 
 #: helios/templates/election_audited_ballots.html:7
-#: helios/templates/election_view.html:281
+#: helios/templates/election_view.html:315
 msgid "Audited Ballots"
 msgstr ""
 
@@ -252,7 +264,7 @@ msgid "Ballot Tracking Center for"
 msgstr ""
 
 #: helios/templates/election_bboard.html:7
-#: helios/templates/election_view.html:280
+#: helios/templates/election_view.html:314
 msgid "Ballot Tracking Center"
 msgstr ""
 
@@ -702,123 +714,151 @@ msgstr ""
 msgid "This election is complete"
 msgstr ""
 
-#: helios/templates/election_view.html:169
+#: helios/templates/election_view.html:173
+msgid "Tally"
+msgstr ""
+
+#: helios/templates/election_view.html:175
 msgid "Question"
 msgstr ""
 
-#: helios/templates/election_view.html:181
+#: helios/templates/election_view.html:178
+msgid "Groups"
+msgstr ""
+
+#: helios/templates/election_view.html:182
+msgid "Total"
+msgstr ""
+
+#: helios/templates/election_view.html:183
+msgid "Weighted Total"
+msgstr ""
+
+#: helios/templates/election_view.html:186
+msgid "Answers"
+msgstr ""
+
+#: helios/templates/election_view.html:188
+msgid "total"
+msgstr ""
+
+#: helios/templates/election_view.html:188
+msgid "weighted"
+msgstr ""
+
+#: helios/templates/election_view.html:215
 msgid "Election closed. Tally will be computed soon"
 msgstr ""
 
-#: helios/templates/election_view.html:187
+#: helios/templates/election_view.html:221
 msgid "Vote in this"
 msgstr ""
 
-#: helios/templates/election_view.html:191
+#: helios/templates/election_view.html:225
 #, python-format
 msgid ""
 "This %(election.election_type)s was initially scheduled to end at %(election."
 "voting_ends_at)s (UTC)"
 msgstr ""
 
-#: helios/templates/election_view.html:192
+#: helios/templates/election_view.html:226
 #, python-format
 msgid "but has been extended until %(election.voting_extended_until)s (UTC)"
 msgstr ""
 
-#: helios/templates/election_view.html:196
+#: helios/templates/election_view.html:230
 #, python-format
 msgid ""
 "This %(election.election_type)s is scheduled to end at %(election."
 "voting_ends_at)s (UTC)"
 msgstr ""
 
-#: helios/templates/election_view.html:198
+#: helios/templates/election_view.html:232
 #, python-format
 msgid "This %(election.election_type)s ends at the administrator's discretion"
 msgstr ""
 
-#: helios/templates/election_view.html:205
+#: helios/templates/election_view.html:239
 #, python-format
 msgid ""
 "This election is <em>private</em>. You are signed in as eligible voter <em>%"
 "(voter.name)s</em>"
 msgstr ""
 
-#: helios/templates/election_view.html:209
+#: helios/templates/election_view.html:243
 msgid ""
 "You do not have Java installed in your browser.<br />At this time, Helios "
 "requires Java.<br />"
 msgstr ""
 
-#: helios/templates/election_view.html:210
+#: helios/templates/election_view.html:244
 msgid ""
 "Visit <a target=\"_new\" href=\"http://java.sun.com\">java.sun.com</a> to "
 "install it"
 msgstr ""
 
-#: helios/templates/election_view.html:215
+#: helios/templates/election_view.html:249
 msgid "voting is not yet open"
 msgstr ""
 
-#: helios/templates/election_view.html:222
+#: helios/templates/election_view.html:256
 #, python-format
 msgid "You are registered to vote in this %(election.election_type)s"
 msgstr ""
 
-#: helios/templates/election_view.html:224
+#: helios/templates/election_view.html:258
 #, python-format
 msgid "Your voter alias is %(voter.alias)s"
 msgstr ""
 
-#: helios/templates/election_view.html:233
+#: helios/templates/election_view.html:267
 msgid "You are eligible to vote in this election"
 msgstr ""
 
-#: helios/templates/election_view.html:235
-#: helios/templates/election_view.html:238
+#: helios/templates/election_view.html:269
+#: helios/templates/election_view.html:272
 #, python-format
 msgid ""
 "You are <em>not eligible</em> to vote in this %(election.election_type)s"
 msgstr ""
 
-#: helios/templates/election_view.html:247
+#: helios/templates/election_view.html:281
 msgid "This election is open to"
 msgstr ""
 
-#: helios/templates/election_view.html:250
+#: helios/templates/election_view.html:284
 msgid "Anyone can vote in this election"
 msgstr ""
 
-#: helios/templates/election_view.html:262
+#: helios/templates/election_view.html:296
 msgid "Audit Info"
 msgstr ""
 
-#: helios/templates/election_view.html:264
+#: helios/templates/election_view.html:298
 msgid "Election URL"
 msgstr ""
 
-#: helios/templates/election_view.html:269
+#: helios/templates/election_view.html:303
 msgid "Election Fingerprint"
 msgstr ""
 
-#: helios/templates/election_view.html:274
+#: helios/templates/election_view.html:308
 msgid "Your smart ballot tracker"
 msgstr ""
 
-#: helios/templates/election_view.html:286
+#: helios/templates/election_view.html:320
 msgid "preview booth"
 msgstr ""
 
-#: helios/templates/election_view.html:295
+#: helios/templates/election_view.html:329
 msgid "verify"
 msgstr ""
 
-#: helios/templates/election_view.html:295
+#: helios/templates/election_view.html:329
 msgid "election tally"
 msgstr ""
 
-#: helios/templates/election_view.html:298
+#: helios/templates/election_view.html:332
 #, python-format
 msgid "review the <a href=\"%(vote_url)s\">voting booth</a>"
 msgstr ""
@@ -1612,35 +1652,35 @@ msgid ""
 "the process."
 msgstr ""
 
-#: heliosbooth/templates/election.html:21
+#: heliosbooth/templates/election.html:28
 msgid "<b>Select</b> your options."
 msgstr ""
 
-#: heliosbooth/templates/election.html:22
+#: heliosbooth/templates/election.html:29
 msgid "Answer the questions, and review your choices."
 msgstr ""
 
-#: heliosbooth/templates/election.html:25
+#: heliosbooth/templates/election.html:32
 msgid "<b>Encrypt</b> your selection."
 msgstr ""
 
-#: heliosbooth/templates/election.html:27
+#: heliosbooth/templates/election.html:34
 msgid "Your selection is encrypted safely inside in your browser."
 msgstr ""
 
-#: heliosbooth/templates/election.html:28
+#: heliosbooth/templates/election.html:35
 msgid "A smart ballot tracker is given to let you track your ballot."
 msgstr ""
 
-#: heliosbooth/templates/election.html:33
+#: heliosbooth/templates/election.html:40
 msgid "<b>Submit</b> your encrypted ballot."
 msgstr ""
 
-#: heliosbooth/templates/election.html:35
+#: heliosbooth/templates/election.html:42
 msgid "Proceed to log in and cast your encrypted ballot for tallying."
 msgstr ""
 
-#: heliosbooth/templates/election.html:41
+#: heliosbooth/templates/election.html:48
 msgid "Start"
 msgstr ""
 

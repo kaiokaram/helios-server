@@ -170,23 +170,22 @@ Tally:<br />
 <br />
 -->
 
-<h3 class="highlight-box">Tally</h3>
+<h3 class="highlight-box">{% trans "Tally" %}</h3>
 {% for question in election.pretty_result %}
 <b><span style="font-size:0.8em;">{% trans "Question" %} #{{forloop.counter}}</span><br />{{question.question}}</b><br />
-<<<<<<< HEAD
 <table class="pretty" style="width: auto; border:3px solid">
 <tr>
-  <th rowspan="1" style="vertical-align:top; text-align:right;">{% trans Grupos %}</th>
+  <th rowspan="1" style="vertical-align:top; text-align:right;">{% trans "Groups" %}</th>
 {% for group in groups %}
   <td colspan="2" style="text-align:center;">{{group.group_name}}</td>
 {% endfor %}
-  <th rowspan="2" style="vertical-align:middle;">{% trans Total %}</th>
-  <th rowspan="2" style="vertical-align:middle;">{% trans Total Peso %}</th>
+  <th rowspan="2" style="vertical-align:middle;">{% trans "Total" %}</th>
+  <th rowspan="2" style="vertical-align:middle;">{% trans "Weighted Total" %}</th>
 </tr>
 <tr>
-  <th rowspan="1" style="vertical-align:bottom; text-align:left;">{% trans Respostas %}</th>
+  <th rowspan="1" style="vertical-align:bottom; text-align:left;">{% trans "Answers" %}</th>
   {% for group in groups %}
-  <td>{% trans total %}</td><td>{% trans total peso %} ({{group.group_weight}})</td>
+  <td>{% trans "total" %}</td><td>{% trans "weighted" %} ({{group.group_weight}})</td>
   {% endfor %}
 </tr>
 {% for answer in question.answers %}
