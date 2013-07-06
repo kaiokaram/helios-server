@@ -1,0 +1,1749 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-07-06 13:02-0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: \n"
+
+#: helios/forms.py:13 helios/forms.py:24
+msgid "Short name"
+msgstr ""
+
+#: helios/forms.py:13
+msgid "no spaces, will be part of the URL for your election, e.g. my-club-2010"
+msgstr ""
+
+#: helios/forms.py:14 helios/forms.py:25
+#: helios/templates/election_bboard.html:35
+#: helios/templates/new_trustee.html:8 helios/templates/voters_list.html:128
+#: helios/templates/voters_upload_confirm.html:12
+msgid "Name"
+msgstr ""
+
+#: helios/forms.py:14
+msgid "the pretty name for your election, e.g. My Club 2010 Election"
+msgstr ""
+
+#: helios/forms.py:15
+msgid "Description"
+msgstr ""
+
+#: helios/forms.py:16
+msgid "Type"
+msgstr ""
+
+#: helios/forms.py:17
+msgid "Use voter aliases"
+msgstr ""
+
+#: helios/forms.py:17
+msgid ""
+"If selected, voter identities will be replaced with aliases, e.g. \"V12\", "
+"in the ballot tracking center"
+msgstr ""
+
+#: helios/forms.py:20
+msgid "Private?"
+msgstr ""
+
+#: helios/forms.py:20
+msgid "A private election is only visible to registered voters."
+msgstr ""
+
+#: helios/forms.py:26
+msgid "Peso"
+msgstr ""
+
+#: helios/templates/_castconfirm_docast.html:20
+#, python-format
+msgid "I am <u>%(voter.display_html_big|safe)s</u>, cast this ballot"
+msgstr ""
+
+#: helios/templates/_castconfirm_docast.html:21
+msgid ""
+"You can cast as many ballots as you want.<br />Only the last one counts."
+msgstr ""
+
+#: helios/templates/_castconfirm_docast.html:26
+msgid ""
+"If you cancel now, your ballot will <em>NOT</em> be recorded.<br />\n"
+"    You can start the voting process over again, of course."
+msgstr ""
+
+#: helios/templates/_castconfirm_docast.html:32
+msgid "Verifying and Casting your ballot"
+msgstr ""
+
+#: helios/templates/_castconfirm_docast.html:37
+msgid "voting has stopped, sorry."
+msgstr ""
+
+#: helios/templates/_castconfirm_docast.html:42
+msgid "voting has not yet begun, sorry."
+msgstr ""
+
+#: helios/templates/_castconfirm_password.html:2
+msgid "Please provide the voter ID and password you received by email."
+msgstr ""
+
+#: helios/templates/_castconfirm_password.html:14
+msgid "Bad voter ID or password, please try again."
+msgstr ""
+
+#: helios/templates/cast_done.html:6
+msgid "Vote Successfully Cast"
+msgstr ""
+
+#: helios/templates/cast_done.html:9
+msgid "Congratulations, your vote has been <b><u>successfully cast</u></b>!"
+msgstr ""
+
+#: helios/templates/cast_done.html:13
+msgid "Your smart ballot tracker is:"
+msgstr ""
+
+#: helios/templates/cast_done.html:22
+msgid "For your safety, we have logged you out."
+msgstr ""
+
+#: helios/templates/cast_done.html:28
+msgid "return to election info"
+msgstr ""
+
+#: helios/templates/castvote.html:6
+msgid "Cast Vote"
+msgstr ""
+
+#: helios/templates/castvote.html:7
+msgid "cast in"
+msgstr ""
+
+#: helios/templates/castvote.html:8
+msgid "Fingerprint:"
+msgstr ""
+
+#: helios/templates/castvote.html:9 helios/templates/stats_elections.html:23
+msgid "by"
+msgstr ""
+
+#: helios/templates/castvote.html:17
+msgid "details"
+msgstr ""
+
+#: helios/templates/combine_decryptions.html:4
+#: helios/templates/combine_decryptions.html:6
+msgid "Release Tally"
+msgstr ""
+
+#: helios/templates/combine_decryptions.html:6
+#: helios/templates/election_edit.html:6 helios/templates/new_trustee.html:5
+msgid "cancel"
+msgstr ""
+
+#: helios/templates/combine_decryptions.html:9
+msgid "You are about to release the tally for this election"
+msgstr ""
+
+#: helios/templates/election_audited_ballots.html:4
+msgid "Audited Ballots for"
+msgstr ""
+
+#: helios/templates/election_audited_ballots.html:7
+#: helios/templates/election_view.html:281
+msgid "Audited Ballots"
+msgstr ""
+
+#: helios/templates/election_audited_ballots.html:7
+#: helios/templates/election_bboard.html:7
+#: helios/templates/election_build.html:5
+#: helios/templates/election_compute_tally.html:28
+#: helios/templates/election_questions.html:6
+#: helios/templates/list_trustees.html:7 helios/templates/voters_email.html:13
+#: helios/templates/voters_email.html:59 helios/templates/voters_list.html:6
+#: helios/templates/voters_manage.html:5 helios/templates/voters_search.html:5
+#: helios/templates/voters_upload.html:5
+#: helios/templates/voters_upload_confirm.html:5
+msgid "back to election"
+msgstr ""
+
+#: helios/templates/election_audited_ballots.html:10
+msgid ""
+"When you prepare a ballot with Helios, you immediately receive a smart "
+"ballot tracker. Before you choose to cast that ballot, you have the option "
+"to ask Helios to "
+msgstr ""
+
+#: helios/templates/election_audited_ballots.html:14
+msgid ""
+"These ballots are <em>not cast</em>, and they will not be counted. They are "
+"just here for auditing purposes, to spot-check that Helios is properly "
+"encrypting voter's choices"
+msgstr ""
+
+#: helios/templates/election_audited_ballots.html:18
+msgid ""
+"To verify an audited ballot, copy its entire content and paste it in the"
+msgstr ""
+
+#: helios/templates/election_audited_ballots.html:18
+msgid "single ballot verifier"
+msgstr ""
+
+#: helios/templates/election_audited_ballots.html:23
+#, python-format
+msgid "Audited Ballots %(offset_plus_one)s - %(offset_plus_limit)s"
+msgstr ""
+
+#: helios/templates/election_audited_ballots.html:27
+#: helios/templates/election_audited_ballots.html:35
+#: helios/templates/election_bboard.html:20
+#: helios/templates/election_bboard.html:28
+#: helios/templates/stats_elections.html:17
+msgid "next"
+msgstr ""
+
+#: helios/templates/election_audited_ballots.html:32
+#: helios/templates/election_bboard.html:25
+#: helios/templates/voters_manage.html:21
+msgid "back to start"
+msgstr ""
+
+#: helios/templates/election_audited_ballots.html:39
+#: helios/templates/election_bboard.html:44
+#: helios/templates/voters_list.html:152
+msgid "view"
+msgstr ""
+
+#: helios/templates/election_audited_ballots.html:43
+msgid "no audited ballots yet"
+msgstr ""
+
+#: helios/templates/election_badge.html:3
+#: helios/templates/election_bboard.html:14
+msgid "cast votes"
+msgstr ""
+
+#: helios/templates/election_badge.html:3
+msgid "vote"
+msgstr ""
+
+#: helios/templates/election_badge.html:4
+msgid "powered by"
+msgstr ""
+
+#: helios/templates/election_badge.html:4
+msgid "Helios Voting"
+msgstr ""
+
+#: helios/templates/election_bboard.html:4
+msgid "Ballot Tracking Center for"
+msgstr ""
+
+#: helios/templates/election_bboard.html:7
+#: helios/templates/election_view.html:280
+msgid "Ballot Tracking Center"
+msgstr ""
+
+#: helios/templates/election_bboard.html:10
+msgid ""
+"This is the ballot tracking center, which displays the tracking numbers of "
+"all cast ballots in this election"
+msgstr ""
+
+#: helios/templates/election_bboard.html:17
+#: helios/templates/voters_manage.html:13
+#, python-format
+msgid "Voters %(offset_plus_one)s - %(offset_plus_limit)s"
+msgstr ""
+
+#: helios/templates/election_bboard.html:33
+#: helios/templates/voters_list.html:134
+msgid "Alias"
+msgstr ""
+
+#: helios/templates/election_bboard.html:37
+#: helios/templates/voters_list.html:136
+msgid "Smart Ballot Tracker"
+msgstr ""
+
+#: helios/templates/election_build.html:5
+#: helios/templates/election_questions.html:6
+msgid "Questions"
+msgstr ""
+
+#: helios/templates/election_cast_confirm.html:4
+msgid "Confirm Vote"
+msgstr ""
+
+#: helios/templates/election_cast_confirm.html:39
+msgid "Submit your Vote"
+msgstr ""
+
+#: helios/templates/election_cast_confirm.html:42
+msgid ""
+"We have received, <b><u>but not yet recorded</u></b>, your encrypted ballot"
+msgstr ""
+
+#: helios/templates/election_cast_confirm.html:43
+msgid "Your smart ballot tracker is"
+msgstr ""
+
+#: helios/templates/election_cast_confirm.html:67
+#, python-format
+msgid ""
+"You are logged in as <u>%(user.display_html_small|safe)s</u>, but this "
+"election<br />"
+msgstr ""
+
+#: helios/templates/election_cast_confirm.html:68
+msgid "requires election-specific credentials"
+msgstr ""
+
+#: helios/templates/election_cast_confirm.html:78
+msgid "Sorry, you are <em><u>not eligible</u></em> for this election"
+msgstr ""
+
+#: helios/templates/election_cast_confirm.html:80
+msgid ""
+"Sorry, you are <em>not registered</em> for this election, and registration "
+"is closed"
+msgstr ""
+
+#: helios/templates/election_cast_confirm.html:84
+msgid "return to the main election page"
+msgstr ""
+
+#: helios/templates/election_cast_confirm.html:88
+msgid "Now, we need you to log in, so we can verify your eligibility"
+msgstr ""
+
+#: helios/templates/election_cast_confirm.html:93
+msgid ""
+"This election is open to <em>anyone</em>, so log in with your preferred "
+"account"
+msgstr ""
+
+#: helios/templates/election_cast_confirm.html:97
+msgid ""
+"This election is only open to <em>registered voters</em>, so log in with"
+msgstr ""
+
+#: helios/templates/election_cast_confirm.html:98
+msgid "the same account you registered with"
+msgstr ""
+
+#: helios/templates/election_cast_confirm.html:105
+msgid "Don't worry, we'll remember your ballot while you log in"
+msgstr ""
+
+#: helios/templates/election_compute_tally.html:4
+msgid "Compute Encryted Tally for"
+msgstr ""
+
+#: helios/templates/election_compute_tally.html:7
+msgid "Compute Tally for Election"
+msgstr ""
+
+#: helios/templates/election_compute_tally.html:12
+#, python-format
+msgid ""
+"You are about to compute the encrypted tally for election <b>%(election.name)"
+"s</b>"
+msgstr ""
+
+#: helios/templates/election_compute_tally.html:16
+msgid "Once you do this, voters will no longer be able to cast a ballot"
+msgstr ""
+
+#: helios/templates/election_compute_tally.html:23
+#: helios/templates/election_freeze.html:40
+msgid "never mind"
+msgstr ""
+
+#: helios/templates/election_compute_tally.html:27
+msgid ""
+"No votes have been cast in this election. At least one vote must be cast "
+"before you compute the tally"
+msgstr ""
+
+#: helios/templates/election_edit.html:6
+msgid "Update"
+msgstr ""
+
+#: helios/templates/election_freeze.html:5
+msgid "Freeze Ballot"
+msgstr ""
+
+#: helios/templates/election_freeze.html:7
+msgid ""
+"Once the ballot is frozen, the questions and options can no longer be "
+"modified"
+msgstr ""
+
+#: helios/templates/election_freeze.html:8
+msgid "The list of trustees and their public keys will also be frozen"
+msgstr ""
+
+#: helios/templates/election_freeze.html:13
+msgid ""
+"Registration for your election is currently <b>open</b>, which means anyone "
+"can vote, even after you freeze the ballot"
+msgstr ""
+
+#: helios/templates/election_freeze.html:15
+msgid ""
+"Registration for your election is currently <b>closed</b>, which means only "
+"the voters you designate will be able to cast a ballot. As the "
+"administrator, you will still be able to modify that voter list as the "
+"election progresses"
+msgstr ""
+
+#: helios/templates/election_freeze.html:21
+msgid "You must freeze the ballot before you can contact voters"
+msgstr ""
+
+#: helios/templates/election_freeze.html:27
+msgid "Before you can freeze the election, you will need to"
+msgstr ""
+
+#: helios/templates/election_freeze.html:33
+msgid "go back to the election"
+msgstr ""
+
+#: helios/templates/election_keygenerator.html:95
+msgid "As a trustee, it's time to set up your key for this election"
+msgstr ""
+
+#: helios/templates/election_keygenerator.html:99
+msgid "Please wait for the generator to load..."
+msgstr ""
+
+#: helios/templates/election_keygenerator.html:104
+msgid "Generate Election Keys"
+msgstr ""
+
+#: helios/templates/election_keygenerator.html:107
+msgid ""
+"If you've already generated a keypair, you can <a href=\"javascript:"
+"show_key_reuse()\">reuse it</a>"
+msgstr ""
+
+#: helios/templates/election_keygenerator.html:111
+msgid "Reusing a Key"
+msgstr ""
+
+#: helios/templates/election_keygenerator.html:114
+msgid "Enter your complete secret key below"
+msgstr ""
+
+#: helios/templates/election_keygenerator.html:125
+msgid "Your Secret Key"
+msgstr ""
+
+#: helios/templates/election_keygenerator.html:127
+msgid ""
+"Your key has been generated, but you may choose to<br /><a href=\"javascript:"
+"clear_keys();\">clear it from memory and start from scratch</a> if you prefer"
+msgstr ""
+
+#: helios/templates/election_keygenerator.html:131
+msgid "Save your secret key"
+msgstr ""
+
+#: helios/templates/election_keygenerator.html:135
+msgid "ok, I've saved the key, let's move on"
+msgstr ""
+
+#: helios/templates/election_keygenerator.html:140
+msgid "Your Public Key"
+msgstr ""
+
+#: helios/templates/election_keygenerator.html:145
+msgid "The fingerprint of your public key is"
+msgstr ""
+
+#: helios/templates/election_keygenerator.html:146
+msgid ""
+"You may want to save this to confirm that your public key was properly "
+"stored by the server"
+msgstr ""
+
+#: helios/templates/election_keygenerator.html:147
+msgid ""
+"Your public key is not currently being displayed because you do not need to "
+"save it, the fingerprint is sufficient"
+msgstr ""
+
+#: helios/templates/election_new.html:6
+#: helios/templates/election_new_2.html:50
+msgid "Create a New Election"
+msgstr ""
+
+#: helios/templates/election_new.html:18
+msgid "Voter groups"
+msgstr ""
+
+#: helios/templates/election_new.html:29
+msgid "Short name must have <b>no spaces</b> and <b>no special characters</b>."
+msgstr ""
+
+#: helios/templates/election_new.html:34
+msgid "Next"
+msgstr ""
+
+#: helios/templates/election_new_2.html:52
+msgid "An election managed by Helios"
+msgstr ""
+
+#: helios/templates/election_new_2.html:55
+msgid "An election managed by you, the single administrator"
+msgstr ""
+
+#: helios/templates/election_new_2.html:57
+msgid "An election managed by multiple trustees"
+msgstr ""
+
+#: helios/templates/election_new_2.html:70
+msgid "Trustees (up to 5)"
+msgstr ""
+
+#: helios/templates/election_new_2.html:85
+msgid "Your Election's Secret Key"
+msgstr ""
+
+#: helios/templates/election_new_2.html:89
+msgid "You need to copy and paste this key and keep it safe"
+msgstr ""
+
+#: helios/templates/election_new_2.html:90
+msgid "otherwise you won't be able to tally your election"
+msgstr ""
+
+#: helios/templates/election_questions.html:4
+msgid "Questions for"
+msgstr ""
+
+#: helios/templates/election_register.html:5
+msgid "Register"
+msgstr ""
+
+#: helios/templates/election_register.html:9
+#, python-format
+msgid "You are currently logged in as %(user.user_id)s [%(user.user_type)s]"
+msgstr ""
+
+#: helios/templates/election_register.html:13
+msgid "You are currently registered for this election"
+msgstr ""
+
+#: helios/templates/election_register.html:17
+msgid "You are <em>not</em> registered for this election"
+msgstr ""
+
+#: helios/templates/election_tallied.html:6
+#, python-format
+msgid "Election %(election.name)s Already Tallied"
+msgstr ""
+
+#: helios/templates/election_tallied.html:9
+msgid "This election has already been tallied, you can no longer cast a vote"
+msgstr ""
+
+#: helios/templates/election_tallied.html:13
+msgid "view the election tally"
+msgstr ""
+
+#: helios/templates/election_view.html:24
+msgid "edit"
+msgstr ""
+
+#: helios/templates/election_view.html:28
+msgid "private"
+msgstr ""
+
+#: helios/templates/election_view.html:28
+msgid "public"
+msgstr ""
+
+#: helios/templates/election_view.html:28
+msgid "created by"
+msgstr ""
+
+#: helios/templates/election_view.html:39
+#, python-format
+msgid "this %(election.election_type)s is featured on the front page"
+msgstr ""
+
+#: helios/templates/election_view.html:44
+#, python-format
+msgid ""
+"this %(election.election_type)s is <u>not</u> featured on the front page"
+msgstr ""
+
+#: helios/templates/election_view.html:46
+msgid "feature it"
+msgstr ""
+
+#: helios/templates/election_view.html:70
+msgid "questions"
+msgstr ""
+
+#: helios/templates/election_view.html:72
+msgid "voters &amp; ballots"
+msgstr ""
+
+#: helios/templates/election_view.html:74
+msgid "trustees"
+msgstr ""
+
+#: helios/templates/election_view.html:80
+msgid "Embed an Election Badge"
+msgstr ""
+
+#: helios/templates/election_view.html:86
+msgid ""
+"adding this HTML to your site displays a thin banner with direct links to "
+"voting"
+msgstr ""
+
+#: helios/templates/election_view.html:98
+msgid "Next Step"
+msgstr ""
+
+#: helios/templates/election_view.html:103
+msgid ", and"
+msgstr ""
+
+#: helios/templates/election_view.html:106
+msgid "freeze ballot and open election"
+msgstr ""
+
+#: helios/templates/election_view.html:109
+msgid ""
+"once you do this, the election will be ready for voting and will open "
+"automatically"
+msgstr ""
+
+#: helios/templates/election_view.html:110
+#, python-format
+msgid "at %(election.voting_starts_at)s, as per your settings"
+msgstr ""
+
+#: helios/templates/election_view.html:112
+msgid "once you do this, the election will be immediately open for voting"
+msgstr ""
+
+#: helios/templates/election_view.html:120
+msgid "Tally computation is under way"
+msgstr ""
+
+#: helios/templates/election_view.html:121
+msgid "Reload this page in a couple of minutes"
+msgstr ""
+
+#: helios/templates/election_view.html:123
+msgid "compute encrypted tally"
+msgstr ""
+
+#: helios/templates/election_view.html:124
+msgid ""
+"The encrypted votes will be combined into an encrypted tally. Once this is "
+"done"
+msgstr ""
+
+#: helios/templates/election_view.html:125
+msgid "trustees will be asked to provide their share of the decryption"
+msgstr ""
+
+#: helios/templates/election_view.html:132
+msgid "release results"
+msgstr ""
+
+#: helios/templates/election_view.html:134
+msgid "combine trustee decryptions and release results"
+msgstr ""
+
+#: helios/templates/election_view.html:138
+msgid "The result is released and all voters are notified"
+msgstr ""
+
+#: helios/templates/election_view.html:140
+msgid ""
+"The decryption shares from the trustees are combined and the tally is "
+"decrypted"
+msgstr ""
+
+#: helios/templates/election_view.html:141
+msgid ""
+"Once you do this, the tally will be immediately available for all to see, and"
+msgstr ""
+
+#: helios/templates/election_view.html:142
+msgid "all voters will be notified that the tally is ready"
+msgstr ""
+
+#: helios/templates/election_view.html:145
+msgid "trustees (for decryption)"
+msgstr ""
+
+#: helios/templates/election_view.html:163
+msgid "This election is complete"
+msgstr ""
+
+#: helios/templates/election_view.html:169
+msgid "Question"
+msgstr ""
+
+#: helios/templates/election_view.html:181
+msgid "Election closed. Tally will be computed soon"
+msgstr ""
+
+#: helios/templates/election_view.html:187
+msgid "Vote in this"
+msgstr ""
+
+#: helios/templates/election_view.html:191
+#, python-format
+msgid ""
+"This %(election.election_type)s was initially scheduled to end at %(election."
+"voting_ends_at)s (UTC)"
+msgstr ""
+
+#: helios/templates/election_view.html:192
+#, python-format
+msgid "but has been extended until %(election.voting_extended_until)s (UTC)"
+msgstr ""
+
+#: helios/templates/election_view.html:196
+#, python-format
+msgid ""
+"This %(election.election_type)s is scheduled to end at %(election."
+"voting_ends_at)s (UTC)"
+msgstr ""
+
+#: helios/templates/election_view.html:198
+#, python-format
+msgid "This %(election.election_type)s ends at the administrator's discretion"
+msgstr ""
+
+#: helios/templates/election_view.html:205
+#, python-format
+msgid ""
+"This election is <em>private</em>. You are signed in as eligible voter <em>%"
+"(voter.name)s</em>"
+msgstr ""
+
+#: helios/templates/election_view.html:209
+msgid ""
+"You do not have Java installed in your browser.<br />At this time, Helios "
+"requires Java.<br />"
+msgstr ""
+
+#: helios/templates/election_view.html:210
+msgid ""
+"Visit <a target=\"_new\" href=\"http://java.sun.com\">java.sun.com</a> to "
+"install it"
+msgstr ""
+
+#: helios/templates/election_view.html:215
+msgid "voting is not yet open"
+msgstr ""
+
+#: helios/templates/election_view.html:222
+#, python-format
+msgid "You are registered to vote in this %(election.election_type)s"
+msgstr ""
+
+#: helios/templates/election_view.html:224
+#, python-format
+msgid "Your voter alias is %(voter.alias)s"
+msgstr ""
+
+#: helios/templates/election_view.html:233
+msgid "You are eligible to vote in this election"
+msgstr ""
+
+#: helios/templates/election_view.html:235
+#: helios/templates/election_view.html:238
+#, python-format
+msgid ""
+"You are <em>not eligible</em> to vote in this %(election.election_type)s"
+msgstr ""
+
+#: helios/templates/election_view.html:247
+msgid "This election is open to"
+msgstr ""
+
+#: helios/templates/election_view.html:250
+msgid "Anyone can vote in this election"
+msgstr ""
+
+#: helios/templates/election_view.html:262
+msgid "Audit Info"
+msgstr ""
+
+#: helios/templates/election_view.html:264
+msgid "Election URL"
+msgstr ""
+
+#: helios/templates/election_view.html:269
+msgid "Election Fingerprint"
+msgstr ""
+
+#: helios/templates/election_view.html:274
+msgid "Your smart ballot tracker"
+msgstr ""
+
+#: helios/templates/election_view.html:286
+msgid "preview booth"
+msgstr ""
+
+#: helios/templates/election_view.html:295
+msgid "verify"
+msgstr ""
+
+#: helios/templates/election_view.html:295
+msgid "election tally"
+msgstr ""
+
+#: helios/templates/election_view.html:298
+#, python-format
+msgid "review the <a href=\"%(vote_url)s\">voting booth</a>"
+msgstr ""
+
+#: helios/templates/elections_administered.html:5
+msgid "Elections you Administer"
+msgstr ""
+
+#: helios/templates/elections_administered.html:5
+#: helios/templates/elections_voted.html:5
+msgid "back to home"
+msgstr ""
+
+#: helios/templates/elections_voted.html:5
+msgid "Elections where you voted"
+msgstr ""
+
+#: helios/templates/list_trustees.html:4
+msgid "Trustees for"
+msgstr ""
+
+#: helios/templates/list_trustees.html:7
+msgid "Trustees"
+msgstr ""
+
+#: helios/templates/list_trustees.html:10
+msgid ""
+"Trustees are responsible for decrypting the election result.<br />\n"
+"    Each trustee generates a keypair and submits the public portion to "
+"Helios.<br />\n"
+"    When it's time to decrypt, each trustee needs to provide his secret key."
+msgstr ""
+
+#: helios/templates/list_trustees.html:18
+msgid ""
+"Helios is automatically your first trustee and will handle its keypair "
+"generation and decryption automatically.<br />\n"
+"  You may add additional trustees if you want, and you can even remove the "
+"Helios trustee.<br />\n"
+"  However, we recommend you do this only if you have a solid understanding "
+"of the trustee's role."
+msgstr ""
+
+#: helios/templates/list_trustees.html:25
+msgid "add a trustee"
+msgstr ""
+
+#: helios/templates/list_trustees.html:29
+msgid "add Helios as a trustee"
+msgstr ""
+
+#: helios/templates/list_trustees.html:40
+msgid "Trustee"
+msgstr ""
+
+#: helios/templates/list_trustees.html:54
+msgid "Public Key Fingerprint"
+msgstr ""
+
+#: helios/templates/list_trustees.html:56
+msgid "No public key uploaded yet"
+msgstr ""
+
+#: helios/templates/list_trustees.html:62
+msgid "tally recorded for this trustee"
+msgstr ""
+
+#: helios/templates/list_trustees.html:64
+msgid "waiting for this trustee's tally"
+msgstr ""
+
+#: helios/templates/new_trustee.html:5
+msgid "New Trustee"
+msgstr ""
+
+#: helios/templates/new_trustee.html:9
+msgid "Email"
+msgstr ""
+
+#: helios/templates/nocookies.html:4
+msgid "Cookies are required for Helios use"
+msgstr ""
+
+#: helios/templates/nocookies.html:7
+msgid "Cookies are Required for Helios"
+msgstr ""
+
+#: helios/templates/nocookies.html:10
+#, python-format
+msgid ""
+"It appears your browser does not support cookies or is set up to block "
+"cookies from this site. Helios needs to set a session cookie so that it can "
+"save your vote, let you log in, etc. Enable cookies and then <a href=\"%"
+"(retest_url)s\">proceed to preparing your ballot</a>"
+msgstr ""
+
+#: helios/templates/nocookies.html:13
+msgid ""
+"If you keep getting sent back to this page, it's probably because you "
+"haven't enabled cookies successfully."
+msgstr ""
+
+#: helios/templates/password_voter_login.html:4
+msgid "Log In to View Election"
+msgstr ""
+
+#: helios/templates/password_voter_login.html:6
+msgid "Private Election - Please Log In"
+msgstr ""
+
+#: helios/templates/password_voter_login.html:9
+#, python-format
+msgid ""
+"This election, with fingerprint <tt>%(election.hash)s</tt>, is private, and "
+"can only be viewed by eligible voters."
+msgstr ""
+
+#: helios/templates/socialbuttons.html:4
+msgid "Share"
+msgstr ""
+
+#: helios/templates/socialbuttons.html:6
+msgid "Tweet"
+msgstr ""
+
+#: helios/templates/stats.html:4 helios/templates/stats.html.py:7
+#: helios/templates/stats_elections.html:4
+#: helios/templates/stats_problem_elections.html:4
+msgid "Statistics"
+msgstr ""
+
+#: helios/templates/stats.html:10
+msgid "elections"
+msgstr ""
+
+#: helios/templates/stats.html:11
+msgid "recent votes"
+msgstr ""
+
+#: helios/templates/stats.html:12
+msgid "recent problem elections"
+msgstr ""
+
+#: helios/templates/stats.html:15
+msgid "votes in queue."
+msgstr ""
+
+#: helios/templates/stats.html:15
+msgid "force it"
+msgstr ""
+
+#: helios/templates/stats_elections.html:7
+#: helios/templates/stats_elections.html:14
+msgid "Elections"
+msgstr ""
+
+#: helios/templates/stats_elections.html:11
+msgid "previous"
+msgstr ""
+
+#: helios/templates/stats_elections.html:23
+#, python-format
+msgid "%(election.num_voters)s voters / %(election.num_cast_votes)s cast votes"
+msgstr ""
+
+#: helios/templates/stats_problem_elections.html:7
+msgid "Problematic Elections"
+msgstr ""
+
+#: helios/templates/stats_problem_elections.html:9
+msgid "Unfrozen for more than a day."
+msgstr ""
+
+#: helios/templates/stats_problem_elections.html:13
+msgid "voters"
+msgstr ""
+
+#: helios/templates/stats_recent_votes.html:7
+msgid "Recent Votes"
+msgstr ""
+
+#: helios/templates/stats_recent_votes.html:9
+msgid "Last 24 hours"
+msgstr ""
+
+#: helios/templates/stats_recent_votes.html:13
+msgid "recently cast votes"
+msgstr ""
+
+#: helios/templates/trustee_check_sk.html:47
+#, python-format
+msgid ""
+"<h2 class=\"title\">%(election.name)s &mdash; Trustee %(trustee.name)s "
+"&mdash; Check Secret Key <span style=\"font-size:0.7em;\">[<a href=\"./home"
+"\">back to trustee home</a>]</span></h2>"
+msgstr ""
+
+#: helios/templates/trustee_check_sk.html:50
+#: helios/templates/trustee_home.html:10
+msgid "Your public key fingerprint is:"
+msgstr ""
+
+#: helios/templates/trustee_check_sk.html:54
+msgid "loading crypto functions..."
+msgstr ""
+
+#: helios/templates/trustee_check_sk.html:59
+msgid "To verify that you have the right secret key, paste it here:"
+msgstr ""
+
+#: helios/templates/trustee_check_sk.html:71
+msgid "checking your secret key..."
+msgstr ""
+
+#: helios/templates/trustee_decrypt_and_prove.html:138
+msgid "Trustee:"
+msgstr ""
+
+#: helios/templates/trustee_decrypt_and_prove.html:139
+msgid "Public Key Fingerprint:"
+msgstr ""
+
+#: helios/templates/trustee_decrypt_and_prove.html:140
+msgid "Encrypted Tally Fingerprint:"
+msgstr ""
+
+#: helios/templates/trustee_decrypt_and_prove.html:144
+msgid "The encrypted tally for your election has been computed."
+msgstr ""
+
+#: helios/templates/trustee_decrypt_and_prove.html:145
+msgid "Now it's time to compute and submit your partial decryption."
+msgstr ""
+
+#: helios/templates/trustee_decrypt_and_prove.html:149
+msgid ""
+"This process is performed in two steps.<br /><br />\n"
+"      <u>First</u>, your secret key is used to decrypt the tally <em>inside</"
+"em> your browser, without connecting to the network.<br />\n"
+"      You can choose to take your browser \"offline\" for this step, if "
+"you'd like.<br /><br />\n"
+"      <u>Second</u>, once your decryption factors have been computed, your "
+"browser will need to be \"online\" to submit them to the server.<br />\n"
+"      If you'd like, you can compute your decryption factors, copy them to "
+"your clipboard, restart your browser, and<br />\n"
+"      skip to the second step so that your browser is never online when you "
+"enter your secret key."
+msgstr ""
+
+#: helios/templates/trustee_decrypt_and_prove.html:160
+msgid "FIRST STEP: enter your secret key"
+msgstr ""
+
+#: helios/templates/trustee_decrypt_and_prove.html:164
+msgid "Generate partial decryption"
+msgstr ""
+
+#: helios/templates/trustee_decrypt_and_prove.html:168
+msgid "skip to the second step"
+msgstr ""
+
+#: helios/templates/trustee_decrypt_and_prove.html:169
+msgid "(you need to have already computed your decryption factors.)"
+msgstr ""
+
+#: helios/templates/trustee_decrypt_and_prove.html:174
+msgid "Generating partial decryption factors and proofs..."
+msgstr ""
+
+#: helios/templates/trustee_decrypt_and_prove.html:179
+msgid "Submitting and checking your decryption factors and proofs..."
+msgstr ""
+
+#: helios/templates/trustee_decrypt_and_prove.html:184
+msgid "SECOND STEP: upload your partial decryption"
+msgstr ""
+
+#: helios/templates/trustee_decrypt_and_prove.html:186
+msgid "Your partial decryption factors and proofs have been generated below."
+msgstr ""
+
+#: helios/templates/trustee_decrypt_and_prove.html:187
+msgid "Your secret key has been cleared from memory."
+msgstr ""
+
+#: helios/templates/trustee_decrypt_and_prove.html:188
+msgid "When you're ready, you can submit this result to the server."
+msgstr ""
+
+#: helios/templates/trustee_decrypt_and_prove.html:190
+msgid "Your partial decryption:"
+msgstr ""
+
+#: helios/templates/trustee_decrypt_and_prove.html:196
+msgid "reset and restart decryption process"
+msgstr ""
+
+#: helios/templates/trustee_decrypt_and_prove.html:201
+msgid "Done!"
+msgstr ""
+
+#: helios/templates/trustee_decrypt_and_prove.html:201
+msgid "Back to election"
+msgstr ""
+
+#: helios/templates/trustee_decrypt_and_prove.html:205
+msgid "Error: your secret key was likely incorrect."
+msgstr ""
+
+#: helios/templates/trustee_home.html:5
+#, python-format
+msgid "Trustee %(trustee.name)s Home"
+msgstr ""
+
+#: helios/templates/trustee_home.html:9
+msgid "You have successfully uploaded your public key."
+msgstr ""
+
+#: helios/templates/trustee_home.html:11
+msgid "You can"
+msgstr ""
+
+#: helios/templates/trustee_home.html:11
+msgid "verify that you have the right secret key"
+msgstr ""
+
+#: helios/templates/trustee_home.html:13
+msgid "setup your key"
+msgstr ""
+
+#: helios/templates/trustee_home.html:20
+msgid "You have successfully uploaded your decryption."
+msgstr ""
+
+#: helios/templates/trustee_home.html:22
+msgid "The encrypted tally for this election is ready."
+msgstr ""
+
+#: helios/templates/trustee_home.html:23
+msgid "decrypt with your key"
+msgstr ""
+
+#: helios/templates/trustee_home.html:26
+msgid ""
+"Once the tally is computed, come back here to provide your secret key for "
+"decryption purposes."
+msgstr ""
+
+#: helios/templates/trustee_home.html:27
+msgid ""
+"You should keep the email with your trustee homepage link, which contains "
+"the credentials needed to get back here."
+msgstr ""
+
+#: helios/templates/voters_eligibility.html:6
+msgid "Voter Eligibility"
+msgstr ""
+
+#: helios/templates/voters_eligibility.html:6
+msgid "back to voters"
+msgstr ""
+
+#: helios/templates/voters_eligibility.html:13
+msgid ""
+"You may limit eligibility of voters to one of these categories, as defined by"
+msgstr ""
+
+#: helios/templates/voters_email.html:4
+msgid "Contact Voters for"
+msgstr ""
+
+#: helios/templates/voters_email.html:13
+msgid "Contact Voters"
+msgstr ""
+
+#: helios/templates/voters_email.html:17
+msgid "You are sending this email to a specific user"
+msgstr ""
+
+#: helios/templates/voters_email.html:22
+msgid "Templates"
+msgstr ""
+
+#: helios/templates/voters_email.html:34
+msgid "Subject"
+msgstr ""
+
+#: helios/templates/voters_email.html:40
+msgid "You may tweak the subject and add a custom message using the form below"
+msgstr ""
+
+#: helios/templates/voters_email.html:59
+msgid "Done, go"
+msgstr ""
+
+#: helios/templates/voters_email.html:63
+msgid ""
+"Error emailing participants. Check server settings, make sure there's an "
+"SMTP server"
+msgstr ""
+
+#: helios/templates/voters_list.html:4
+#, python-format
+msgid "Voters &amp; Ballot Tracking Center for %(election.name)s"
+msgstr ""
+
+#: helios/templates/voters_list.html:6
+msgid "Voters and Ballot Tracking Center"
+msgstr ""
+
+#: helios/templates/voters_list.html:9
+msgid "Who can vote?"
+msgstr ""
+
+#: helios/templates/voters_list.html:13
+msgid "Only the voters listed here"
+msgstr ""
+
+#: helios/templates/voters_list.html:32
+msgid ""
+"Your election is marked private, which means you cannot open registration up "
+"more widely"
+msgstr ""
+
+#: helios/templates/voters_list.html:34
+msgid "You can change this setting"
+msgstr ""
+
+#: helios/templates/voters_list.html:37
+msgid "anyone can vote"
+msgstr ""
+
+#: helios/templates/voters_list.html:38
+msgid "only voters listed explicitly below can vote"
+msgstr ""
+
+#: helios/templates/voters_list.html:40
+msgid "only voters who are members of"
+msgstr ""
+
+#: helios/templates/voters_list.html:54
+msgid "email voters"
+msgstr ""
+
+#: helios/templates/voters_list.html:60
+msgid "searching for"
+msgstr ""
+
+#: helios/templates/voters_list.html:60
+msgid "clear search"
+msgstr ""
+
+#: helios/templates/voters_list.html:62 helios/templates/voters_manage.html:7
+msgid "search"
+msgstr ""
+
+#: helios/templates/voters_list.html:71 helios/templates/voters_manage.html:10
+msgid "bulk upload voters"
+msgstr ""
+
+#: helios/templates/voters_list.html:75
+msgid "Prior Bulk Uploads"
+msgstr ""
+
+#: helios/templates/voters_list.html:84
+#, python-format
+msgid "bytes, at %(vf.uploaded_at)s"
+msgstr ""
+
+#: helios/templates/voters_list.html:86
+#, python-format
+msgid "done processing: %(vf.num_voters)s voters loaded"
+msgstr ""
+
+#: helios/templates/voters_list.html:90
+msgid "currently processing"
+msgstr ""
+
+#: helios/templates/voters_list.html:92
+msgid "not yet processed"
+msgstr ""
+
+#: helios/templates/voters_list.html:106
+#, python-format
+msgid "previous %(limit)s"
+msgstr ""
+
+#: helios/templates/voters_list.html:112
+msgid "cast vote"
+msgstr ""
+
+#: helios/templates/voters_list.html:112
+msgid "s"
+msgstr ""
+
+#: helios/templates/voters_list.html:114
+msgid "no votes yet"
+msgstr ""
+
+#: helios/templates/voters_list.html:119
+#, python-format
+msgid ""
+"Voters %(voters_page.start_index)s - %(voters_page.end_index)s (of %"
+"(total_voters)s)"
+msgstr ""
+
+#: helios/templates/voters_list.html:122
+#: helios/templates/voters_manage.html:16
+#: helios/templates/voters_manage.html:24
+#, python-format
+msgid "next %(limit)s"
+msgstr ""
+
+#: helios/templates/voters_list.html:159
+msgid "no voters"
+msgstr ""
+
+#: helios/templates/voters_manage.html:5
+msgid "Manage Voters"
+msgstr ""
+
+#: helios/templates/voters_manage.html:28
+msgid "<tr><th>Alias</th><th>Name</th><th>Username</th></tr>"
+msgstr ""
+
+#: helios/templates/voters_search.html:5
+#, python-format
+msgid "Search Voters for '%(search_term)s'"
+msgstr ""
+
+#: helios/templates/voters_search.html:8
+msgid "Voter Found:"
+msgstr ""
+
+#: helios/templates/voters_search.html:10
+msgid "email this voter"
+msgstr ""
+
+#: helios/templates/voters_search.html:12
+msgid "once this election is frozen, you'll be able to email this voter."
+msgstr ""
+
+#: helios/templates/voters_search.html:15
+msgid "no such voter found"
+msgstr ""
+
+#: helios/templates/voters_upload.html:5
+#: helios/templates/voters_upload_confirm.html:5
+msgid "Bulk Upload Voters"
+msgstr ""
+
+#: helios/templates/voters_upload.html:9
+msgid ""
+"If you would like to specify your list of voters by name and email address"
+msgstr ""
+
+#: helios/templates/voters_upload.html:10
+msgid "you can bulk upload a list of such voters here"
+msgstr ""
+
+#: helios/templates/voters_upload.html:12
+msgid "Please prepare a text file of comma-separated values, as follows"
+msgstr ""
+
+#: helios/templates/voters_upload.html:22
+msgid ""
+"The easiest way to prepare such a file is to use a spreadsheet program and "
+"to export as \"CSV\".<br/>\n"
+"    If the election has voter groups, make sure each voter has a <b>valid "
+"group</b> by specifying the group's short name."
+msgstr ""
+
+#: helios/templates/voters_upload.html:38
+msgid "OK, done uploading"
+msgstr ""
+
+#: helios/templates/voters_upload.html:39
+msgid "You can now <a href=\"./manage\">view the list of voters</a>"
+msgstr ""
+
+#: helios/templates/voters_upload_confirm.html:5
+msgid "Confirm"
+msgstr ""
+
+#: helios/templates/voters_upload_confirm.html:8
+msgid ""
+"You have uploaded a file of voters. The first few rows of this file are:"
+msgstr ""
+
+#: helios/templates/voters_upload_confirm.html:12
+msgid "Voter Login"
+msgstr ""
+
+#: helios/templates/voters_upload_confirm.html:12
+msgid "Email Address"
+msgstr ""
+
+#: helios/templates/voters_upload_confirm.html:12
+msgid "Group"
+msgstr ""
+
+#: helios/templates/voters_upload_confirm.html:20
+msgid ""
+"If the election has voter groups, make sure each voter has a <b>valid group</"
+"b> by specifying the group's short name.<br/>\n"
+"  Does this look right to you?"
+msgstr ""
+
+#: helios/templates/voters_upload_confirm.html:26
+msgid "no, let me upload a different file"
+msgstr ""
+
+#: helios/templates/email/info_body.txt:6
+msgid "Election Link:"
+msgstr ""
+
+#: helios/templates/email/info_subject.txt:2
+msgid "Additional Information"
+msgstr ""
+
+#: helios/templates/email/result_body.txt:2
+#: helios/templates/email/vote_body.txt:2
+msgid "Dear"
+msgstr ""
+
+#: helios/templates/email/result_body.txt:4
+#, python-format
+msgid "The tally for %(election.name)s has been computed and released:"
+msgstr ""
+
+#: helios/templates/email/result_body.txt:10
+msgid "Your smart ballot tracker in this election was:"
+msgstr ""
+
+#: helios/templates/email/result_body.txt:14
+msgid "If you believe this tracker to be in error, please contact us."
+msgstr ""
+
+#: helios/templates/email/result_body.txt:16
+msgid "It appears you did not cast a vote in this election."
+msgstr ""
+
+#: helios/templates/email/result_body.txt:17
+msgid "Please contact us if you believe you did."
+msgstr ""
+
+#: helios/templates/email/result_subject.txt:2
+msgid "Tally Released"
+msgstr ""
+
+#: helios/templates/email/vote_body.txt:6
+msgid "Election URL:"
+msgstr ""
+
+#: helios/templates/email/vote_body.txt:7 heliosbooth/templates/footer.html:9
+msgid "Election Fingerprint:"
+msgstr ""
+
+#: helios/templates/email/vote_body.txt:9
+msgid "Your voter ID:"
+msgstr ""
+
+#: helios/templates/email/vote_body.txt:10
+msgid "Your password:"
+msgstr ""
+
+#: helios/templates/email/vote_body.txt:11
+msgid "Your group:"
+msgstr ""
+
+#: helios/templates/email/vote_body.txt:13
+msgid "Log in with your"
+msgstr ""
+
+#: helios/templates/email/vote_body.txt:15
+msgid "We have recorded your vote with smart tracker:"
+msgstr ""
+
+#: helios/templates/email/vote_body.txt:19
+msgid "You may re-vote if you wish: only your last vote counts."
+msgstr ""
+
+#: helios/templates/email/vote_body.txt:21
+msgid "In order to protect your privacy, this election is configured"
+msgstr ""
+
+#: helios/templates/email/vote_body.txt:22
+msgid ""
+"to never display your voter login ID, name, or email address to the public."
+msgstr ""
+
+#: helios/templates/email/vote_body.txt:23
+msgid "Instead, the ballot tracking center will only display your alias."
+msgstr ""
+
+#: helios/templates/email/vote_body.txt:25
+msgid "Your voter alias is"
+msgstr ""
+
+#: helios/templates/email/vote_body.txt:27
+msgid "IMPORTANTLY, when you are prompted to log in to vote,"
+msgstr ""
+
+#: helios/templates/email/vote_body.txt:28
+msgid "please use your *voter ID*, not your alias."
+msgstr ""
+
+#: helios/templates/email/vote_subject.txt:2
+msgid "Vote:"
+msgstr ""
+
+#: heliosbooth/templates/audit.html:3
+msgid "Your audited ballot"
+msgstr ""
+
+#: heliosbooth/templates/audit.html:6
+msgid ""
+"IMPORTANT</u></b>: this ballot, now that it has been audited, <em>will not "
+"be tallied</em>.<br />\n"
+"To cast a ballot, you must click the \"Back to Voting\" button below, re-"
+"encrypt it, and choose \"cast\" instead of \"audit.\""
+msgstr ""
+
+#: heliosbooth/templates/audit.html:11
+msgid "Why?"
+msgstr ""
+
+#: heliosbooth/templates/audit.html:11
+msgid ""
+"Helios prevents you from auditing and casting the same ballot to provide you "
+"with some protection against coercion."
+msgstr ""
+
+#: heliosbooth/templates/audit.html:15
+msgid "Now what?"
+msgstr ""
+
+#: heliosbooth/templates/audit.html:15
+msgid ""
+"<a onclick=\"$('#audit_trail').select(); return false;\" href=\"#\">Select "
+"your ballot audit info</a>, copy it to your clipboard, then use the <a "
+"target=\"_blank\" href=\"single-ballot-verify.html?election_url={$T."
+"election_url}\">ballot verifier</a> to verify it."
+msgstr ""
+
+#: heliosbooth/templates/audit.html:16
+msgid ""
+"Once you're satisfied, click the \"back to voting\" button to re-encrypt and "
+"cast your ballot."
+msgstr ""
+
+#: heliosbooth/templates/audit.html:24
+msgid ""
+"Before going back to voting,<br />\n"
+"you can post this audited ballot to the Helios tracking center so that "
+"others might double-check the verification of this ballot.\n"
+"<br /><br />\n"
+"<b>Even if you post your audited ballot, you must go back to voting and "
+"choose \"cast\" if you want your vote to count.</b>"
+msgstr ""
+
+#: heliosbooth/templates/confirm.html:3
+msgid "Review your Ballot"
+msgstr ""
+
+#: heliosbooth/templates/confirm.html:7
+msgid "Question #"
+msgstr ""
+
+#: heliosbooth/templates/confirm.html:17
+msgid "Confirm Choices and Encrypt Ballot"
+msgstr ""
+
+#: heliosbooth/templates/done.html:2
+msgid "Your Vote is Being Submitted"
+msgstr ""
+
+#: heliosbooth/templates/done.html:5
+msgid ""
+"Please wait a few seconds while your vote is submitted to the casting "
+"server..."
+msgstr ""
+
+#: heliosbooth/templates/election.html:5
+msgid "To cast a vote, you will be led through the following steps."
+msgstr ""
+
+#: heliosbooth/templates/election.html:6
+msgid ""
+"If you have not yet logged in, you will be asked to do so at the very end of "
+"the process."
+msgstr ""
+
+#: heliosbooth/templates/election.html:21
+msgid "<b>Select</b> your options."
+msgstr ""
+
+#: heliosbooth/templates/election.html:22
+msgid "Answer the questions, and review your choices."
+msgstr ""
+
+#: heliosbooth/templates/election.html:25
+msgid "<b>Encrypt</b> your selection."
+msgstr ""
+
+#: heliosbooth/templates/election.html:27
+msgid "Your selection is encrypted safely inside in your browser."
+msgstr ""
+
+#: heliosbooth/templates/election.html:28
+msgid "A smart ballot tracker is given to let you track your ballot."
+msgstr ""
+
+#: heliosbooth/templates/election.html:33
+msgid "<b>Submit</b> your encrypted ballot."
+msgstr ""
+
+#: heliosbooth/templates/election.html:35
+msgid "Proceed to log in and cast your encrypted ballot for tallying."
+msgstr ""
+
+#: heliosbooth/templates/election.html:41
+msgid "Start"
+msgstr ""
+
+#: heliosbooth/templates/footer.html:4
+msgid "help!"
+msgstr ""
+
+#: heliosbooth/templates/footer.html:7
+msgid ""
+"The public key for this election is not yet ready. This election is in "
+"preview mode only."
+msgstr ""
+
+#: heliosbooth/templates/question.html:11
+msgid "Your group"
+msgstr ""
+
+#: heliosbooth/templates/question.html:13
+msgid "Question #{$T.question_num + 1} of {$T.last_question_num + 1}"
+msgstr ""
+
+#: heliosbooth/templates/question.html:15
+msgid ""
+"select \n"
+"{#if $T.question.min && $T.question.min == $T.question.max}\n"
+" exactly {$T.question.min} answer{#if $T.question.min > 1}s{#/if}\n"
+"{#else}\n"
+" {#if $T.question.min && $T.question.min > 0}\n"
+" at least {$T.question.min} answer{#if $T.question.min > 1}s{#/if}, \n"
+" {#/if}\n"
+" {#if $T.question.max}\n"
+" up to {$T.question.max} answer{#if $T.question.max > 1}s{#/if}\n"
+" {#else}\n"
+" as many of the choices as you approve of\n"
+" {#/if}\n"
+"{#/if}"
+msgstr ""
+
+#: heliosbooth/templates/question.html:37
+msgid "more info"
+msgstr ""
+
+#: heliosbooth/templates/seal.html:4
+msgid "Audit"
+msgstr ""
+
+#: heliosbooth/templates/seal.html:7
+msgid ""
+"If you choose, you can audit your ballot and reveal how your choices were "
+"encrypted."
+msgstr ""
+
+#: heliosbooth/templates/seal.html:10
+msgid "You will then be guided to re-encrypt your choices for final casting."
+msgstr ""
+
+#: heliosbooth/templates/seal.html:17
+msgid "Your ballot was successfully encrypted"
+msgstr ""
+
+#: heliosbooth/templates/seal.html:20
+msgid "Please <b><u>keep a record</u></b> of your smart ballot tracker"
+msgstr ""
+
+#: heliosbooth/templates/seal.html:28
+msgid "To protect your privacy:"
+msgstr ""
+
+#: heliosbooth/templates/seal.html:30
+msgid "Helios has not yet asked for your identity."
+msgstr ""
+
+#: heliosbooth/templates/seal.html:31
+msgid "Once you click "
+msgstr ""
+
+#: heliosbooth/templates/seal.html:32
+msgid "Thus, only you know your vote."
+msgstr ""
+
+#: heliosbooth/templates/seal.html:36
+msgid "Proceed to Cast"
+msgstr ""
+
+#: heliosbooth/templates/submit.html:3
+msgid "Submit Your Encrypted Ballot"
+msgstr ""
+
+#: heliosbooth/templates/submit.html:6
+msgid ""
+"All information, other than your encrypted ballot,<br />\n"
+"has been removed from memory."
+msgstr ""
+
+#: heliosbooth/templates/submit.html:11
+msgid "As a reminder, your ballot tracking number is:"
+msgstr ""
+
+#: heliosbooth/templates/submit.html:16
+msgid ""
+"According to the election definition file, this ballot will be submitted to:"
+msgstr ""
+
+#: heliosbooth/templates/submit.html:22
+msgid "where you will log in to validate your eligibility to vote."
+msgstr ""
