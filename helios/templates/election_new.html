@@ -15,7 +15,7 @@
     <table class="pretty">
      {{election_form.as_table}}
 <tr>
-<th><label for="id_voter_groups_0">Voter groups:</label></th>
+<th><label for="id_voter_groups_0">{% trans "Voter groups" %}:</label></th>
 <td>{{ group_formset.management_form }}
 <ol style="margin-bottom:0;">
     {% for group_form in group_formset.forms %}
@@ -26,12 +26,12 @@
           {{ group_form.weight.label_tag }}: {{ group_form.weight }}<br /><br /></li>
     {% endfor %}
 </ol>
-Short name must have <b>no spaces</b> and <b>no special characters</b>.
+{% blocktrans %}Short name must have <b>no spaces</b> and <b>no special characters</b>.{% endblocktrans %}
 </td>
 </tr>
      </table>
   <div>
-  <label for="">&nbsp;</label><input type="submit" value="Next &gt;&gt;" id="next_button" />
+  <label for="">&nbsp;</label><input type="submit" value="{% trans "Next" %} &gt;&gt;" id="next_button" />
   </div>
   </form>
 

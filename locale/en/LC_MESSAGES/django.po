@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-01 13:09-0300\n"
+"POT-Creation-Date: 2013-07-06 13:02-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,6 +16,55 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: \n"
+
+#: helios/forms.py:13 helios/forms.py:24
+msgid "Short name"
+msgstr ""
+
+#: helios/forms.py:13
+msgid "no spaces, will be part of the URL for your election, e.g. my-club-2010"
+msgstr ""
+
+#: helios/forms.py:14 helios/forms.py:25
+#: helios/templates/election_bboard.html:35
+#: helios/templates/new_trustee.html:8 helios/templates/voters_list.html:128
+#: helios/templates/voters_upload_confirm.html:12
+msgid "Name"
+msgstr ""
+
+#: helios/forms.py:14
+msgid "the pretty name for your election, e.g. My Club 2010 Election"
+msgstr ""
+
+#: helios/forms.py:15
+msgid "Description"
+msgstr ""
+
+#: helios/forms.py:16
+msgid "Type"
+msgstr ""
+
+#: helios/forms.py:17
+msgid "Use voter aliases"
+msgstr ""
+
+#: helios/forms.py:17
+msgid ""
+"If selected, voter identities will be replaced with aliases, e.g. \"V12\", "
+"in the ballot tracking center"
+msgstr ""
+
+#: helios/forms.py:20
+msgid "Private?"
+msgstr ""
+
+#: helios/forms.py:20
+msgid "A private election is only visible to registered voters."
+msgstr ""
+
+#: helios/forms.py:26
+msgid "Peso"
+msgstr ""
 
 #: helios/templates/_castconfirm_docast.html:20
 #, python-format
@@ -222,12 +271,6 @@ msgstr ""
 #: helios/templates/election_bboard.html:33
 #: helios/templates/voters_list.html:134
 msgid "Alias"
-msgstr ""
-
-#: helios/templates/election_bboard.html:35
-#: helios/templates/new_trustee.html:8 helios/templates/voters_list.html:128
-#: helios/templates/voters_upload_confirm.html:12
-msgid "Name"
 msgstr ""
 
 #: helios/templates/election_bboard.html:37
@@ -446,6 +489,18 @@ msgstr ""
 #: helios/templates/election_new.html:6
 #: helios/templates/election_new_2.html:50
 msgid "Create a New Election"
+msgstr ""
+
+#: helios/templates/election_new.html:18
+msgid "Voter groups"
+msgstr ""
+
+#: helios/templates/election_new.html:29
+msgid "Short name must have <b>no spaces</b> and <b>no special characters</b>."
+msgstr ""
+
+#: helios/templates/election_new.html:34
+msgid "Next"
 msgstr ""
 
 #: helios/templates/election_new_2.html:52
