@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-06 14:06-0300\n"
+"POT-Creation-Date: 2013-07-06 14:34-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1276,6 +1276,14 @@ msgstr ""
 msgid "Only the voters listed here"
 msgstr ""
 
+#: helios/templates/voters_list.html:18
+msgid "Voter Groups"
+msgstr ""
+
+#: helios/templates/voters_list.html:22
+msgid "weight"
+msgstr ""
+
 #: helios/templates/voters_list.html:32
 msgid ""
 "Your election is marked private, which means you cannot open registration up "
@@ -1371,6 +1379,11 @@ msgstr ""
 msgid "next %(limit)s"
 msgstr ""
 
+#: helios/templates/voters_list.html:131
+#: helios/templates/voters_upload_confirm.html:12
+msgid "Group"
+msgstr ""
+
 #: helios/templates/voters_list.html:159
 msgid "no voters"
 msgstr ""
@@ -1453,10 +1466,6 @@ msgstr ""
 
 #: helios/templates/voters_upload_confirm.html:12
 msgid "Email Address"
-msgstr ""
-
-#: helios/templates/voters_upload_confirm.html:12
-msgid "Group"
 msgstr ""
 
 #: helios/templates/voters_upload_confirm.html:20
