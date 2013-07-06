@@ -18,7 +18,7 @@
         <input type="radio" name="voter_group" id="id_voter_group_{$T.rule.group_id}" value="{$T.rule.group_id}">
         <label for="id_voter_group_{$T.rule.group_id}">{$T.rule.group_name}</label><br/>
         {#/for}
-        <span id="id_select_group_error" style="display:none; font-size:90%; color:red;">Please, select your group.</span>
+        <span id="id_select_group_error" style="display:none; font-size:90%; color:red;">{% trans "Please, select your group" %}.</span>
         <span id="id_select_group_error_aux" style="font-size:90%; color:white;">Please, select your group.</span>
     </ul>
 

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-06 14:34-0300\n"
+"POT-Creation-Date: 2013-07-06 17:17-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1827,6 +1827,10 @@ msgid ""
 "the process."
 msgstr ""
 "Se você ainda não se conectou, você deverá se conectar no final do processo"
+
+#: heliosbooth/templates/election.html:21
+msgid "Please, select your group"
+msgstr "Selecione seu grupo"
 
 #: heliosbooth/templates/election.html:28
 msgid "<b>Select</b> your options."

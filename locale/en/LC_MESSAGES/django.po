@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-06 14:34-0300\n"
+"POT-Creation-Date: 2013-07-06 17:17-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1658,6 +1658,10 @@ msgstr ""
 msgid ""
 "If you have not yet logged in, you will be asked to do so at the very end of "
 "the process."
+msgstr ""
+
+#: heliosbooth/templates/election.html:21
+msgid "Please, select your group"
 msgstr ""
 
 #: heliosbooth/templates/election.html:28
