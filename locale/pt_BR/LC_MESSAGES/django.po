@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-07 14:52-0300\n"
+"POT-Creation-Date: 2013-07-07 17:44-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -116,7 +116,7 @@ msgstr "eleitores que ainda não enviaram seu voto"
 
 #: helios/forms.py:46
 msgid "only voters who cast a ballot"
-msgstr "apenas eleitores que enviaram seu voto"
+msgstr "apenas eleitores que já enviaram seu voto"
 
 #: helios/forms.py:46
 msgid "no one -- are you sure about this?"
@@ -656,27 +656,27 @@ msgstr "caso contrário você não poderá apurar os votos da eleição"
 msgid "Questions for"
 msgstr "Questões para"
 
-#: helios/templates/election_questions.html:144
+#: helios/templates/election_questions.html:153
 msgid "Answer #"
 msgstr "Resposta "
 
-#: helios/templates/election_questions.html:184
+#: helios/templates/election_questions.html:193
 msgid "Rules"
 msgstr "Regras"
 
-#: helios/templates/election_questions.html:190
+#: helios/templates/election_questions.html:199
 msgid "/static/helios/static_templates/question.html"
 msgstr "/static/helios/static_templates/question-pt_BR.html"
 
-#: helios/templates/election_questions.html:196
+#: helios/templates/election_questions.html:205
 msgid "select between"
 msgstr "selecione entre"
 
-#: helios/templates/election_questions.html:221
+#: helios/templates/election_questions.html:230
 msgid "and"
 msgstr "e"
 
-#: helios/templates/election_questions.html:249
+#: helios/templates/election_questions.html:258
 msgid "answers"
 msgstr "respostas"
 
@@ -1508,9 +1508,13 @@ msgstr "apenas eleitores explicitamentes listados a baixo podem votar"
 msgid "only voters who are members of"
 msgstr "apenas eleitores que são membros de"
 
+#: helios/templates/voters_list.html:48
+msgid "update"
+msgstr "atualizar"
+
 #: helios/templates/voters_list.html:54
 msgid "email voters"
-msgstr "envie mensagens aos eleitores"
+msgstr "enviar email aos eleitores"
 
 #: helios/templates/voters_list.html:60
 msgid "searching for"
@@ -1526,11 +1530,11 @@ msgstr "procure"
 
 #: helios/templates/voters_list.html:71 helios/templates/voters_manage.html:10
 msgid "bulk upload voters"
-msgstr "lista de eleitores carregada"
+msgstr "inserir lista de eleitores"
 
 #: helios/templates/voters_list.html:75
 msgid "Prior Bulk Uploads"
-msgstr "Lista de eleitores anterior"
+msgstr "Inserções anteriores de eleitores"
 
 #: helios/templates/voters_list.html:84
 #, python-format
@@ -1903,7 +1907,7 @@ msgid ""
 "If you have not yet logged in, you will be asked to do so at the very end of "
 "the process."
 msgstr ""
-"Se você ainda não se conectou, você deverá se conectar no final do processo"
+"Se você ainda não se conectou, você deverá se conectar no final do processo."
 
 #: heliosbooth/templates/election.html:21
 msgid "Please, select your group"

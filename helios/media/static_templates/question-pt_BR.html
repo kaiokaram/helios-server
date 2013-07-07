@@ -30,6 +30,10 @@ resultado {#if $T.question.result_type == 'absolute'}absoluto{#else}relativo{#/i
     </tr>
     {#/for}
     <!--<tr><th>&nbsp;</th><th>&nbsp;</th><th>&nbsp;</th></tr>-->
+    <tr><th>&nbsp;</th><th>&nbsp;</th>
+        <th align="left">&nbsp;&nbsp;&nbsp;&nbsp;Opção de voto nulo: 
+        {#if $T.question.null_vote == true}sim{#else}não{#/if}</th>
+    </tr>
   </tbody>
 </table>
 {#/if}
@@ -124,17 +128,22 @@ Result Type:&nbsp;
 
 <table id="answer_table_{$T.question$index}">
   <tbody>
-    <tr><th colspan="3" style="border: 0; text-align: center;">
+    <tr><th>&nbsp;</th><th>&nbsp;</th>
+      <th colspan="3" style="border: 0; text-align: left;">
       &nbsp;&nbsp;
       Resultado:&nbsp;
       <select name="result_type">
         <option value="absolute" selected>absoluto</option>
-        <option value="relative"> relativo</option>
+        <option value="relative">relativo</option>
       </select>
     </th></tr>
     <tr><th>&nbsp;</th><th>&nbsp;</th><th>&nbsp;</th></tr>
     <tr><th colspan="2">Question:</th><td><input type="text" name="question" size="70" /></td></tr>
     <tr><th>&nbsp;</th><th>&nbsp;</th><th>&nbsp;</th></tr>
+    <tr><th>&nbsp;</th><th>&nbsp;</th>
+        <th align="left"><input type="checkbox" name="null_vote" id="null_vote" />
+            <label for="null_vote">Opção de voto nulo</label></th>
+    </tr>
   </tbody>
   <tfoot>
     <tr><th colspan="2"></th><th><a href="javascript:add_answers($('#answer_table_{$T.question$index}'),5)">adicione mais 5 respostas</a></th></tr>
@@ -246,6 +255,10 @@ Result Type:&nbsp;
     <tr><th>&nbsp;</th><th>&nbsp;</th><th>&nbsp;</th></tr>
     <tr><th colspan="2">Questão:</th><td><input type="text" name="question" size="70" /></td></tr>
     <tr><th>&nbsp;</th><th>&nbsp;</th><th>&nbsp;</th></tr>
+    <tr><th>&nbsp;</th><th>&nbsp;</th>
+        <th align="left"><input type="checkbox" name="null_vote" id="null_vote" />
+            <label for="null_vote">Opção de voto nulo</label></th>
+    </tr>
 <!--
     <tr><th>&nbsp;&nbsp;&nbsp;</th><th>Answer #1:</th><td><input type="text" name="answer_1" size="70" /></td></tr>
     <tr><th>&nbsp;&nbsp;&nbsp;</th><th>Answer #2:</th><td><input type="text" name="answer_2" size="70" /></td></tr>
