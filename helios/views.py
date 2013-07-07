@@ -41,6 +41,8 @@ from models import *
 
 import forms, signals
 
+from django.utils.translation import ugettext as _
+
 # Parameters for everything
 ELGAMAL_PARAMS = elgamal.Cryptosystem()
 
@@ -1335,9 +1337,9 @@ def voters_email(request, election):
   if not helios.VOTERS_EMAIL:
     return HttpResponseRedirect(reverse(one_election_view, args=[election.uuid]))
   TEMPLATES = [
-    ('vote', 'Time to Vote'),
-    ('info', 'Additional Info'),
-    ('result', 'Election Result')
+    ('vote', _('Time to Vote')),
+    ('info', _('Additional Info')),
+    ('result', _('Election Result'))
     ]
 
   template = request.REQUEST.get('template', 'vote')

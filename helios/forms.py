@@ -29,23 +29,23 @@ class VoterGroupForm(forms.Form):
 
 class ElectionTimesForm(forms.Form):
   # times
-  voting_starts_at = SplitDateTimeField(help_text = 'UTC date and time when voting begins',
+  voting_starts_at = SplitDateTimeField(help_text = _('UTC date and time when voting begins'),
                                    widget=SplitSelectDateTimeWidget)
-  voting_ends_at = SplitDateTimeField(help_text = 'UTC date and time when voting ends',
+  voting_ends_at = SplitDateTimeField(help_text = _('UTC date and time when voting ends'),
                                    widget=SplitSelectDateTimeWidget)
 
   
 class EmailVotersForm(forms.Form):
-  subject = forms.CharField(max_length=80)
-  body = forms.CharField(max_length=2000, widget=forms.Textarea)
-  send_to = forms.ChoiceField(label="Send To", initial="all", choices= [('all', 'all voters'), ('voted', 'voters who have cast a ballot'), ('not-voted', 'voters who have not yet cast a ballot')])
+  subject = forms.CharField(label=_('Subject'), max_length=80)
+  body = forms.CharField(label=_('Body'), max_length=2000, widget=forms.Textarea)
+  send_to = forms.ChoiceField(label=_('Send To'), initial="all", choices= [('all', _('all voters')), ('voted', _('voters who have cast a ballot')), ('not-voted', _('voters who have not yet cast a ballot'))])
 
 class TallyNotificationEmailForm(forms.Form):
   subject = forms.CharField(max_length=80)
   body = forms.CharField(max_length=2000, widget=forms.Textarea, required=False)
-  send_to = forms.ChoiceField(label="Send To", choices= [('all', 'all voters'), ('voted', 'only voters who cast a ballot'), ('none', 'no one -- are you sure about this?')])
+  send_to = forms.ChoiceField(label=_('Send To'), choices= [('all', _('all voters')), ('voted', _('only voters who cast a ballot')), ('none', _('no one -- are you sure about this?'))])
 
 class VoterPasswordForm(forms.Form):
-  voter_id = forms.CharField(max_length=50, label="Voter ID")
+  voter_id = forms.CharField(max_length=50, label=_("Voter ID"))
   password = forms.CharField(widget=forms.PasswordInput(), max_length=100)
 

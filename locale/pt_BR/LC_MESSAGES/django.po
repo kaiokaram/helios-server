@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-06 17:17-0300\n"
+"POT-Creation-Date: 2013-07-07 10:32-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -71,18 +71,73 @@ msgid "A Short Name is required for this group"
 msgstr ""
 
 #: helios/forms.py:25
-#, fuzzy
 msgid "A Name is required for this group"
-msgstr "Cookies são necessários para utilizar o Helios"
+msgstr "É obrigatório especificar um nome para este grupo"
 
 #: helios/forms.py:26
-#, fuzzy
 msgid "Weight"
-msgstr "editar"
+msgstr "Peso"
 
 #: helios/forms.py:27
 msgid "A Weight is required for this group"
+msgstr "Peso para este grupo é obrigatório"
+
+#: helios/forms.py:32
+msgid "UTC date and time when voting begins"
 msgstr ""
+
+#: helios/forms.py:34
+msgid "UTC date and time when voting ends"
+msgstr ""
+
+#: helios/forms.py:39 helios/templates/voters_email.html:34
+msgid "Subject"
+msgstr "Assunto"
+
+#: helios/forms.py:40
+msgid "Body"
+msgstr "Texto do email"
+
+#: helios/forms.py:41 helios/forms.py:46
+msgid "Send To"
+msgstr "Enviar para"
+
+#: helios/forms.py:41 helios/forms.py:46
+msgid "all voters"
+msgstr "todos os eleitores"
+
+#: helios/forms.py:41
+msgid "voters who have cast a ballot"
+msgstr "eleitores que enviaram seu voto"
+
+#: helios/forms.py:41
+msgid "voters who have not yet cast a ballot"
+msgstr "eleitores que ainda não enviaram seu voto"
+
+#: helios/forms.py:46
+msgid "only voters who cast a ballot"
+msgstr "apenas eleitores que enviaram seu voto"
+
+#: helios/forms.py:46
+msgid "no one -- are you sure about this?"
+msgstr "ninguém -- tem certeza disso?"
+
+#: helios/forms.py:49
+#, fuzzy
+msgid "Voter ID"
+msgstr "Seu usuário (ID de eleitor):"
+
+#: helios/views.py:1340
+msgid "Time to Vote"
+msgstr "Hora de votar"
+
+#: helios/views.py:1341
+msgid "Additional Info"
+msgstr "Informação adicional"
+
+#: helios/views.py:1342
+msgid "Election Result"
+msgstr "Resultado de eleição"
 
 #: helios/templates/_castconfirm_docast.html:20
 #, python-format
@@ -600,6 +655,10 @@ msgstr "caso contrário você não poderá apurar os votos da eleição"
 #: helios/templates/election_questions.html:4
 msgid "Questions for"
 msgstr "Questões para"
+
+#: helios/templates/election_questions.html:190
+msgid "/static/helios/static_templates/question.html"
+msgstr "/static/helios/static_templates/question-pt_BR.html"
 
 #: helios/templates/election_register.html:5
 msgid "Register"
@@ -1359,14 +1418,10 @@ msgstr "Você está enviando este email para um usuário específico"
 msgid "Templates"
 msgstr "Exemplos"
 
-#: helios/templates/voters_email.html:34
-msgid "Subject"
-msgstr "Assunto"
-
 #: helios/templates/voters_email.html:40
 msgid "You may tweak the subject and add a custom message using the form below"
 msgstr ""
-"Você pode mudar o assunto e adicionar uma mensagem customizada utizandoo "
+"Você pode mudar o assunto e adicionar uma mensagem customizada utilizando o "
 "formulário abaixo"
 
 #: helios/templates/voters_email.html:59
@@ -1993,3 +2048,51 @@ msgstr ""
 #: heliosbooth/templates/submit.html:22
 msgid "where you will log in to validate your eligibility to vote."
 msgstr "onde  você se concterá para validar sua autorizacão para votar"
+
+#~ msgid "select between {$T.question.min} and {$T.question.max} answers"
+#~ msgstr "selecione entre {$T.question.min} e {$T.question.max} respostas"
+
+#~ msgid "select at least {$T.question.min} answers"
+#~ msgstr "selecione pelo menos {$T.question.min} respostas"
+
+#~ msgid "Rules"
+#~ msgstr "Regras"
+
+#~ msgid "result type"
+#~ msgstr "tipo do resultado"
+
+#~ msgid "select between {$T.rule.min} and {$T.rule.max} answers"
+#~ msgstr "selecione entre {$T.rule.min} e {$T.rule.max} respostas"
+
+#~ msgid "Select between"
+#~ msgstr "Selecione entre"
+
+#~ msgid "and"
+#~ msgstr "e"
+
+#~ msgid "answers"
+#~ msgstr "respostas"
+
+#~ msgid "Result Type"
+#~ msgstr "Tipo do resultado"
+
+#~ msgid "absolute"
+#~ msgstr "absoluto"
+
+#~ msgid "relative"
+#~ msgstr "relativo"
+
+#~ msgid "add 5 more answers"
+#~ msgstr "adicione 5 respostas"
+
+#~ msgid "no questions yet"
+#~ msgstr "sem questões por ora"
+
+#~ msgid "Add a Question"
+#~ msgstr "Adicione uma questão"
+
+#~ msgid "add question"
+#~ msgstr "adicione questão"
+
+#~ msgid "select between"
+#~ msgstr "selecione entre"

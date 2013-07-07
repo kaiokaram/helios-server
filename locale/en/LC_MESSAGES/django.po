@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-06 17:17-0300\n"
+"POT-Creation-Date: 2013-07-07 10:32-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -75,6 +75,62 @@ msgstr ""
 
 #: helios/forms.py:27
 msgid "A Weight is required for this group"
+msgstr ""
+
+#: helios/forms.py:32
+msgid "UTC date and time when voting begins"
+msgstr ""
+
+#: helios/forms.py:34
+msgid "UTC date and time when voting ends"
+msgstr ""
+
+#: helios/forms.py:39 helios/templates/voters_email.html:34
+msgid "Subject"
+msgstr ""
+
+#: helios/forms.py:40
+msgid "Body"
+msgstr ""
+
+#: helios/forms.py:41 helios/forms.py:46
+msgid "Send To"
+msgstr ""
+
+#: helios/forms.py:41 helios/forms.py:46
+msgid "all voters"
+msgstr ""
+
+#: helios/forms.py:41
+msgid "voters who have cast a ballot"
+msgstr ""
+
+#: helios/forms.py:41
+msgid "voters who have not yet cast a ballot"
+msgstr ""
+
+#: helios/forms.py:46
+msgid "only voters who cast a ballot"
+msgstr ""
+
+#: helios/forms.py:46
+msgid "no one -- are you sure about this?"
+msgstr ""
+
+#: helios/forms.py:49
+msgid "Voter ID"
+msgstr ""
+
+#: helios/views.py:1340
+msgid "Time to Vote"
+msgstr ""
+
+#: helios/views.py:1341
+msgid "Additional Info"
+msgstr ""
+
+#: helios/views.py:1342
+msgid "Election Result"
 msgstr ""
 
 #: helios/templates/_castconfirm_docast.html:20
@@ -544,6 +600,10 @@ msgstr ""
 
 #: helios/templates/election_questions.html:4
 msgid "Questions for"
+msgstr ""
+
+#: helios/templates/election_questions.html:190
+msgid "/static/helios/static_templates/question.html"
 msgstr ""
 
 #: helios/templates/election_register.html:5
@@ -1239,10 +1299,6 @@ msgstr ""
 
 #: helios/templates/voters_email.html:22
 msgid "Templates"
-msgstr ""
-
-#: helios/templates/voters_email.html:34
-msgid "Subject"
 msgstr ""
 
 #: helios/templates/voters_email.html:40
