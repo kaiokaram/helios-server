@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-07 13:05-0300\n"
+"POT-Creation-Date: 2013-07-07 14:52-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -602,8 +602,28 @@ msgstr ""
 msgid "Questions for"
 msgstr ""
 
+#: helios/templates/election_questions.html:144
+msgid "Answer #"
+msgstr ""
+
+#: helios/templates/election_questions.html:184
+msgid "Rules"
+msgstr ""
+
 #: helios/templates/election_questions.html:190
 msgid "/static/helios/static_templates/question.html"
+msgstr ""
+
+#: helios/templates/election_questions.html:196
+msgid "select between"
+msgstr ""
+
+#: helios/templates/election_questions.html:221
+msgid "and"
+msgstr ""
+
+#: helios/templates/election_questions.html:249
+msgid "answers"
 msgstr ""
 
 #: helios/templates/election_register.html:5

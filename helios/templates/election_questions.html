@@ -141,7 +141,7 @@
   function add_answer(el) {
     el = $(el);
     var num_answers = el.find('input.answer').length + 1;
-    el.find('tbody').append('<tr><th>&nbsp;&nbsp;&nbsp;</th><th>Answer #' + num_answers + '</th><td><input type="text" class="answer" name="answer_' + num_answers + '" size="70" /></td></tr>');
+    el.find('tbody').append('<tr><th>&nbsp;&nbsp;&nbsp;</th><th>{% trans "Answer #" %}' + num_answers + '</th><td><input type="text" class="answer" name="answer_' + num_answers + '" size="70" /></td></tr>');
   }
 
   function add_answers(el, num) {
@@ -181,7 +181,7 @@
       tr.prependTo(tbody);
     }
     var tr = $('<tr><th colspan="2" style="text-align: right;"></th>\
-                <th colspan="1" style="text-align: left;">&nbsp;&nbsp;&nbsp;Rules</th></tr>');
+                <th colspan="1" style="text-align: left;">&nbsp;&nbsp;&nbsp;{% trans "Rules" %}</th></tr>');
     tr.prependTo(tbody);
     //tbody.prepend('<tr><th>&nbsp;</th><th>&nbsp;</th><th>&nbsp;</th></tr>');
   }
@@ -193,7 +193,7 @@
   });
   
 var select_fields_string = 
-'&nbsp;&nbsp;&nbsp;select between &nbsp;&nbsp;\n\
+'&nbsp;&nbsp;&nbsp;{% trans "select between" %} &nbsp;&nbsp;\n\
 <select name="min_#short_name#">\n\
     <option selected>0</option>\n\
     <option>1</option>\n\
@@ -218,7 +218,7 @@ var select_fields_string =
     <option>20</option>\n\
 </select>\n\
 \n\
-&nbsp;&nbsp; and  &nbsp;&nbsp;\n\
+&nbsp;&nbsp; {% trans "and" %}  &nbsp;&nbsp;\n\
 \n\
 <select name="max_#short_name#">\n\
     <option>0</option>\n\
@@ -246,7 +246,7 @@ var select_fields_string =
 </select>\n\
 \n\
 &nbsp;&nbsp;\n\
-answers.'
+{% trans "answers" %}.'
 
   </script>
 
