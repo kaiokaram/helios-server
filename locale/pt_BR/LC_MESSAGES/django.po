@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-07 17:44-0300\n"
+"POT-Creation-Date: 2013-07-07 20:05-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -140,9 +140,12 @@ msgid "Election Result"
 msgstr "Resultado de eleição"
 
 #: helios/templates/_castconfirm_docast.html:20
-#, python-format
-msgid "I am <u>%(voter.display_html_big|safe)s</u>, cast this ballot"
-msgstr "Eu sou <u>%(voter.display_html_big|safe)s</u>, confirme este voto"
+msgid "I am"
+msgstr "Eu sou"
+
+#: helios/templates/_castconfirm_docast.html:20
+msgid "cast this ballot"
+msgstr "confirme este voto"
 
 #: helios/templates/_castconfirm_docast.html:21
 msgid ""
@@ -238,7 +241,7 @@ msgid "Audited Ballots for"
 msgstr "Cédulas auditadas por"
 
 #: helios/templates/election_audited_ballots.html:7
-#: helios/templates/election_view.html:315
+#: helios/templates/election_view.html:325
 msgid "Audited Ballots"
 msgstr "Cédulas auditadas"
 
@@ -337,7 +340,7 @@ msgid "Ballot Tracking Center for"
 msgstr "Central de rastreamento de cédula"
 
 #: helios/templates/election_bboard.html:7
-#: helios/templates/election_view.html:314
+#: helios/templates/election_view.html:324
 msgid "Ballot Tracking Center"
 msgstr "Central de rastreamento de cédula"
 
@@ -898,11 +901,11 @@ msgstr "total peso"
 msgid "Election closed. Tally will be computed soon"
 msgstr "Eleição está encerrada. Apuracão será finalizada em breve"
 
-#: helios/templates/election_view.html:221
+#: helios/templates/election_view.html:229
 msgid "Vote in this"
 msgstr "Vote nesta"
 
-#: helios/templates/election_view.html:225
+#: helios/templates/election_view.html:235
 #, python-format
 msgid ""
 "This %(election.election_type)s was initially scheduled to end at %(election."
@@ -911,12 +914,12 @@ msgstr ""
 "Este(a) %(election.election_type)s foi inicialmente agendada para terminar "
 "em %(election.voting_ends_at)s (UTC)"
 
-#: helios/templates/election_view.html:226
+#: helios/templates/election_view.html:236
 #, python-format
 msgid "but has been extended until %(election.voting_extended_until)s (UTC)"
 msgstr "mas foi extendida até %(election.voting_extended_until)s (UTC)"
 
-#: helios/templates/election_view.html:230
+#: helios/templates/election_view.html:240
 #, python-format
 msgid ""
 "This %(election.election_type)s is scheduled to end at %(election."
@@ -925,13 +928,13 @@ msgstr ""
 "Este(a) %(election.election_type)s foi agendada para terminar em  %(election."
 "voting_ends_at)s (UTC)"
 
-#: helios/templates/election_view.html:232
+#: helios/templates/election_view.html:242
 #, python-format
 msgid "This %(election.election_type)s ends at the administrator's discretion"
 msgstr ""
 "Este(a) %(election.election_type)s termina quando o administrador determinar"
 
-#: helios/templates/election_view.html:239
+#: helios/templates/election_view.html:249
 #, python-format
 msgid ""
 "This election is <em>private</em>. You are signed in as eligible voter <em>%"
@@ -940,14 +943,14 @@ msgstr ""
 "Esta eleição é <em>privada</em>. Você está registrado como um eleitor "
 "autorizado <em>%(voter.name)s</em>"
 
-#: helios/templates/election_view.html:243
+#: helios/templates/election_view.html:253
 msgid ""
 "You do not have Java installed in your browser.<br />At this time, Helios "
 "requires Java.<br />"
 msgstr ""
 "Você não tem Java instalado em seu navegador.<br />Helios requer Java.<br />"
 
-#: helios/templates/election_view.html:244
+#: helios/templates/election_view.html:254
 msgid ""
 "Visit <a target=\"_new\" href=\"http://java.sun.com\">java.sun.com</a> to "
 "install it"
@@ -955,26 +958,26 @@ msgstr ""
 "Visite <a target=\"_new\" href=\"http://java.sun.com\">java.sun.com</a> para "
 "instalar o Java"
 
-#: helios/templates/election_view.html:249
+#: helios/templates/election_view.html:259
 msgid "voting is not yet open"
 msgstr "Votação ainda não está aberta"
 
-#: helios/templates/election_view.html:256
+#: helios/templates/election_view.html:266
 #, python-format
 msgid "You are registered to vote in this %(election.election_type)s"
 msgstr "Você está registrado para votar neste(a) %(election.election_type)s"
 
-#: helios/templates/election_view.html:258
+#: helios/templates/election_view.html:268
 #, python-format
 msgid "Your voter alias is %(voter.alias)s"
 msgstr "Seu pseudônimo é %(voter.alias)s"
 
-#: helios/templates/election_view.html:267
+#: helios/templates/election_view.html:277
 msgid "You are eligible to vote in this election"
 msgstr "Você está autorizado para votar nesta eleição"
 
-#: helios/templates/election_view.html:269
-#: helios/templates/election_view.html:272
+#: helios/templates/election_view.html:279
+#: helios/templates/election_view.html:282
 #, python-format
 msgid ""
 "You are <em>not eligible</em> to vote in this %(election.election_type)s"
@@ -982,43 +985,43 @@ msgstr ""
 "Você <em>não está autorizado</em> para votar neste(a) %(election."
 "election_type)s"
 
-#: helios/templates/election_view.html:281
+#: helios/templates/election_view.html:291
 msgid "This election is open to"
 msgstr "Esta eleição está aberta para"
 
-#: helios/templates/election_view.html:284
+#: helios/templates/election_view.html:294
 msgid "Anyone can vote in this election"
 msgstr "Qualquer pessoa pode votar nesta eleição"
 
-#: helios/templates/election_view.html:296
+#: helios/templates/election_view.html:306
 msgid "Audit Info"
 msgstr "Informação de auditoria"
 
-#: helios/templates/election_view.html:298
+#: helios/templates/election_view.html:308
 msgid "Election URL"
 msgstr "URL da eleição"
 
-#: helios/templates/election_view.html:303
+#: helios/templates/election_view.html:313
 msgid "Election Fingerprint"
 msgstr "Assinatura da eleição"
 
-#: helios/templates/election_view.html:308
+#: helios/templates/election_view.html:318
 msgid "Your smart ballot tracker"
 msgstr "Seu número rastreador de cédula"
 
-#: helios/templates/election_view.html:320
+#: helios/templates/election_view.html:330
 msgid "preview booth"
 msgstr "prever urna"
 
-#: helios/templates/election_view.html:329
+#: helios/templates/election_view.html:339
 msgid "verify"
 msgstr "verificar"
 
-#: helios/templates/election_view.html:329
+#: helios/templates/election_view.html:339
 msgid "election tally"
 msgstr "apuração da eleição"
 
-#: helios/templates/election_view.html:332
+#: helios/templates/election_view.html:342
 #, python-format
 msgid "review the <a href=\"%(vote_url)s\">voting booth</a>"
 msgstr "rever a <a href=\"%(vote_url)s\"> urna de votação</a>"
@@ -1746,7 +1749,7 @@ msgstr "Apuracão disponível"
 msgid "Election URL:"
 msgstr "URL da eleição"
 
-#: helios/templates/email/vote_body.txt:7 heliosbooth/templates/footer.html:9
+#: helios/templates/email/vote_body.txt:7
 msgid "Election Fingerprint:"
 msgstr "Assinatura da eleição"
 
@@ -1806,274 +1809,6 @@ msgstr "por favor use seu *usuário ID*, não seu pseudônimo."
 #: helios/templates/email/vote_subject.txt:2
 msgid "Vote:"
 msgstr "Voto:"
-
-#: heliosbooth/templates/audit.html:3
-msgid "Your audited ballot"
-msgstr "Sua cédula auditada"
-
-#: heliosbooth/templates/audit.html:6
-msgid ""
-"IMPORTANT</u></b>: this ballot, now that it has been audited, <em>will not "
-"be tallied</em>.<br />\n"
-"To cast a ballot, you must click the \"Back to Voting\" button below, re-"
-"encrypt it, and choose \"cast\" instead of \"audit.\""
-msgstr ""
-"Atenção </u></b>: esta cédula, que foi auditada, <em> não será contada</em>."
-"<br />\n"
-"Para depositar uma cédula, você deve clicar no botão à baixo \"Volte `a "
-"eleição\", reencripte a cédula e escolha \"votar\" em vez de \"auditar.\""
-
-#: heliosbooth/templates/audit.html:11
-msgid "Why?"
-msgstr "Por quê?"
-
-#: heliosbooth/templates/audit.html:11
-msgid ""
-"Helios prevents you from auditing and casting the same ballot to provide you "
-"with some protection against coercion."
-msgstr ""
-"Helios previne que você audite e deposite a mesma cédula para prover alguma "
-"proteção contra coação."
-
-#: heliosbooth/templates/audit.html:15
-msgid "Now what?"
-msgstr "E agora?"
-
-#: heliosbooth/templates/audit.html:15
-msgid ""
-"<a onclick=\"$('#audit_trail').select(); return false;\" href=\"#\">Select "
-"your ballot audit info</a>, copy it to your clipboard, then use the <a "
-"target=\"_blank\" href=\"single-ballot-verify.html?election_url={$T."
-"election_url}\">ballot verifier</a> to verify it."
-msgstr ""
-"<a onclick=\"$('#audit_trail').select(); return false;\" href=\"#"
-"\">Selecione sua informação para auditoria de cédula</a>, copie a informação "
-"e use o <a target=\"_blank\" href=\"single-ballot-verify.html?election_url="
-"{$T.election_url}\">verificador de cédula</a> para verificá-la."
-
-#: heliosbooth/templates/audit.html:16
-msgid ""
-"Once you're satisfied, click the \"back to voting\" button to re-encrypt and "
-"cast your ballot."
-msgstr ""
-"Assim que estiver satisfeito(a), selecione o botão \"volte à eleição\" para "
-"reencritptar e depositar sua cédula."
-
-#: heliosbooth/templates/audit.html:24
-msgid ""
-"Before going back to voting,<br />\n"
-"you can post this audited ballot to the Helios tracking center so that "
-"others might double-check the verification of this ballot.\n"
-"<br /><br />\n"
-"<b>Even if you post your audited ballot, you must go back to voting and "
-"choose \"cast\" if you want your vote to count.</b>"
-msgstr ""
-"Antes de voltar à votação,<br />\n"
-"você pode postar esta cédula auditada no centro de rastreamento do Helios, "
-"dessa forma outros podem avaliar a verificação desta cédula.\n"
-"<br /><br />\n"
-"<b>Após postar a cédula auditada, você deve voltar à votação e selecionar "
-"\"cast\" se você quiser depositar seu voto para ser contado.</b>"
-
-#: heliosbooth/templates/confirm.html:3
-msgid "Review your Ballot"
-msgstr "Reveja sua cédula"
-
-#: heliosbooth/templates/confirm.html:7
-msgid "Question #"
-msgstr "Questão #"
-
-#: heliosbooth/templates/confirm.html:17
-msgid "Confirm Choices and Encrypt Ballot"
-msgstr "Confime escolhas e encripte a cédula"
-
-#: heliosbooth/templates/done.html:2
-msgid "Your Vote is Being Submitted"
-msgstr "Seu voto está sendo submetido"
-
-#: heliosbooth/templates/done.html:5
-msgid ""
-"Please wait a few seconds while your vote is submitted to the casting "
-"server..."
-msgstr ""
-"Por favor, espere alguns segundos enquanto seu voto é enviado ao servidor..."
-
-#: heliosbooth/templates/election.html:5
-msgid "To cast a vote, you will be led through the following steps."
-msgstr "Para depositar um voto, você será guiado pelos seguintes passos."
-
-#: heliosbooth/templates/election.html:6
-msgid ""
-"If you have not yet logged in, you will be asked to do so at the very end of "
-"the process."
-msgstr ""
-"Se você ainda não se conectou, você deverá se conectar no final do processo."
-
-#: heliosbooth/templates/election.html:21
-msgid "Please, select your group"
-msgstr "Selecione seu grupo"
-
-#: heliosbooth/templates/election.html:28
-msgid "<b>Select</b> your options."
-msgstr "<b>Selecione</b> Suas opções."
-
-#: heliosbooth/templates/election.html:29
-msgid "Answer the questions, and review your choices."
-msgstr "Responda as questões e verifique suas escolhas."
-
-#: heliosbooth/templates/election.html:32
-msgid "<b>Encrypt</b> your selection."
-msgstr "<>Encripte</b> Sua escolha."
-
-#: heliosbooth/templates/election.html:34
-msgid "Your selection is encrypted safely inside in your browser."
-msgstr "Sua escolha é encriptada, com segurança, em seu navegador."
-
-#: heliosbooth/templates/election.html:35
-msgid "A smart ballot tracker is given to let you track your ballot."
-msgstr ""
-"Um número de rastreamento de cédula será dado para que você possa rastrear "
-"sua cédula. "
-
-#: heliosbooth/templates/election.html:40
-msgid "<b>Submit</b> your encrypted ballot."
-msgstr "<b>Submeter</b> sua cédula encriptada."
-
-#: heliosbooth/templates/election.html:42
-msgid "Proceed to log in and cast your encrypted ballot for tallying."
-msgstr ""
-"Prossiga para a conexão e deposite sua cédula encriptada para ser apurada"
-
-#: heliosbooth/templates/election.html:48
-msgid "Start"
-msgstr "Inicie"
-
-#: heliosbooth/templates/footer.html:4
-msgid "help!"
-msgstr "ajuda!"
-
-#: heliosbooth/templates/footer.html:7
-msgid ""
-"The public key for this election is not yet ready. This election is in "
-"preview mode only."
-msgstr ""
-"A chave pública para esta eleição não está pronta. Esta eleição está em modo "
-"de revisão."
-
-#: heliosbooth/templates/question.html:11
-msgid "Your group"
-msgstr "Seu grupo"
-
-#: heliosbooth/templates/question.html:13
-msgid "Question #{$T.question_num + 1} of {$T.last_question_num + 1}"
-msgstr "Questão #{$T.question_num + 1} de {$T.last_question_num + 1}"
-
-#: heliosbooth/templates/question.html:15
-msgid ""
-"select \n"
-"{#if $T.question.min && $T.question.min == $T.question.max}\n"
-" exactly {$T.question.min} answer{#if $T.question.min > 1}s{#/if}\n"
-"{#else}\n"
-" {#if $T.question.min && $T.question.min > 0}\n"
-" at least {$T.question.min} answer{#if $T.question.min > 1}s{#/if}, \n"
-" {#/if}\n"
-" {#if $T.question.max}\n"
-" up to {$T.question.max} answer{#if $T.question.max > 1}s{#/if}\n"
-" {#else}\n"
-" as many of the choices as you approve of\n"
-" {#/if}\n"
-"{#/if}"
-msgstr ""
-"select \n"
-"{#if $T.question.min && $T.question.min == $T.question.max}\n"
-" exatamente {$T.question.min} resposta{#if $T.question.min > 1}s{#/if}\n"
-"{#else}\n"
-" {#if $T.question.min && $T.question.min > 0}\n"
-" no mínimo {$T.question.min} resposta{#if $T.question.min > 1}s{#/if}, \n"
-" {#/if}\n"
-" {#if $T.question.max}\n"
-" no máximo{$T.question.max} resposta{#if $T.question.max > 1}s{#/if}\n"
-" {#else}\n"
-" quantas respostas forem aprovadas \n"
-" {#/if}\n"
-"{#/if}"
-
-#: heliosbooth/templates/question.html:37
-msgid "more info"
-msgstr "mais informação"
-
-#: heliosbooth/templates/seal.html:4
-msgid "Audit"
-msgstr "Auditoria"
-
-#: heliosbooth/templates/seal.html:7
-msgid ""
-"If you choose, you can audit your ballot and reveal how your choices were "
-"encrypted."
-msgstr ""
-"Se você escolher, você pode auditar sua cédula e revelar como suasescolhas "
-"forma encriptadas."
-
-#: heliosbooth/templates/seal.html:10
-msgid "You will then be guided to re-encrypt your choices for final casting."
-msgstr "Você, então, será guiado para reencriptar sua cédula e depositá-la."
-
-#: heliosbooth/templates/seal.html:17
-msgid "Your ballot was successfully encrypted"
-msgstr "Sua cédula foi encriptada com sucesso"
-
-#: heliosbooth/templates/seal.html:20
-msgid "Please <b><u>keep a record</u></b> of your smart ballot tracker"
-msgstr ""
-"Por favor, <b><u>mantenha uma cópia</u></b> do seu número de rastreamento de "
-"cédula"
-
-#: heliosbooth/templates/seal.html:28
-msgid "To protect your privacy:"
-msgstr "Para proteger sua privacidade:"
-
-#: heliosbooth/templates/seal.html:30
-msgid "Helios has not yet asked for your identity."
-msgstr "Helios ainda não pediu sua identificação."
-
-#: heliosbooth/templates/seal.html:31
-msgid "Once you click "
-msgstr "Assim que você clicar "
-
-#: heliosbooth/templates/seal.html:32
-msgid "Thus, only you know your vote."
-msgstr "Desta forma, apenas você sabe seu voto."
-
-#: heliosbooth/templates/seal.html:36
-msgid "Proceed to Cast"
-msgstr "Prossiga para depositar seu voto"
-
-#: heliosbooth/templates/submit.html:3
-msgid "Submit Your Encrypted Ballot"
-msgstr "Submita sua cédula encriptada"
-
-#: heliosbooth/templates/submit.html:6
-msgid ""
-"All information, other than your encrypted ballot,<br />\n"
-"has been removed from memory."
-msgstr ""
-"Toda informação, exceto sua cédula encriptada, <br />\n"
-"foi removida da memória."
-
-#: heliosbooth/templates/submit.html:11
-msgid "As a reminder, your ballot tracking number is:"
-msgstr "não esqueça, seu número de rastreamento de cédula é:"
-
-#: heliosbooth/templates/submit.html:16
-msgid ""
-"According to the election definition file, this ballot will be submitted to:"
-msgstr ""
-"De acordo com a definição do arquivo da eleição, esta cédula será submetida "
-"para:"
-
-#: heliosbooth/templates/submit.html:22
-msgid "where you will log in to validate your eligibility to vote."
-msgstr "onde você se concterá para validar sua autorizacão para votar"
 
 #: server_ui/templates/base.html:50
 msgid "logged in as"
@@ -2138,6 +1873,261 @@ msgstr "Eleições atuais"
 #: server_ui/templates/index.html:68
 msgid "no featured elections at the moment"
 msgstr "sem eleições no momento"
+
+#~ msgid "I am <u>{{voter.display_html_big|safe}}</u>, cast this ballot"
+#~ msgstr "Eu sou <u>%(voter.display_html_big|safe)s</u>, confirme este voto"
+
+#~ msgid "Select"
+#~ msgstr "Selecionar"
+
+#~ msgid "Submit Your Encrypted Ballot"
+#~ msgstr "Submeta sua cédula encriptada"
+
+#~ msgid ""
+#~ "All information, other than your encrypted ballot,<br />\n"
+#~ "has been removed from memory."
+#~ msgstr ""
+#~ "Toda informação, exceto sua cédula encriptada, <br />\n"
+#~ "foi removida da memória."
+
+#~ msgid "As a reminder, your ballot tracking number is:"
+#~ msgstr "não esqueça, seu número de rastreamento de cédula é:"
+
+#~ msgid ""
+#~ "According to the election definition file, this ballot will be submitted "
+#~ "to:"
+#~ msgstr ""
+#~ "De acordo com a definição do arquivo da eleição, esta cédula será "
+#~ "submetida para:"
+
+#~ msgid "where you will log in to validate your eligibility to vote."
+#~ msgstr "onde você se concterá para validar sua autorizacão para votar"
+
+#~ msgid "Your audited ballot"
+#~ msgstr "Sua cédula auditada"
+
+#~ msgid ""
+#~ "IMPORTANT</u></b>: this ballot, now that it has been audited, <em>will "
+#~ "not be tallied</em>.<br />\n"
+#~ "To cast a ballot, you must click the \"Back to Voting\" button below, re-"
+#~ "encrypt it, and choose \"cast\" instead of \"audit.\""
+#~ msgstr ""
+#~ "Atenção </u></b>: esta cédula, que foi auditada, <em> não será contada</"
+#~ "em>.<br />\n"
+#~ "Para depositar uma cédula, você deve clicar no botão à baixo \"Volte `a "
+#~ "eleição\", reencripte a cédula e escolha \"votar\" em vez de \"auditar.\""
+
+#~ msgid "Why?"
+#~ msgstr "Por quê?"
+
+#~ msgid ""
+#~ "Helios prevents you from auditing and casting the same ballot to provide "
+#~ "you with some protection against coercion."
+#~ msgstr ""
+#~ "Helios previne que você audite e deposite a mesma cédula para prover "
+#~ "alguma proteção contra coação."
+
+#~ msgid "Now what?"
+#~ msgstr "E agora?"
+
+#~ msgid ""
+#~ "<a onclick=\"$('#audit_trail').select(); return false;\" href=\"#"
+#~ "\">Select your ballot audit info</a>, copy it to your clipboard, then use "
+#~ "the <a target=\"_blank\" href=\"single-ballot-verify.html?election_url="
+#~ "{$T.election_url}\">ballot verifier</a> to verify it."
+#~ msgstr ""
+#~ "<a onclick=\"$('#audit_trail').select(); return false;\" href=\"#"
+#~ "\">Selecione sua informação para auditoria de cédula</a>, copie a "
+#~ "informação e use o <a target=\"_blank\" href=\"single-ballot-verify.html?"
+#~ "election_url={$T.election_url}\">verificador de cédula</a> para verificá-"
+#~ "la."
+
+#~ msgid ""
+#~ "Once you're satisfied, click the \"back to voting\" button to re-encrypt "
+#~ "and cast your ballot."
+#~ msgstr ""
+#~ "Assim que estiver satisfeito(a), selecione o botão \"volte à eleição\" "
+#~ "para reencritptar e depositar sua cédula."
+
+#~ msgid ""
+#~ "Before going back to voting,<br />\n"
+#~ "you can post this audited ballot to the Helios tracking center so that "
+#~ "others might double-check the verification of this ballot.\n"
+#~ "<br /><br />\n"
+#~ "<b>Even if you post your audited ballot, you must go back to voting and "
+#~ "choose \"cast\" if you want your vote to count.</b>"
+#~ msgstr ""
+#~ "Antes de voltar à votação,<br />\n"
+#~ "você pode postar esta cédula auditada no centro de rastreamento do "
+#~ "Helios, dessa forma outros podem avaliar a verificação desta cédula.\n"
+#~ "<br /><br />\n"
+#~ "<b>Após postar a cédula auditada, você deve voltar à votação e selecionar "
+#~ "\"cast\" se você quiser depositar seu voto para ser contado.</b>"
+
+#~ msgid "Review your Ballot"
+#~ msgstr "Reveja sua cédula"
+
+#~ msgid "Question #"
+#~ msgstr "Questão #"
+
+#~ msgid "Confirm Choices and Encrypt Ballot"
+#~ msgstr "Confime escolhas e encripte a cédula"
+
+#~ msgid "Your Vote is Being Submitted"
+#~ msgstr "Seu voto está sendo submetido"
+
+#~ msgid ""
+#~ "Please wait a few seconds while your vote is submitted to the casting "
+#~ "server..."
+#~ msgstr ""
+#~ "Por favor, espere alguns segundos enquanto seu voto é enviado ao "
+#~ "servidor..."
+
+#~ msgid "To cast a vote, you will be led through the following steps."
+#~ msgstr "Para depositar um voto, você será guiado pelos seguintes passos."
+
+#~ msgid ""
+#~ "If you have not yet logged in, you will be asked to do so at the very end "
+#~ "of the process."
+#~ msgstr ""
+#~ "Se você ainda não se conectou, você deverá se conectar no final do "
+#~ "processo."
+
+#~ msgid "Please, select your group"
+#~ msgstr "Selecione seu grupo"
+
+#~ msgid "<b>Select</b> your options."
+#~ msgstr "<b>Selecione</b> suas opções."
+
+#~ msgid "Answer the questions, and review your choices."
+#~ msgstr "Responda as questões e verifique suas escolhas."
+
+#~ msgid "<b>Encrypt</b> your selection."
+#~ msgstr "<>Encripte</b> Sua escolha."
+
+#~ msgid "Your selection is encrypted safely inside in your browser."
+#~ msgstr "Sua escolha é encriptada, com segurança, em seu navegador."
+
+#~ msgid "A smart ballot tracker is given to let you track your ballot."
+#~ msgstr ""
+#~ "Um número de rastreamento de cédula será dado para que você possa "
+#~ "rastrear sua cédula. "
+
+#~ msgid "<b>Submit</b> your encrypted ballot."
+#~ msgstr "<b>Submeter</b> sua cédula encriptada."
+
+#~ msgid "Proceed to log in and cast your encrypted ballot for tallying."
+#~ msgstr ""
+#~ "Prossiga para a conexão e deposite sua cédula encriptada para ser apurada"
+
+#~ msgid "Start"
+#~ msgstr "Inicie"
+
+#~ msgid "help!"
+#~ msgstr "ajuda!"
+
+#~ msgid ""
+#~ "The public key for this election is not yet ready. This election is in "
+#~ "preview mode only."
+#~ msgstr ""
+#~ "A chave pública para esta eleição não está pronta. Esta eleição está em "
+#~ "modo de revisão."
+
+#~ msgid "Your group"
+#~ msgstr "Seu grupo"
+
+#~ msgid "Question #{$T.question_num + 1} of {$T.last_question_num + 1}"
+#~ msgstr "Questão #{$T.question_num + 1} de {$T.last_question_num + 1}"
+
+#~ msgid ""
+#~ "select \n"
+#~ "{#if $T.question.min && $T.question.min == $T.question.max}\n"
+#~ " exactly {$T.question.min} answer{#if $T.question.min > 1}s{#/if}\n"
+#~ "{#else}\n"
+#~ " {#if $T.question.min && $T.question.min > 0}\n"
+#~ " at least {$T.question.min} answer{#if $T.question.min > 1}s{#/if}, \n"
+#~ " {#/if}\n"
+#~ " {#if $T.question.max}\n"
+#~ " up to {$T.question.max} answer{#if $T.question.max > 1}s{#/if}\n"
+#~ " {#else}\n"
+#~ " as many of the choices as you approve of\n"
+#~ " {#/if}\n"
+#~ "{#/if}"
+#~ msgstr ""
+#~ "select \n"
+#~ "{#if $T.question.min && $T.question.min == $T.question.max}\n"
+#~ " exatamente {$T.question.min} resposta{#if $T.question.min > 1}s{#/if}\n"
+#~ "{#else}\n"
+#~ " {#if $T.question.min && $T.question.min > 0}\n"
+#~ " no mínimo {$T.question.min} resposta{#if $T.question.min > 1}s{#/if}, \n"
+#~ " {#/if}\n"
+#~ " {#if $T.question.max}\n"
+#~ " no máximo{$T.question.max} resposta{#if $T.question.max > 1}s{#/if}\n"
+#~ " {#else}\n"
+#~ " quantas respostas forem aprovadas \n"
+#~ " {#/if}\n"
+#~ "{#/if}"
+
+#~ msgid "more info"
+#~ msgstr "mais informação"
+
+#~ msgid "Audit"
+#~ msgstr "Auditoria"
+
+#~ msgid ""
+#~ "If you choose, you can audit your ballot and reveal how your choices were "
+#~ "encrypted."
+#~ msgstr ""
+#~ "Se você escolher, você pode auditar sua cédula e revelar como "
+#~ "suasescolhas forma encriptadas."
+
+#~ msgid ""
+#~ "You will then be guided to re-encrypt your choices for final casting."
+#~ msgstr "Você, então, será guiado para reencriptar sua cédula e depositá-la."
+
+#~ msgid "Your ballot was successfully encrypted"
+#~ msgstr "Sua cédula foi encriptada com sucesso"
+
+#~ msgid "Please <b><u>keep a record</u></b> of your smart ballot tracker"
+#~ msgstr ""
+#~ "Por favor, <b><u>mantenha uma cópia</u></b> do seu número de rastreamento "
+#~ "de cédula"
+
+#~ msgid "To protect your privacy:"
+#~ msgstr "Para proteger sua privacidade:"
+
+#~ msgid "Helios has not yet asked for your identity."
+#~ msgstr "Helios ainda não pediu sua identificação."
+
+#~ msgid "Once you click "
+#~ msgstr "Assim que você clicar "
+
+#~ msgid "Thus, only you know your vote."
+#~ msgstr "Desta forma, apenas você sabe seu voto."
+
+#~ msgid "Proceed to Cast"
+#~ msgstr "Prossiga para depositar seu voto"
+
+#~ msgid "templates/header.html"
+#~ msgstr "templates/pt_BR/header.html"
+
+#~ msgid "templates/election.html"
+#~ msgstr "templates/pt_BR/election.html"
+
+#~ msgid "templates/question.html"
+#~ msgstr "templates/pt_BR/question.html"
+
+#~ msgid "templates/confirm.html"
+#~ msgstr "templates/pt_BR/confirm.html"
+
+#~ msgid "templates/seal.html"
+#~ msgstr "templates/pt_BR/seal.html"
+
+#~ msgid "templates/audit.html"
+#~ msgstr "templates/pt_BR/audit.html"
+
+#~ msgid "templates/footer.html"
+#~ msgstr "templates/pt_BR/footer.html"
 
 #~ msgid "Welcome to Helios for Unicamp"
 #~ msgstr "Bem-vindo ao sistema Helios para a Unicamp"

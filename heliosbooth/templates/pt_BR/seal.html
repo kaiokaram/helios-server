@@ -1,21 +1,21 @@
 <div style="float: right; background: lightyellow; margin-left: 20px; padding: 0px 10px 10px 10px; border: 1px solid #ddd; width:200px;">
-<h4><a onclick="$('#auditbody').slideToggle(250);" href="#">Audit</a> <span style="font-size: 0.8em; color: #444">[optional]</span></h4>
+<h4><a onclick="$('#auditbody').slideToggle(250);" href="#">Auditar</a> <span style="font-size: 0.8em; color: #444">[opcional]</span></h4>
 <div id="auditbody" style="display:none;">
 <p>
-If you choose, you can audit your ballot and reveal how your choices were encrypted.
+Se você escolher, você pode auditar sua cédula e revelar como suas escolhas são encriptadas.
 </p>
 <p>
-You will then be guided to re-encrypt your choices for final casting.
+Você, então, será guiado para reencriptar sua cédula e depositá-la.
 </p>
 <input type="button" value="Verify Encryption" onclick="BOOTH.audit_ballot();" class="pretty" />
 </p>
 </div>
 </div>
 
-<h3>Your ballot was successfully encrypted</h3>
+<h3>Sua cédula foi encriptada com sucesso</h3>
 
 <p>
-Please <b><u>keep a record</u></b> of your smart ballot tracker [<a onclick="BOOTH.show_receipt(); return false;" href="#">print</a>]
+Por favor, <b><u>mantenha uma cópia</u></b> do seu número de rastreamento de cédula [<a onclick="BOOTH.show_receipt(); return false;" href="#">imprimir</a>]
 &nbsp; [<a target="_blank" href="mailto:?subject=Helios%20Receipt - {$T.election.name}&body=%0AThis is your smart ballot tracker for {$T.election.name}%0A%0A  {$T.encrypted_vote_hash}">email</a>]:<br /><br />
 
 <b><tt style="font-size: 16pt;">&nbsp;&nbsp;&nbsp;{$T.encrypted_vote_hash}</tt></b><br /><br />
@@ -23,15 +23,15 @@ Please <b><u>keep a record</u></b> of your smart ballot tracker [<a onclick="BOO
 </p>
 
 <p>
-To protect your privacy:
+Para proteger sua privacidade:
 <ul>
-  <li> Helios has not yet asked for your identity.</li>
-  <li> Once you click "Proceed", Helios will remember only your encrypted vote.</li>
-  <li> Thus, only you know your vote.</li>
+  <li> Helios ainda não pediu sua identificação.</li>
+  <li> Ao clicar em "Prosseguir", Helios guardará apenas seu voto encriptado.</li>
+  <li> Desta forma, apenas você sabe seu voto.</li>
 </ul>
 </p>
 
-<button id="proceed_button" onclick="BOOTH.cast_ballot();">Proceed to Cast</button><br />
+<button id="proceed_button" onclick="BOOTH.cast_ballot();">Prosseguir para depositar seu voto</button><br />
 <div id="loading_div"></div>
 
 

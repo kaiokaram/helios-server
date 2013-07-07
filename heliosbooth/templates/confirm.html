@@ -1,10 +1,8 @@
-{% load i18n %}
-
-<h3>{% trans "Review your Ballot" %}</h3>
+<h3>Review your Ballot</h3>
 
 {#foreach $T.questions as question}
 <p>
-<u>{% trans "Question #" %}{$T.question$index + 1}</u>: {$T.question.short_name}<br />
+<u>Question #{$T.question$index + 1}</u>: {$T.question.short_name}<br />
 
 <b style="font-size:1.0em;">{#foreach $T.choices[$T.question$index] as choice}
 {$T.choice}{#if !$T.choice$last}, {#/if}
@@ -14,4 +12,4 @@
 </p>
 {#/for}
 
-<button onclick="BOOTH.seal_ballot();">{% trans "Confirm Choices and Encrypt Ballot" %}</button>
+<button onclick="BOOTH.seal_ballot();">Confirm Choices and Encrypt Ballot</button>

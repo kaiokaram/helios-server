@@ -1,9 +1,7 @@
-{% load i18n %}
-
 <div id="questions_div">
 <p>
-    {% trans "To cast a vote, you will be led through the following steps." %}<br />
-    {% trans "If you have not yet logged in, you will be asked to do so at the very end of the process." %}
+    To cast a vote, you will be led through the following steps.<br />
+    If you have not yet logged in, you will be asked to do so at the very end of the process.
 
 <p style="font-size:120%">
     First of all, please <b>select your group</b> for this election:<br/>
@@ -18,34 +16,34 @@
         <input type="radio" name="voter_group" id="id_voter_group_{$T.rule.group_id}" value="{$T.rule.group_id}">
         <label for="id_voter_group_{$T.rule.group_id}">{$T.rule.group_name}</label><br/>
         {#/for}
-        <span id="id_select_group_error" style="display:none; font-size:90%; color:red;">{% trans "Please, select your group" %}.</span>
+        <span id="id_select_group_error" style="display:none; font-size:90%; color:red;">Please, select your group.</span>
         <span id="id_select_group_error_aux" style="font-size:90%; color:white;">Please, select your group.</span>
     </ul>
 
 <p>
     
 <ol>
-    <li> {% blocktrans %}<b>Select</b> your options.{% endblocktrans %}<br />
-<span style="font-size: 14pt;">{% trans "Answer the questions, and review your choices." %}</span></li>
+    <li> <b>Select</b> your options.<br />
+<span style="font-size: 14pt;">Answer the questions, and review your choices.</span></li>
 <br />
 
-    <li> {% blocktrans %}<b>Encrypt</b> your selection.{% endblocktrans %}<br />
+    <li> <b>Encrypt</b> your selection.<br />
 <span style="font-size: 14pt;">
-  {% trans "Your selection is encrypted safely inside in your browser." %}<br />
-  {% trans "A smart ballot tracker is given to let you track your ballot." %}<br />
+  Your selection is encrypted safely inside in your browser.<br />
+  A smart ballot tracker is given to let you track your ballot.<br />
 </span>
 </li>
 <br />
 
-    <li> {% blocktrans %}<b>Submit</b> your encrypted ballot.{% endblocktrans %}<br />
+    <li> <b>Submit</b> your encrypted ballot.<br />
 <span style="font-size: 14pt;">
-{% trans "Proceed to log in and cast your encrypted ballot for tallying." %}
+Proceed to log in and cast your encrypted ballot for tallying.
 </span>
 </li>
 </ol>
 
 <div align="center">
-<button onclick="return(BOOTH.check_group_selection())">{% trans "Start" %}</button>
+<button onclick="return(BOOTH.check_group_selection())">Start</button>
 </div>
 
 </div>

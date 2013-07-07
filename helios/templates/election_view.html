@@ -218,7 +218,17 @@ Tally:<br />
 
 {% if election.voting_has_started %}
 <span class="highlight-box round" style="font-size: 1.6em; margin-right: 10px;" id="votelink">
-<a href="{{test_cookie_url}}">{% trans "Vote in this" %} {{election.election_type}} </a>
+<a href="{{test_cookie_url}}">
+{% if language == "pt-BR" %}
+  {% if election.election_type == "election" %}
+    Vote nesta eleição
+  {% else %}
+    Vote neste referendum
+  {% endif %}
+{% else %}
+  {% trans "Vote in this" %} {{election.election_type}} 
+{% endif %}
+</a>
 </span><br />
 <br />
 {% if election.voting_extended_until %}
