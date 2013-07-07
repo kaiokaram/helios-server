@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-07 12:20-0300\n"
+"POT-Creation-Date: 2013-07-07 13:05-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1147,6 +1147,7 @@ msgstr "Tweet"
 #: helios/templates/stats.html:4 helios/templates/stats.html.py:7
 #: helios/templates/stats_elections.html:4
 #: helios/templates/stats_problem_elections.html:4
+#: server_ui/templates/base.html:68
 msgid "Statistics"
 msgstr "Estatísticas"
 
@@ -2050,12 +2051,43 @@ msgstr ""
 msgid "where you will log in to validate your eligibility to vote."
 msgstr "onde você se concterá para validar sua autorizacão para votar"
 
+#: server_ui/templates/base.html:50
+msgid "logged in as"
+msgstr "usuário conectado como"
+
+#: server_ui/templates/base.html:54
+msgid "You are signed in as voter"
+msgstr "Você está autenticado como eleitor"
+
+#: server_ui/templates/base.html:55
+msgid "in election"
+msgstr "na eleição"
+
+#: server_ui/templates/base.html:56
+msgid "sign out"
+msgstr "desconecte-se"
+
+#: server_ui/templates/base.html:58
+msgid "not logged in"
+msgstr "usuário não conectado"
+
+#: server_ui/templates/base.html:58
+msgid "log in"
+msgstr "conecte-se"
+
+#: server_ui/templates/base.html:62
+msgid "About Helios"
+msgstr "Sobre o Helios"
+
+#: server_ui/templates/base.html:66
+msgid "Help!"
+msgstr "Ajuda!"
+
 #: server_ui/templates/index.html:18
 msgid "Administration"
 msgstr "Administração"
 
 #: server_ui/templates/index.html:26
-#, fuzzy
 msgid "no elections yet"
 msgstr "sem questões por ora"
 

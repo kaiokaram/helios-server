@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-07 12:20-0300\n"
+"POT-Creation-Date: 2013-07-07 13:05-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1046,6 +1046,7 @@ msgstr ""
 #: helios/templates/stats.html:4 helios/templates/stats.html.py:7
 #: helios/templates/stats_elections.html:4
 #: helios/templates/stats_problem_elections.html:4
+#: server_ui/templates/base.html:68
 msgid "Statistics"
 msgstr ""
 
@@ -1855,6 +1856,38 @@ msgstr ""
 
 #: heliosbooth/templates/submit.html:22
 msgid "where you will log in to validate your eligibility to vote."
+msgstr ""
+
+#: server_ui/templates/base.html:50
+msgid "logged in as"
+msgstr ""
+
+#: server_ui/templates/base.html:54
+msgid "You are signed in as voter"
+msgstr ""
+
+#: server_ui/templates/base.html:55
+msgid "in election"
+msgstr ""
+
+#: server_ui/templates/base.html:56
+msgid "sign out"
+msgstr ""
+
+#: server_ui/templates/base.html:58
+msgid "not logged in"
+msgstr ""
+
+#: server_ui/templates/base.html:58
+msgid "log in"
+msgstr ""
+
+#: server_ui/templates/base.html:62
+msgid "About Helios"
+msgstr ""
+
+#: server_ui/templates/base.html:66
+msgid "Help!"
 msgstr ""
 
 #: server_ui/templates/index.html:18

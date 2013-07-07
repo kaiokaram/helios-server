@@ -1,4 +1,4 @@
-
+# -*- coding: utf-8 -*-
 import os
 
 # go through environment variables and override them
@@ -12,7 +12,8 @@ DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
-    ('Helios for Unicamp', ''),
+    #('Helios for Unicamp', ''),
+    ('Helios Unicamp', ''),
 )
 
 MANAGERS = ADMINS
@@ -133,13 +134,15 @@ SECURE_URL_HOST = get_from_env("SECURE_URL_HOST", "http://143.106.167.66:8000")
 SOCIALBUTTONS_URL_HOST= get_from_env("SOCIALBUTTONS_URL_HOST", "http://143.106.167.66:8000")
 
 # election stuff
-SITE_TITLE = get_from_env('SITE_TITLE', 'Helios Election Server for Unicamp - DEV')
+#SITE_TITLE = get_from_env('SITE_TITLE', 'Helios Election Server for Unicamp - DEV')
+SITE_TITLE = get_from_env('SITE_TITLE', 'Sistema de Eleições Helios Unicamp - DEV')
 
 # FOOTER links
 FOOTER_LINKS = []
 FOOTER_LOGO = False
 
-WELCOME_MESSAGE = get_from_env('WELCOME_MESSAGE', "Welcome to Helios for Unicamp")
+#WELCOME_MESSAGE = get_from_env('WELCOME_MESSAGE', "Welcome to Helios for Unicamp")
+WELCOME_MESSAGE = get_from_env('WELCOME_MESSAGE', "Bem-vindo ao Sistema Helios Unicamp")
 
 HELP_EMAIL_ADDRESS = get_from_env('HELP_EMAIL_ADDRESS', 'kaio.karam@gmail.com')
 
