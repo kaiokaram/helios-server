@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-07 10:32-0300\n"
+"POT-Creation-Date: 2013-07-07 12:20-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1096,6 +1096,7 @@ msgid "voters"
 msgstr ""
 
 #: helios/templates/stats_recent_votes.html:7
+#: server_ui/templates/index.html:34
 msgid "Recent Votes"
 msgstr ""
 
@@ -1417,7 +1418,7 @@ msgstr ""
 msgid "s"
 msgstr ""
 
-#: helios/templates/voters_list.html:114
+#: helios/templates/voters_list.html:114 server_ui/templates/index.html:42
 msgid "no votes yet"
 msgstr ""
 
@@ -1854,4 +1855,36 @@ msgstr ""
 
 #: heliosbooth/templates/submit.html:22
 msgid "where you will log in to validate your eligibility to vote."
+msgstr ""
+
+#: server_ui/templates/index.html:18
+msgid "Administration"
+msgstr ""
+
+#: server_ui/templates/index.html:26
+msgid "no elections yet"
+msgstr ""
+
+#: server_ui/templates/index.html:28
+msgid "see all"
+msgstr ""
+
+#: server_ui/templates/index.html:30
+msgid "create election"
+msgstr ""
+
+#: server_ui/templates/index.html:44
+msgid "see all votes"
+msgstr ""
+
+#: server_ui/templates/index.html:46
+msgid "Log In to Start Voting"
+msgstr ""
+
+#: server_ui/templates/index.html:57
+msgid "Current Featured Elections"
+msgstr ""
+
+#: server_ui/templates/index.html:68
+msgid "no featured elections at the moment"
 msgstr ""

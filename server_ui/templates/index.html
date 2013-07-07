@@ -1,4 +1,6 @@
 {% extends 'server_ui/templates/base.html' %}
+{% load i18n %}
+
 {% block title %}{{ settings.SITE_TITLE }}{% endblock %}
 
 {% block header %}
@@ -13,7 +15,7 @@
 {{user.display_html_big|safe}}
 </div>
 {% if create_p %}
-<h4>Administration</h4>
+<h4>{% trans "Administration" %}</h4>
 {% if elections_administered %}
 <ul>
 {% for election in elections_administered %}
@@ -21,15 +23,15 @@
 {% endfor %}
 </ul>
 {% else %}
-<em>none yet</em>
+<em>{% trans "no elections yet" %}</em>
 {% endif %}
-<p>[<a href="{% url helios.views.elections_administered %}">see all</a>]</p>
+<p>[<a href="{% url helios.views.elections_administered %}">{% trans "see all" %}</a>]</p>
 <div style="text-align:right;">
-<a href="{% url helios.views.election_new %}" style="font-size: 1.2em; padding:5px; background: #eee; border: 1px solid #888">create election &gt;</a>
+<a href="{% url helios.views.election_new %}" style="font-size: 1.2em; padding:5px; background: #eee; border: 1px solid #888">{% trans "create election" %} &gt;</a>
 </div>
 {% endif %}
 
-<h4>Recent Votes</h4>
+<h4>{% trans "Recent Votes" %}</h4>
 {% if elections_voted %}
 <ul>
 {% for election in elections_voted %}
@@ -37,11 +39,11 @@
 {% endfor %}
 </ul>
 {% else %}
-<em>none yet</em>
+<em>{% trans "no votes yet" %}</em>
 {% endif %}
-<p>[<a href="{% url helios.views.elections_voted %}">see all</a>]</p>
+<p>[<a href="{% url helios.views.elections_voted %}">{% trans "see all votes" %}</a>]</p>
 {% else %}
-<h3>Log In to Start Voting</h3>
+<h3>{% trans "Log In to Start Voting" %}</h3>
 {{login_box|safe}}
 {% endif %}
 <br /><br />
@@ -52,7 +54,7 @@
 </p>
 
 {% if elections|length %}
-<h3>Current Featured Elections</h3>
+<h3>{% trans "Current Featured Elections" %}</h3>
 <p>
 {% for election in elections %}
 <div class="highlight-box-margin">
@@ -63,7 +65,7 @@
 {% endfor %}
 </p>
 {% else %}
-<h4>no featured elections at the moment</h4>
+<h4>{% trans "no featured elections at the moment" %}</h4>
 {% endif %}
 
 <br clear="right" /><br />

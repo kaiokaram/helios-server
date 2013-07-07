@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-07 10:32-0300\n"
+"POT-Creation-Date: 2013-07-07 12:20-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1197,6 +1197,7 @@ msgid "voters"
 msgstr "eleitores"
 
 #: helios/templates/stats_recent_votes.html:7
+#: server_ui/templates/index.html:34
 msgid "Recent Votes"
 msgstr "Votos recentes"
 
@@ -1541,7 +1542,7 @@ msgstr "deposite o voto"
 msgid "s"
 msgstr "s"
 
-#: helios/templates/voters_list.html:114
+#: helios/templates/voters_list.html:114 server_ui/templates/index.html:42
 msgid "no votes yet"
 msgstr "nenhum voto"
 
@@ -2047,7 +2048,46 @@ msgstr ""
 
 #: heliosbooth/templates/submit.html:22
 msgid "where you will log in to validate your eligibility to vote."
-msgstr "onde  você se concterá para validar sua autorizacão para votar"
+msgstr "onde você se concterá para validar sua autorizacão para votar"
+
+#: server_ui/templates/index.html:18
+msgid "Administration"
+msgstr "Administração"
+
+#: server_ui/templates/index.html:26
+#, fuzzy
+msgid "no elections yet"
+msgstr "sem questões por ora"
+
+#: server_ui/templates/index.html:28
+msgid "see all"
+msgstr "todas as eleições"
+
+#: server_ui/templates/index.html:30
+msgid "create election"
+msgstr "criar eleição"
+
+#: server_ui/templates/index.html:44
+msgid "see all votes"
+msgstr "todos os votos"
+
+#: server_ui/templates/index.html:46
+msgid "Log In to Start Voting"
+msgstr "Conecte-se para iniciar"
+
+#: server_ui/templates/index.html:57
+msgid "Current Featured Elections"
+msgstr "Eleições atuais"
+
+#: server_ui/templates/index.html:68
+msgid "no featured elections at the moment"
+msgstr "sem eleições no momento"
+
+#~ msgid "Welcome to Helios for Unicamp"
+#~ msgstr "Bem-vindo ao sistema Helios para a Unicamp"
+
+#~ msgid "none yet"
+#~ msgstr "nenhum voto"
 
 #~ msgid "select between {$T.question.min} and {$T.question.max} answers"
 #~ msgstr "selecione entre {$T.question.min} e {$T.question.max} respostas"
@@ -2084,9 +2124,6 @@ msgstr "onde  você se concterá para validar sua autorizacão para votar"
 
 #~ msgid "add 5 more answers"
 #~ msgstr "adicione 5 respostas"
-
-#~ msgid "no questions yet"
-#~ msgstr "sem questões por ora"
 
 #~ msgid "Add a Question"
 #~ msgstr "Adicione uma questão"
