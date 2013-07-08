@@ -198,14 +198,18 @@ Tally:<br />
     {% if group.group_short_name == "professor" %}
       <td align="right" style="{% if answer.winner %}font-weight:bold;{% endif %}">{{answer.count_g}}</td>
       <td align="right" style="{% if answer.winner %}font-weight:bold;{% endif %}">
+        {% if answer.answer != "Null vote" %}
         <script>document.write({{answer.count_g}} * {{group.group_weight}})</script>
+        {% endif %}
       </td>
     {% else %}
       <td> </td><td> </td>
     {% endif %}
   {% endfor %}
   <td align="right" style="{% if answer.winner %}font-weight:bold;{% endif %}">{{answer.count}}</td>
+  {% if answer.answer != "Null vote" %}
   <td align="right" style="{% if answer.winner %}font-weight:bold;{% endif %}">{{answer.count_w}}</td>
+  {% endif %}
 </tr>
 {% endfor %}
 </table>
