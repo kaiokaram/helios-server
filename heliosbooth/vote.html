@@ -348,6 +348,23 @@ BOOTH.click_checkbox = function(question_num, answer_num, checked_p) {
      });
      $('#warning_box').html("");
   }
+  
+  //alert(answer_num);
+  //alert(BOOTH.election.questions[question_num].question);
+  //alert(BOOTH.election.questions[question_num].null_vote);
+  //alert(BOOTH.election.questions[question_num].answers.length);
+  
+  // If voter clicked on 'Null vote' answer (the last answer), 
+  // then uncheck and disable all other answers.
+  if (checked_p && BOOTH.election.questions[question_num].null_vote && 
+     answer_num == BOOTH.election.questions[question_num].answers.length - 1) {
+     $('.ballot_answer').each(function(i, checkbox) {
+         if (i < answer_num) {
+           checkbox.checked = false;
+           checkbox.disabled = true;
+         }
+     });
+  }
 };
 
 BOOTH.show_processing_before = function(str_to_execute) {
