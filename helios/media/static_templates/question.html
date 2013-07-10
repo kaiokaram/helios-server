@@ -22,7 +22,13 @@ result type {$T.question.result_type}.)</h4>
         <th colspan="1" style="text-align: left;">&nbsp;&nbsp;&nbsp;Rules</th></tr>
     {#foreach $T.question.rules as rule}
     <tr><th colspan="2" style="text-align: right;">{$T.rule.group_name}:</th>
-        <td style="border: 0;">&nbsp;&nbsp;&nbsp;select between {$T.rule.min} and {$T.rule.max} answers.</td>
+        <td style="border: 0;">&nbsp;&nbsp;&nbsp;
+        {#if $T.rule.allow == true}
+          select between {$T.rule.min} and {$T.rule.max} answers.
+        {#else}
+          this question is <b>not</b> applied to this group.
+        {#/if}
+        </td>
     </tr>
     {#/for}
     <!--<tr><th>&nbsp;</th><th>&nbsp;</th><th>&nbsp;</th></tr>-->
@@ -137,8 +143,8 @@ Result Type:&nbsp;
     <tr><th colspan="2">Question:</th><td><input type="text" name="question" size="70" /></td></tr>
     <tr><th>&nbsp;</th><th>&nbsp;</th><th>&nbsp;</th></tr>
     <tr><th>&nbsp;</th><th>&nbsp;</th>
-        <th align="left"><input type="checkbox" name="null_vote" id="null_vote" />
-            <label for="null_vote">Null vote option</label></th>
+        <th align="left"><input type="checkbox" name="null_vote" id="null_vote_{$T.question$index}" />
+            <label for="null_vote_{$T.question$index}">Null vote option</label></th>
     </tr>
   </tbody>
   <tfoot>
@@ -252,8 +258,8 @@ Result Type:&nbsp;
     <tr><th colspan="2">Question:</th><td><input type="text" name="question" size="70" /></td></tr>
     <tr><th>&nbsp;</th><th>&nbsp;</th><th>&nbsp;</th></tr>
     <tr><th>&nbsp;</th><th>&nbsp;</th>
-        <th align="left"><input type="checkbox" name="null_vote" id="null_vote" />
-            <label for="null_vote">Null vote option</label></th>
+        <th align="left"><input type="checkbox" name="null_vote" id="null_vote_{$T.question$index}" />
+            <label for="null_vote_{$T.question$index}">Null vote option</label></th>
     </tr>
 <!--
     <tr><th>&nbsp;&nbsp;&nbsp;</th><th>Answer #1:</th><td><input type="text" name="answer_1" size="70" /></td></tr>

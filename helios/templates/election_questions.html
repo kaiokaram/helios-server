@@ -32,12 +32,12 @@
       $('#questions').processTemplate({'questions' : QUESTIONS, 'admin_p' : ADMIN_P, 'groups': GROUPS}); 
 
       add_answers($('#answer_table'),DEFAULT_NUM_ANSWERS);
-      add_groups($('#answer_table'));
+      add_groups($('#answer_table'), null);
 
       // add groups to the questions
       for (var q_num = 0; q_num < QUESTIONS.length; q_num++) {
         var answer_table = $('#answer_table_' + q_num);
-        add_groups(answer_table);
+        add_groups(answer_table, q_num);
       }
  }
   
@@ -69,12 +69,13 @@
       
       var rule = null;
       for (i = 0; i < GROUPS.length; i++) {
+          var allow_group = form['allow_' + GROUPS[i].short_name].checked;
           var min = parseInt(form['min_' + GROUPS[i].short_name].value);
           var max = null;
           if (form['max_' + GROUPS[i].short_name].value != "")
             max = parseInt(form['max_' + GROUPS[i].short_name].value);
           rule = {"group_id": GROUPS[i].id, "group_short_name": GROUPS[i].short_name, 
-            "group_name": GROUPS[i].name, "min": min, "max": max};
+            "group_name": GROUPS[i].name, "allow": allow_group, "min": min, "max": max};
           new_q.rules[i] = rule;
       }
 
@@ -128,8 +129,18 @@
       var short_name = q_data.rules[i]['group_short_name'];
       var min = q_data.rules[i]['min'];
       var max = q_data.rules[i]['max'];
+      var allow = q_data.rules[i]['allow'];
       form[0]['min_' + short_name].value = min;
       form[0]['max_' + short_name].value = max;
+      form[0]['allow_' + short_name].checked = allow;
+      if (!allow) {
+        form[0]['min_' + short_name].disabled = true;
+        form[0]['max_' + short_name].disabled = true;
+      }
+      else {
+        form[0]['min_' + short_name].disabled = false;
+        form[0]['max_' + short_name].disabled = false;
+      }
     }
   
   }
@@ -143,6 +154,22 @@
       var new_q = get_question_from_form(form);
       QUESTIONS[q_num] = new_q;
       save_questions(refresh);
+  }
+  
+  function click_allow_group(group_short_name, q_num, checked) {
+    var form;
+    if (q_num == '') form = $('#question_form');
+    else form = $('#question_edit_' + q_num + '_form');
+    var min = form[0]['min_' + group_short_name];
+    var max = form[0]['max_' + group_short_name];
+    if (!checked) {
+      min.disabled = true;
+      max.disabled = true;
+    }
+    else {
+      min.disabled = false;
+      max.disabled = false;
+    }
   }
 
   var DEFAULT_NUM_ANSWERS = 5;
@@ -165,7 +192,7 @@
     save_questions(refresh);
   }
 
-  function add_groups(el) {
+  function add_groups(el, q_num) {
 
     var num = GROUPS.length;
     if (num == 0) return;
@@ -181,7 +208,12 @@
       th.attr('colspan', '2');
       th.css('text-align', 'right');
 
-      var temp_string = select_fields_string.replace(/#short_name#/g, GROUPS[i]['short_name']);
+      var aux = select_fields_string.replace(/#short_name#/g, GROUPS[i]['short_name']);
+      var temp_string;
+      if (q_num == null)
+        temp_string = aux.replace(/#q_num#/g, '');
+      else
+        temp_string = aux.replace(/#q_num#/g, q_num);
       var td = $('<td>' + temp_string + '</td>');
       td.css('border', '0');
 
@@ -202,7 +234,9 @@
   });
   
 var select_fields_string = 
-'&nbsp;&nbsp;&nbsp;{% trans "select between" %} &nbsp;&nbsp;\n\
+'&nbsp;&nbsp;\n\
+<input type="checkbox" name="allow_#short_name#" onclick="click_allow_group(\'#short_name#\', \'#q_num#\', this.checked);" checked="true"/>&nbsp;\n\
+{% trans "select between" %} &nbsp;&nbsp;\n\
 <select name="min_#short_name#">\n\
     <option selected>0</option>\n\
     <option>1</option>\n\
