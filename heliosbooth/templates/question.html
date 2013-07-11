@@ -8,7 +8,8 @@
 <span style="font-size: 0.6em;">
 Your group: {$T.group_name}<br/>
 
-Question #{$T.question_num + 1} of {$T.last_question_num + 1} &mdash;
+<!--Question #{$T.question_num + 1} of {$T.last_question_num + 1} &mdash;-->
+Question {$T.fake_num + 1} of {$T.num_allowed_questions} &mdash;
 
  select 
 {#if $T.question.min && $T.question.min == $T.question.max}
@@ -27,7 +28,9 @@ Question #{$T.question_num + 1} of {$T.last_question_num + 1} &mdash;
 </p>
 
 {#foreach $T.question.answers as answer}
-<div id="answer_label_{$T.question_num}_{$T.answer$index}"><input type="checkbox" class="ballot_answer" id="answer_{$T.question_num}_{$T.answer$index}" name="answer_{$T.question_num}_{$T.answer$index}" value="yes" onclick="BOOTH.click_checkbox({$T.question_num}, {$T.answer$index}, this.checked);" /> {$T.answer}
+<div id="answer_label_{$T.question_num}_{$T.answer$index}">
+<input type="checkbox" class="ballot_answer" id="answer_{$T.question_num}_{$T.answer$index}" name="answer_{$T.question_num}_{$T.answer$index}" value="yes" onclick="BOOTH.click_checkbox({$T.question_num}, {$T.answer$index}, this.checked);" /> 
+{$T.answer}
 
 {#if $T.question.answer_urls && $T.question.answer_urls[$T.answer$index] && $T.question.answer_urls[$T.answer$index] != ""}
 &nbsp;&nbsp;
@@ -53,7 +56,7 @@ Question #{$T.question_num + 1} of {$T.last_question_num + 1} &mdash;
 &nbsp;
 {#/if}
 
-{#if $T.question_num < $T.last_question_num}
+{#if $T.question_num < $T.last_question_num && $T.question_num < $T.last_allowed_question}
 <input type="button" onclick="BOOTH.next({$T.question_num})" value="Next" />
 &nbsp;
 {#/if}

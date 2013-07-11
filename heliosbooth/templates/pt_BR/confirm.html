@@ -1,8 +1,10 @@
 <h3>Verifique sua cédula</h3>
 
 {#foreach $T.questions as question}
+{#if $T.question.allowed == true}
 <p>
-<u>Questão {$T.question$index + 1}</u>: {$T.question.short_name}<br />
+<!--<u>Questão {$T.question$index + 1}</u>: {$T.question.short_name}<br />-->
+<u>Questão #{$T.question.fake_num + 1}</u>: {$T.question.short_name}<br />
 
 <b style="font-size:1.0em;">{#foreach $T.choices[$T.question$index] as choice}
 {#if $T.choice == "Null vote"}Voto nulo{#else}{$T.choice}{#/if}
@@ -11,6 +13,7 @@
 &nbsp;&nbsp;&nbsp;
 [<a onclick="BOOTH.show_question({$T.question$index}); return false;" href="#">alterar</a>]
 </p>
+{#/if}
 {#/for}
 
 <button onclick="BOOTH.seal_ballot();">Confirmar respostas e encriptar cédula</button>

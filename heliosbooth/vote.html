@@ -215,6 +215,10 @@ BOOTH.launch_async_encryption_answer = function(question_num) {
 // check if the current question is ok
 BOOTH.validate_question = function(question_num) {
     // check if enough answers are checked
+    if (BOOTH.election.questions[question_num].allowed == false) {
+        BOOTH.ballot.answers[question_num] = [];
+    }
+    else
     if (BOOTH.ballot.answers[question_num].length < BOOTH.election.questions[question_num].min) {
         alert('You need to select at least ' + BOOTH.election.questions[question_num].min + ' answer(s).');
         return false;
@@ -234,30 +238,31 @@ BOOTH.validate_question = function(question_num) {
 
 BOOTH.validate_and_confirm = function(question_num) {
   if (BOOTH.validate_question(question_num)) {
+      if (question_num < BOOTH.election.questions.length - 1) {
+        BOOTH.show_question(question_num + 1, 'next');
+      }
       BOOTH.show_confirm();
   }
 };
 
 BOOTH.next = function(question_num) {
     if (BOOTH.validate_question(question_num)) {
-        BOOTH.show_question(question_num + 1);
+        BOOTH.show_question(question_num + 1, 'next');
     }
 };
 
 BOOTH.previous = function(question_num) {
     if (BOOTH.validate_question(question_num)) {
-        BOOTH.show_question(question_num - 1);
+        BOOTH.show_question(question_num - 1, 'previous');
     }
 };
 
 BOOTH.get_rule = function(question_num, voter_group_id) {
   var rules = BOOTH.election.questions[question_num].rules;
-  //alert(rules);
-  if (!rules) return [];
+  if (!rules) return null;
   
   for (var i = 0; i < rules.length; i++) {
     if (rules[i].group_id == voter_group_id) {
-      //alert(rules[i])
       return rules[i];
     }
   }
@@ -267,20 +272,22 @@ BOOTH.get_rule = function(question_num, voter_group_id) {
 
 BOOTH.voter_group_id = '';
 
-BOOTH.show_question = function(question_num) {
+BOOTH.show_question = function(question_num, op = 'next') {
   BOOTH.started_p = true;
 
   // the first time we hit the last question, we enable the review all button
-  if (question_num == BOOTH.election.questions.length -1)
+  //if (question_num == BOOTH.election.questions.length - 1)
+  if (question_num == BOOTH.last_allowed_question)
     BOOTH.all_questions_seen = true;
-
+  
   var rule = BOOTH.get_rule(question_num, BOOTH.voter_group_id);
   // Replace min and max numbers of answers by the specific rule for the voter group
   BOOTH.election.questions[question_num].max = rule.max;
   BOOTH.election.questions[question_num].min = rule.min;
 
   BOOTH.show_progress('1');
-  BOOTH.show($('#question_div')).processTemplate({'question_num' : question_num,
+  BOOTH.show($('#question_div')).processTemplate({'question_num' : question_num, 'fake_num': BOOTH.election.questions[question_num].fake_num,
+                      'last_allowed_question': BOOTH.last_allowed_question, 'num_allowed_questions': BOOTH.num_allowed_questions,
                       'last_question_num' : BOOTH.election.questions.length - 1, 'group_name': rule.group_name,
                       'question' : BOOTH.election.questions[question_num], 'show_reviewall' : BOOTH.all_questions_seen
                 });
@@ -296,19 +303,48 @@ BOOTH.show_question = function(question_num) {
     BOOTH.click_checkbox_script(question_num, ans, true);
   });
   BOOTH.dirty[question_num] = old_dirty;
+
+  if (!BOOTH.election.questions[question_num].allowed) {
+    if (op == 'next' && question_num < BOOTH.election.questions.length - 1)
+      BOOTH.next(question_num);
+    else if (op == 'previous' && question_num > 0)
+      BOOTH.previous(question_num);
+    else // force validation for this question so that answers are encrypted 
+      BOOTH.validate_question(question_num);
+  }
 };
 
+
+BOOTH.setup_allowed_questions = function() {
+  // Discover which questions should be shown for this voter based on voter group.
+  BOOTH.last_allowed_question = BOOTH.election.questions.length - 1;
+  var i = 0;
+  for (var q_num = 0; q_num < BOOTH.election.questions.length; q_num++) {
+    var rule = BOOTH.get_rule(q_num, BOOTH.voter_group_id);
+    if (rule == null) {
+      BOOTH.election.questions[q_num].allowed = true;
+    }
+    else {
+      BOOTH.election.questions[q_num].allowed = rule.allow;
+      if (rule.allow) BOOTH.last_allowed_question = q_num;
+    }
+    if (BOOTH.election.questions[q_num].allowed == true) {
+      BOOTH.election.questions[q_num].fake_num = i;
+      i++;
+    }
+  }
+  BOOTH.num_allowed_questions = i;
+};
 
 BOOTH.check_group_selection = function() {
   //BOOTH.voter_group_id = $('#id_voter_group').val();
   BOOTH.voter_group_id = $('input:radio[name=voter_group]:checked').val();
-  //if (BOOTH.voter_group_id == 'none') {
   if (BOOTH.voter_group_id == null) {
-    //alert('NONE!');
-    $('#id_select_group_error').show();//style.display = '';
+    $('#id_select_group_error').show();
     $('#id_select_group_error_aux').hidde();
   }
   else {
+    BOOTH.setup_allowed_questions();
     BOOTH.show_question(0);
   }
   return false;

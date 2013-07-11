@@ -8,7 +8,8 @@
 <span style="font-size: 0.6em;">
 Seu grupo: {$T.group_name}<br/>
 
-Questão {$T.question_num + 1} de {$T.last_question_num + 1} &mdash;
+<!--Questão {$T.question_num + 1} de {$T.last_question_num + 1} &mdash;-->
+Questão {$T.fake_num + 1} de {$T.num_allowed_questions} &mdash;
 
  selecione 
 {#if $T.question.min && $T.question.min == $T.question.max}
@@ -59,7 +60,7 @@ Voto nulo
 &nbsp;
 {#/if}
 
-{#if $T.question_num < $T.last_question_num}
+{#if $T.question_num < $T.last_question_num && $T.question_num < $T.last_allowed_question}
 <input type="button" onclick="BOOTH.next({$T.question_num})" value="Next" />
 &nbsp;
 {#/if}
