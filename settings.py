@@ -135,7 +135,7 @@ SOCIALBUTTONS_URL_HOST= get_from_env("SOCIALBUTTONS_URL_HOST", "http://143.106.1
 
 # election stuff
 #SITE_TITLE = get_from_env('SITE_TITLE', 'Helios Election Server for Unicamp - DEV')
-SITE_TITLE = get_from_env('SITE_TITLE', 'Sistema de Eleições Helios Unicamp - DEV')
+SITE_TITLE = get_from_env('SITE_TITLE', 'Sistema Helios Unicamp - DEV')
 
 # FOOTER links
 FOOTER_LINKS = []
