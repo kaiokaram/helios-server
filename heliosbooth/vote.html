@@ -220,8 +220,10 @@ BOOTH.validate_question = function(question_num) {
     }
     else
     if (BOOTH.ballot.answers[question_num].length < BOOTH.election.questions[question_num].min) {
-        alert('You need to select at least ' + BOOTH.election.questions[question_num].min + ' answer(s).');
-        return false;
+        if ($(BOOTH.ballot.answers[question_num]).index('Null vote') == -1 && $(BOOTH.ballot.answers[question_num]).index('White vote') == -1) {
+          alert('You need to select at least ' + BOOTH.election.questions[question_num].min + ' answer(s).');
+          return false;
+        }
     }
 
     // if we need to launch the worker, let's do it
@@ -359,6 +361,18 @@ BOOTH.click_checkbox = function(question_num, answer_num, checked_p) {
   // keep track of dirty answers that need encrypting
   BOOTH.dirty[question_num] = true;
 
+  white_index = -1;
+  null_index = -1;
+  if (BOOTH.election.questions[question_num].white_vote) {
+    white_index = BOOTH.election.questions[question_num].answers.length - 1;
+    if (BOOTH.election.questions[question_num].null_vote) {
+      null_index = BOOTH.election.questions[question_num].answers.length - 2;
+    }
+  }
+  else if (BOOTH.election.questions[question_num].null_vote) {
+    null_index = BOOTH.election.questions[question_num].answers.length - 1;
+  }
+  
   if (checked_p) {
      // multiple click events shouldn't screw this up
      if ($(BOOTH.ballot.answers[question_num]).index(answer_num) == -1)
@@ -370,10 +384,34 @@ BOOTH.click_checkbox = function(question_num, answer_num, checked_p) {
      $('#answer_label_' + question_num + "_" + answer_num).removeClass('selected');
   }
 
+  // If voter clicked on 'Null vote' or 'White vote' answers, 
+  // then uncheck and disable all other answers.
+  if (answer_num == null_index || answer_num == white_index) {
+    if (checked_p) {
+       $('.ballot_answer').each(function(i, checkbox) {
+           if (i != answer_num && checkbox.checked) {
+             checkbox.click();
+           }
+       });
+       $('.ballot_answer').each(function(i, checkbox) {
+           if (i != null_index && i != white_index) {
+             checkbox.disabled = true;
+           }
+       });
+    }
+    else { // checked_p == false
+       $('.ballot_answer').each(function(i, checkbox) {
+           checkbox.disabled = false;
+       });
+    }
+    $('#warning_box').html("");
+    return;
+  }
+
   if (BOOTH.election.questions[question_num].max != null && BOOTH.ballot.answers[question_num].length >= BOOTH.election.questions[question_num].max) {
      // disable the other checkboxes
      $('.ballot_answer').each(function(i, checkbox) {
-        if (!checkbox.checked)
+        if (!checkbox.checked && i != null_index && i != white_index)
             checkbox.disabled = true;
      });
      $('#warning_box').html("Maximum number of options selected.<br />To change your selection, please de-select a current selection first.");
@@ -385,21 +423,6 @@ BOOTH.click_checkbox = function(question_num, answer_num, checked_p) {
      $('#warning_box').html("");
   }
   
-  // If voter clicked on 'Null vote' answer (the last answer), 
-  // then uncheck and disable all other answers.
-  if (checked_p && BOOTH.election.questions[question_num].null_vote && 
-     answer_num == BOOTH.election.questions[question_num].answers.length - 1) {
-     $('.ballot_answer').each(function(i, checkbox) {
-         if (i < answer_num && checkbox.checked) {
-           checkbox.click();
-         }
-     });
-     $('.ballot_answer').each(function(i, checkbox) {
-         if (i < answer_num) {
-           checkbox.disabled = true;
-         }
-     });
-  }
 };
 
 BOOTH.show_processing_before = function(str_to_execute) {

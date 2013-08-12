@@ -52,7 +52,7 @@
       if (form.max.value != "")
         max = parseInt(form.max.value);
         
-      var new_q = {'question' : form.question.value, 'min': parseInt(form.min.value), 'max': max, 'rules': [], 'short_name': form.question.value, 'answers': [], 'answer_urls': [], 'null_vote': form.null_vote.checked, 'choice_type': form.choice_type.value, 'tally_type': 'homomorphic', 'result_type': form.result_type.value};
+      var new_q = {'question' : form.question.value, 'min': parseInt(form.min.value), 'max': max, 'rules': [], 'short_name': form.question.value, 'answers': [], 'answer_urls': [], 'null_vote': form.null_vote.checked, 'white_vote': form.white_vote.checked, 'choice_type': form.choice_type.value, 'tally_type': 'homomorphic', 'result_type': form.result_type.value};
       var i = 0;
       while(true) {
           i += 1;
@@ -65,6 +65,13 @@
       if (form.null_vote.checked) {
           new_q.answers[i-1] = "Null vote";
           new_q.answer_urls[i-1] = null;
+          i += 1;
+      }
+      
+      if (form.white_vote.checked) {
+          new_q.answers[i-1] = "White vote";
+          new_q.answer_urls[i-1] = null;
+          i += 1;
       }
       
       var rule = null;
@@ -114,6 +121,7 @@
     // add the answers
     answers_bound = q_data.answers.length;
     if (q_data.null_vote) answers_bound--;
+    if (q_data.white_vote) answers_bound--;
     var answer_table = $('#answer_table_' + q_num);
     var num_answers_form = answer_table.find('input.answer').length;
     if (answers_bound > num_answers_form)
@@ -123,6 +131,7 @@
     });
     
     form[0].null_vote.checked = q_data.null_vote;
+    form[0].white_vote.checked = q_data.white_vote;
 
     // add the rules
     for (var i = 0; i < q_data.rules.length; i++) {

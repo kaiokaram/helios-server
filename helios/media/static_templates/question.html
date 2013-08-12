@@ -33,8 +33,12 @@ result type {$T.question.result_type}.)</h4>
     {#/for}
     <!--<tr><th>&nbsp;</th><th>&nbsp;</th><th>&nbsp;</th></tr>-->
     <tr><th>&nbsp;</th><th>&nbsp;</th>
-        <th align="left">&nbsp;&nbsp;&nbsp;&nbsp;Null vote option: 
+        <th align="left">&nbsp;&nbsp;&nbsp;&nbsp;Add null vote: 
         {#if $T.question.null_vote == true}yes{#else}no{#/if}</th>
+    </tr>
+    <tr><th>&nbsp;</th><th>&nbsp;</th>
+        <th align="left">&nbsp;&nbsp;&nbsp;&nbsp;Add white vote: 
+        {#if $T.question.white_vote == true}yes{#else}no{#/if}</th>
     </tr>
   </tbody>
 </table>
@@ -144,7 +148,11 @@ Result Type:&nbsp;
     <tr><th>&nbsp;</th><th>&nbsp;</th><th>&nbsp;</th></tr>
     <tr><th>&nbsp;</th><th>&nbsp;</th>
         <th align="left"><input type="checkbox" name="null_vote" id="null_vote_{$T.question$index}" />
-            <label for="null_vote_{$T.question$index}">Null vote option</label></th>
+            <label for="null_vote_{$T.question$index}">Add null vote</label></th>
+    </tr>
+    <tr><th>&nbsp;</th><th>&nbsp;</th>
+        <th align="left"><input type="checkbox" name="white_vote" id="white_vote_{$T.question$index}" />
+            <label for="white_vote_{$T.question$index}">Add white vote</label></th>
     </tr>
   </tbody>
   <tfoot>
@@ -259,7 +267,11 @@ Result Type:&nbsp;
     <tr><th>&nbsp;</th><th>&nbsp;</th><th>&nbsp;</th></tr>
     <tr><th>&nbsp;</th><th>&nbsp;</th>
         <th align="left"><input type="checkbox" name="null_vote" id="null_vote_{$T.question$index}" />
-            <label for="null_vote_{$T.question$index}">Null vote option</label></th>
+            <label for="null_vote_{$T.question$index}">Add null vote</label></th>
+    </tr>
+    <tr><th>&nbsp;</th><th>&nbsp;</th>
+        <th align="left"><input type="checkbox" name="white_vote" id="white_vote_{$T.question$index}" />
+            <label for="white_vote_{$T.question$index}">Add white vote</label></th>
     </tr>
 <!--
     <tr><th>&nbsp;&nbsp;&nbsp;</th><th>Answer #1:</th><td><input type="text" name="answer_1" size="70" /></td></tr>

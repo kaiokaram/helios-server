@@ -191,8 +191,12 @@ Tally:<br />
 {% for answer in question.answers %}
 <tr>
   <td style="padding-right:80px;{% if answer.winner %}font-weight:bold;{% endif %}">
-  {% if language == "pt-BR" and answer.answer == "Null vote" %}Voto nulo
-  {% else %}{{answer.answer}}{% endif %}
+  {% if language == "pt-BR" and answer.answer == "Null vote" %}Votos nulos
+  {% else %}
+    {% if language == "pt-BR" and answer.answer == "White vote" %}Votos brancos
+    {% else %}{{answer.answer}}
+    {% endif %}
+  {% endif %}
   </td>
   {% for group in groups %}
     {% if group.group_short_name == "professor" %}

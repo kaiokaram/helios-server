@@ -31,9 +31,11 @@ Questão {$T.fake_num + 1} de {$T.num_allowed_questions} &mdash;
 <div id="answer_label_{$T.question_num}_{$T.answer$index}">
 <input type="checkbox" class="ballot_answer" id="answer_{$T.question_num}_{$T.answer$index}" name="answer_{$T.question_num}_{$T.answer$index}" value="yes" onclick="BOOTH.click_checkbox({$T.question_num}, {$T.answer$index}, this.checked);" /> 
 {#if $T.answer == "Null vote"}
-Voto nulo
+	Voto nulo
+{#elseif $T.answer == "White vote"}
+	Voto branco
 {#else}
-{$T.answer}
+	{$T.answer}
 {#/if}
 
 {#if $T.question.answer_urls && $T.question.answer_urls[$T.answer$index] && $T.question.answer_urls[$T.answer$index] != ""}

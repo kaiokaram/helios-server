@@ -7,7 +7,9 @@
 <u>Questão #{$T.question.fake_num + 1}</u>: {$T.question.short_name}<br />
 
 <b style="font-size:1.0em;">{#foreach $T.choices[$T.question$index] as choice}
-{#if $T.choice == "Null vote"}Voto nulo{#else}{$T.choice}{#/if}
+{#if $T.choice == "Null vote"}Voto nulo
+{#elseif $T.choice == "White vote"}Voto branco
+{#else}{$T.choice}{#/if}
 {#if !$T.choice$last}, {#/if}
 {#/for}</b>
 &nbsp;&nbsp;&nbsp;

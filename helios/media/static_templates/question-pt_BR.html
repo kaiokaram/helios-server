@@ -40,13 +40,19 @@ resultado {#if $T.question.result_type == 'absolute'}absoluto{#else}relativo{#/i
         <th align="left">&nbsp;&nbsp;&nbsp;&nbsp;Opção de voto nulo: 
         {#if $T.question.null_vote == true}sim{#else}não{#/if}</th>
     </tr>
+    <tr><th>&nbsp;</th><th>&nbsp;</th>
+        <th align="left">&nbsp;&nbsp;&nbsp;&nbsp;Opção de voto branco: 
+        {#if $T.question.white_vote == true}sim{#else}não{#/if}</th>
+    </tr>
   </tbody>
 </table>
 {#/if}
 
 <ul>
 {#foreach $T.question.answers as answer}
-<li> {#if $T.answer == 'Null vote'}Voto nulo{#else}{$T.answer}{#/if}</li>
+<li> {#if $T.answer == 'Null vote'}Voto nulo
+     {#elseif $T.answer == 'White vote'}Voto branco
+     {#else}{$T.answer}{#/if}</li>
 {#/for}
 </ul>
 </div>
@@ -149,6 +155,10 @@ Result Type:&nbsp;
     <tr><th>&nbsp;</th><th>&nbsp;</th>
         <th align="left"><input type="checkbox" name="null_vote" id="null_vote_{$T.question$index}" />
             <label for="null_vote_{$T.question$index}">Opção de voto nulo</label></th>
+    </tr>
+    <tr><th>&nbsp;</th><th>&nbsp;</th>
+        <th align="left"><input type="checkbox" name="white_vote" id="white_vote_{$T.question$index}" />
+            <label for="white_vote_{$T.question$index}">Opção de voto branco</label></th>
     </tr>
   </tbody>
   <tfoot>
@@ -264,6 +274,10 @@ Result Type:&nbsp;
     <tr><th>&nbsp;</th><th>&nbsp;</th>
         <th align="left"><input type="checkbox" name="null_vote" id="null_vote_{$T.question$index}" />
             <label for="null_vote_{$T.question$index}">Opção de voto nulo</label></th>
+    </tr>
+    <tr><th>&nbsp;</th><th>&nbsp;</th>
+        <th align="left"><input type="checkbox" name="white_vote" id="white_vote_{$T.question$index}" />
+            <label for="white_vote_{$T.question$index}">Opção de voto branco</label></th>
     </tr>
 <!--
     <tr><th>&nbsp;&nbsp;&nbsp;</th><th>Answer #1:</th><td><input type="text" name="answer_1" size="70" /></td></tr>
