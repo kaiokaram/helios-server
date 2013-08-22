@@ -101,8 +101,10 @@ BOOTH.setup_ballot = function(election) {
   // each question starts out with an empty array answer
   // and a dirty bit to make sure we encrypt
   BOOTH.ballot.answers = [];
+  BOOTH.ballot.null_or_white = [];
   $(BOOTH.election.questions).each(function(i,x){
     BOOTH.ballot.answers[i] = [];
+    BOOTH.ballot.null_or_white[i] = '';
     BOOTH.dirty[i] = true;
   });
 };
@@ -217,10 +219,12 @@ BOOTH.validate_question = function(question_num) {
     // check if enough answers are checked
     if (BOOTH.election.questions[question_num].allowed == false) {
         BOOTH.ballot.answers[question_num] = [];
+        BOOTH.ballot.null_or_white[question_num] = '';
     }
     else
     if (BOOTH.ballot.answers[question_num].length < BOOTH.election.questions[question_num].min) {
-        if ($(BOOTH.ballot.answers[question_num]).index('Null vote') == -1 && $(BOOTH.ballot.answers[question_num]).index('White vote') == -1) {
+        //if ($(BOOTH.ballot.answers[question_num]).index('Null vote') == -1 && $(BOOTH.ballot.answers[question_num]).index('White vote') == -1) {
+        if (BOOTH.ballot.null_or_white[question_num] == '') {
           alert('You need to select at least ' + BOOTH.election.questions[question_num].min + ' answer(s).');
           return false;
         }
@@ -275,7 +279,20 @@ BOOTH.get_rule = function(question_num, voter_group_id) {
 BOOTH.voter_group_id = '';
 
 BOOTH.show_question = function(question_num, op = 'next') {
+  //alert(':'+BOOTH.ballot.null_or_white[question_num]+':');
   BOOTH.started_p = true;
+
+  white_ans_index = -1;
+  null_ans_index = -1;
+  if (BOOTH.election.questions[question_num].white_vote) {
+    white_ans_index = BOOTH.election.questions[question_num].answers.length - 1;
+    if (BOOTH.election.questions[question_num].null_vote) {
+      null_ans_index = BOOTH.election.questions[question_num].answers.length - 2;
+    }
+  }
+  else if (BOOTH.election.questions[question_num].null_vote) {
+    null_ans_index = BOOTH.election.questions[question_num].answers.length - 1;
+  }
 
   // the first time we hit the last question, we enable the review all button
   //if (question_num == BOOTH.election.questions.length - 1)
@@ -301,9 +318,13 @@ BOOTH.show_question = function(question_num, op = 'next') {
 
   // we should not set the dirty bit here, so we save it away
   var old_dirty = BOOTH.dirty[question_num];
-  $(answer_array).each(function(i, ans) {
-    BOOTH.click_checkbox_script(question_num, ans, true);
-  });
+  if (BOOTH.ballot.null_or_white[question_num] == 'null') BOOTH.click_checkbox_script(question_num, null_ans_index, true);
+  else if (BOOTH.ballot.null_or_white[question_num] == 'white') BOOTH.click_checkbox_script(question_num, white_ans_index, true);
+  else {
+    $(answer_array).each(function(i, ans) {
+      BOOTH.click_checkbox_script(question_num, ans, true);
+    });
+  }
   BOOTH.dirty[question_num] = old_dirty;
 
   if (!BOOTH.election.questions[question_num].allowed) {
@@ -361,57 +382,68 @@ BOOTH.click_checkbox = function(question_num, answer_num, checked_p) {
   // keep track of dirty answers that need encrypting
   BOOTH.dirty[question_num] = true;
 
-  white_index = -1;
-  null_index = -1;
+  white_ans_index = -1;
+  null_ans_index = -1;
   if (BOOTH.election.questions[question_num].white_vote) {
-    white_index = BOOTH.election.questions[question_num].answers.length - 1;
+    white_ans_index = BOOTH.election.questions[question_num].answers.length - 1;
     if (BOOTH.election.questions[question_num].null_vote) {
-      null_index = BOOTH.election.questions[question_num].answers.length - 2;
+      null_ans_index = BOOTH.election.questions[question_num].answers.length - 2;
     }
   }
   else if (BOOTH.election.questions[question_num].null_vote) {
-    null_index = BOOTH.election.questions[question_num].answers.length - 1;
+    null_ans_index = BOOTH.election.questions[question_num].answers.length - 1;
   }
   
-  if (checked_p) {
-     // multiple click events shouldn't screw this up
-     if ($(BOOTH.ballot.answers[question_num]).index(answer_num) == -1)
-        BOOTH.ballot.answers[question_num].push(answer_num);
+  if (answer_num != null_ans_index && answer_num != white_ans_index) {
+    if (checked_p) {
+       // multiple click events shouldn't screw this up
+       if ($(BOOTH.ballot.answers[question_num]).index(answer_num) == -1)
+          BOOTH.ballot.answers[question_num].push(answer_num);
 
-     $('#answer_label_' + question_num + "_" + answer_num).addClass('selected');
-  } else {
-     BOOTH.ballot.answers[question_num] = UTILS.array_remove_value(BOOTH.ballot.answers[question_num], answer_num);
-     $('#answer_label_' + question_num + "_" + answer_num).removeClass('selected');
+       $('#answer_label_' + question_num + "_" + answer_num).addClass('selected');
+    } else {
+       BOOTH.ballot.answers[question_num] = UTILS.array_remove_value(BOOTH.ballot.answers[question_num], answer_num);
+       $('#answer_label_' + question_num + "_" + answer_num).removeClass('selected');
+    }
   }
 
-  // If voter clicked on 'Null vote' or 'White vote' answers, 
-  // then uncheck and disable all other answers.
-  if (answer_num == null_index || answer_num == white_index) {
-    if (checked_p) {
-       $('.ballot_answer').each(function(i, checkbox) {
-           if (i != answer_num && checkbox.checked) {
-             checkbox.click();
-           }
-       });
-       $('.ballot_answer').each(function(i, checkbox) {
-           if (i != null_index && i != white_index) {
-             checkbox.disabled = true;
-           }
-       });
+  if (checked_p) {
+    // If voter checked 'Null vote' or 'White vote' answer, uncheck all other answers.
+    if (answer_num == null_ans_index || answer_num == white_ans_index) {
+      if (answer_num == null_ans_index) {
+        BOOTH.ballot.null_or_white[question_num] = 'null';
+        $('#answer_label_' + question_num + "_" + null_ans_index).addClass('selected');
+      }
+      else {
+        BOOTH.ballot.null_or_white[question_num] = 'white';
+        $('#answer_label_' + question_num + "_" + white_ans_index).addClass('selected');
+      }
+
+      $('.ballot_answer').each(function(i, checkbox) {
+         if (i != answer_num && checkbox.checked) {
+           //checkbox.click();
+           BOOTH.click_checkbox_script(question_num, i);
+         }
+      });
+      $('#warning_box').html("");
+      return;
     }
-    else { // checked_p == false
-       $('.ballot_answer').each(function(i, checkbox) {
-           checkbox.disabled = false;
-       });
+    else { // Otherwise, voter check some other answer. Then, uncheck null and white answers.
+      BOOTH.ballot.null_or_white[question_num] = '';
+      $('.ballot_answer').each(function(i, checkbox) {
+         if ((i == null_ans_index || i == white_ans_index) && checkbox.checked) {
+           //checkbox.click();
+           BOOTH.click_checkbox_script(question_num, i);
+           $('#answer_label_' + question_num + "_" + i).removeClass('selected');
+         }
+      });
     }
-    $('#warning_box').html("");
-    return;
   }
 
   if (BOOTH.election.questions[question_num].max != null && BOOTH.ballot.answers[question_num].length >= BOOTH.election.questions[question_num].max) {
      // disable the other checkboxes
      $('.ballot_answer').each(function(i, checkbox) {
-        if (!checkbox.checked && i != null_index && i != white_index)
+        if (!checkbox.checked && i != null_ans_index && i != white_ans_index)
             checkbox.disabled = true;
      });
      $('#warning_box').html("Maximum number of options selected.<br />To change your selection, please de-select a current selection first.");
@@ -515,7 +547,7 @@ BOOTH.show_confirm = function() {
     // process the answers
     var choices = BALLOT.pretty_choices(BOOTH.election, BOOTH.ballot);
 
-    BOOTH.show($('#confirm_div')).processTemplate({'questions' : BOOTH.election.questions, 'choices' : choices});
+    BOOTH.show($('#confirm_div')).processTemplate({'questions' : BOOTH.election.questions, 'choices' : choices, 'null_or_white' : BOOTH.ballot.null_or_white});
 };
 
 BOOTH.check_encryption_status = function() {
@@ -611,6 +643,28 @@ BOOTH.request_ballot_encryption = function() {
 
 BOOTH.seal_ballot = function() {
     BOOTH.show_progress('2');
+
+    $(BOOTH.election.questions).each(function(i,x){
+      white_ans_index = -1;
+      null_ans_index = -1;
+      if (BOOTH.election.questions[i].white_vote) {
+        white_ans_index = BOOTH.election.questions[i].answers.length - 1;
+        if (BOOTH.election.questions[i].null_vote) {
+          null_ans_index = BOOTH.election.questions[i].answers.length - 2;
+        }
+      }
+      else if (BOOTH.election.questions[i].null_vote) {
+        null_ans_index = BOOTH.election.questions[i].answers.length - 1;
+      }
+  
+      if (BOOTH.ballot.null_or_white[i] == 'null') {
+        BOOTH.ballot.answers[i].push(null_ans_index);
+      }
+      else
+      if (BOOTH.ballot.null_or_white[i] == 'white') {
+        BOOTH.ballot.answers[i].push(white_ans_index);
+      }
+    });
 
     // if we don't have the ability to do crypto in the browser,
     // we use the server

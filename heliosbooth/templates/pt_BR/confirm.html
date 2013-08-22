@@ -6,12 +6,14 @@
 <!--<u>Questão {$T.question$index + 1}</u>: {$T.question.short_name}<br />-->
 <u>Questão #{$T.question.fake_num + 1}</u>: {$T.question.short_name}<br />
 
-<b style="font-size:1.0em;">{#foreach $T.choices[$T.question$index] as choice}
-{#if $T.choice == "Null vote"}Voto nulo
-{#elseif $T.choice == "White vote"}Voto branco
-{#else}{$T.choice}{#/if}
-{#if !$T.choice$last}, {#/if}
-{#/for}</b>
+<b style="font-size:1.0em;">
+{#if $T.null_or_white[$T.question$index] == 'null'}Voto nulo
+{#elseif $T.null_or_white[$T.question$index] == 'white'}Voto branco
+{#else}
+  {#foreach $T.choices[$T.question$index] as choice}
+    {$T.choice}{#if !$T.choice$last}, {#/if}
+  {#/for}
+{#/if}</b>
 &nbsp;&nbsp;&nbsp;
 [<a onclick="BOOTH.show_question({$T.question$index}); return false;" href="#">alterar</a>]
 </p>
