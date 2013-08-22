@@ -413,10 +413,12 @@ BOOTH.click_checkbox = function(question_num, answer_num, checked_p) {
       if (answer_num == null_ans_index) {
         BOOTH.ballot.null_or_white[question_num] = 'null';
         $('#answer_label_' + question_num + "_" + null_ans_index).addClass('selected');
+        $('#answer_label_' + question_num + "_" + white_ans_index).removeClass('selected');
       }
       else {
         BOOTH.ballot.null_or_white[question_num] = 'white';
         $('#answer_label_' + question_num + "_" + white_ans_index).addClass('selected');
+        $('#answer_label_' + question_num + "_" + null_ans_index).removeClass('selected');
       }
 
       $('.ballot_answer').each(function(i, checkbox) {
@@ -428,7 +430,7 @@ BOOTH.click_checkbox = function(question_num, answer_num, checked_p) {
       $('#warning_box').html("");
       return;
     }
-    else { // Otherwise, voter check some other answer. Then, uncheck null and white answers.
+    else { // Otherwise, voter checked some other answer. Then, uncheck null and white answers.
       BOOTH.ballot.null_or_white[question_num] = '';
       $('.ballot_answer').each(function(i, checkbox) {
          if ((i == null_ans_index || i == white_ans_index) && checkbox.checked) {
