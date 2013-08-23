@@ -211,8 +211,10 @@ Tally:<br />
     {% endif %}
   {% endfor %}
   <td align="right" style="{% if answer.winner %}font-weight:bold;{% endif %}">{{answer.count}}</td>
-  {% if answer.answer != "Null vote" %}
-  <td align="right" style="{% if answer.winner %}font-weight:bold;{% endif %}">{{answer.count_w}}</td>
+  {% if answer.answer == "Null vote" or answer.answer == "White vote" %}
+    <td align="right" style="">--</td>
+  {% else %}
+    <td align="right" style="{% if answer.winner %}font-weight:bold;{% endif %}">{{answer.count_w}}</td>
   {% endif %}
 </tr>
 {% endfor %}
