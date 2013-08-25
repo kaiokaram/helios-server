@@ -28,8 +28,19 @@ Questão {$T.fake_num + 1} de {$T.num_allowed_questions} &mdash;
 </p>
 
 {#foreach $T.question.answers as answer}
+{#if $T.answer$index == $T.question.answers_length}
+  <hr style="width:50%;" align="left"/>
+{#/if}
 <div id="answer_label_{$T.question_num}_{$T.answer$index}">
-<input type="checkbox" class="ballot_answer" id="answer_{$T.question_num}_{$T.answer$index}" name="answer_{$T.question_num}_{$T.answer$index}" value="yes" onclick="BOOTH.click_checkbox({$T.question_num}, {$T.answer$index}, this.checked);" /> 
+{#if $T.answer$index >= $T.question.answers_length}
+<input type="checkbox" class="ballot_answer" id="answer_{$T.question_num}_{$T.answer$index}" 
+       name="answer_{$T.question_num}_{$T.answer$index}" value="yes" 
+       onclick="BOOTH.click_checkbox_nullwhite({$T.question_num}, {$T.answer$index}, this.checked);" /> 
+{#else}
+<input type="checkbox" class="ballot_answer" id="answer_{$T.question_num}_{$T.answer$index}" 
+       name="answer_{$T.question_num}_{$T.answer$index}" value="yes" 
+       onclick="BOOTH.click_checkbox({$T.question_num}, {$T.answer$index}, this.checked);" /> 
+{#/if}
 {#if $T.answer == "Null vote"}
 	Voto nulo
 {#elseif $T.answer == "White vote"}
