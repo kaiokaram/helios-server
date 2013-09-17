@@ -7,12 +7,16 @@ Ben Adida
 reworked 2011-01-09
 """
 
+#from django.db import models,transaction,connection
+
 from helios.crypto import algs, utils
 import logging
 import uuid
 import datetime
 from helios import models
 from . import WorkflowObject
+
+from helios.models import *
 
 class EncryptedAnswer(WorkflowObject):
   """
@@ -272,12 +276,17 @@ class Tally(WorkflowObject):
     self.tally = None
     self.tally_w = None
     self.tally_g = None
+    self.tally_exp = None
     self.num_tallied = 0    
 
     if election:
       self.init_election(election)
       self.tally = [[0 for a in q['answers']] for q in self.questions]
       self.tally_w = [[0 for a in q['answers']] for q in self.questions]
+      self.groups = self.election.votergroup_set.order_by('id')
+      #self.tally_g = []
+      #for group in groups:
+      self.tally_exp = [[[0 for a in q['answers']] for q in self.questions] for g in self.groups]
       self.tally_g = [[0 for a in q['answers']] for q in self.questions]
     else:
       self.questions = None
@@ -285,6 +294,7 @@ class Tally(WorkflowObject):
       self.tally = None
       self.tally_w = None
       self.tally_g = None
+      self.tally_exp = None
 
   def init_election(self, election):
     """
@@ -305,6 +315,11 @@ class Tally(WorkflowObject):
   def add_vote(self, encrypted_vote, voter_group, verify_p=True):
     weight = voter_group.group_weight
     short_name = voter_group.group_short_name
+    index = -1
+    for i, g in enumerate(self.groups):
+      if g.group_short_name == short_name:
+        index = i
+        break
     
     # do we verify?
     if verify_p:
@@ -322,10 +337,17 @@ class Tally(WorkflowObject):
         enc_vote_choice = encrypted_vote.encrypted_answers[question_num].choices[answer_num]
         enc_vote_choice.pk = self.public_key
         self.tally[question_num][answer_num] = encrypted_vote.encrypted_answers[question_num].choices[answer_num] * self.tally[question_num][answer_num]
+        self.tally_exp[index][question_num][answer_num] = encrypted_vote.encrypted_answers[question_num].choices[answer_num] * self.tally_exp[index][question_num][answer_num]
         for counter in range(weight):
           self.tally_w[question_num][answer_num] = encrypted_vote.encrypted_answers[question_num].choices[answer_num] * self.tally_w[question_num][answer_num]
         if short_name == "professor":
           self.tally_g[question_num][answer_num] = encrypted_vote.encrypted_answers[question_num].choices[answer_num] * self.tally_g[question_num][answer_num]
+        #  self.tally_exp[0][question_num][answer_num] = encrypted_vote.encrypted_answers[question_num].choices[answer_num] * self.tally_exp[0][question_num][answer_num]
+        #if short_name == "aluno":
+        #  self.tally_exp[1][question_num][answer_num] = encrypted_vote.encrypted_answers[question_num].choices[answer_num] * self.tally_exp[1][question_num][answer_num]
+        #if short_name == "funcionario":
+        #  self.tally_exp[2][question_num][answer_num] = encrypted_vote.encrypted_answers[question_num].choices[answer_num] * self.tally_exp[2][question_num][answer_num]
+        #self.tally_g[question_num][answer_num] = encrypted_vote.encrypted_answers[question_num].choices[answer_num] * self.tally_g[question_num][answer_num]
 
     self.num_tallied += 1
   
@@ -414,6 +436,34 @@ class Tally(WorkflowObject):
     
     return decryption_factors, decryption_proof
     
+  def decryption_factors_and_proofs_exp(self, sk, index):
+    """
+    returns an array of decryption factors and a corresponding array of decryption proofs.
+    makes the decryption factors into strings, for general Helios / JS compatibility.
+    """
+    # for all choices of all questions (double list comprehension)
+    decryption_factors = []
+    decryption_proof = []
+    
+    for question_num, question in enumerate(self.questions):
+      answers = question['answers']
+      question_factors = []
+      question_proof = []
+
+      for answer_num, answer in enumerate(answers):
+        # do decryption and proof of it
+        dec_factor, proof = sk.decryption_factor_and_proof(self.tally_exp[index][question_num][answer_num])
+
+        # look up appropriate discrete log
+        # this is the string conversion
+        question_factors.append(dec_factor)
+        question_proof.append(proof)
+        
+      decryption_factors.append(question_factors)
+      decryption_proof.append(question_proof)
+    
+    return decryption_factors, decryption_proof
+    
   def decrypt_and_prove(self, sk, discrete_logs=None):
     """
     returns an array of tallies and a corresponding array of decryption proofs.
@@ -487,7 +537,6 @@ class Tally(WorkflowObject):
       for a_num, a in enumerate(q):
         # coalesce the decryption factors into one list
         dec_factor_list = [df[q_num][a_num] for df in decryption_factors]
-        dec_factor_list_w = [df[q_num][a_num] for df in decryption_factors]
         raw_value = self.tally[q_num][a_num].decrypt(dec_factor_list, public_key)
 
         q_result.append(dlog_table.lookup(raw_value))
@@ -554,6 +603,36 @@ class Tally(WorkflowObject):
     
     return result_g
         
+  def decrypt_from_factors_exp(self, decryption_factors, public_key, max_weight, index):
+    """
+    decrypt a tally given decryption factors
+    
+    The decryption factors are a list of decryption factor sets, for each trustee.
+    Each decryption factor set is a list of lists of decryption factors (questions/answers).
+    """
+    
+    # pre-compute a dlog table
+    dlog_table = DLogTable(base = public_key.g, modulus = public_key.p)
+    dlog_table.precompute(self.num_tallied * max_weight)
+    
+    result_exp = []
+    
+    # go through each one
+    for q_num, q in enumerate(self.tally):
+      q_result_exp = []
+
+      for a_num, a in enumerate(q):
+        # coalesce the decryption factors into one list
+        dec_factor_list_exp = [df[index][q_num][a_num] for df in decryption_factors]
+        raw_value_exp = self.tally_exp[index][q_num][a_num].decrypt(dec_factor_list_exp, public_key)
+
+        q_result_exp.append(dlog_table.lookup(raw_value_exp))
+
+      result_exp.append(q_result_exp)
+    
+    return result_exp
+        
+        
   def _process_value_in(self, field_name, field_value):
     if field_name == 'tally':
       return [[algs.EGCiphertext.fromJSONDict(a) for a in q] for q in field_value]
@@ -561,12 +640,16 @@ class Tally(WorkflowObject):
       return [[algs.EGCiphertext.fromJSONDict(a) for a in q] for q in field_value]
     if field_name == 'tally_g':
       return [[algs.EGCiphertext.fromJSONDict(a) for a in q] for q in field_value]
+    if field_name == 'tally_exp':
+      return [[[algs.EGCiphertext.fromJSONDict(a) for a in q] for q in group] for group in field_value]
       
   def _process_value_out(self, field_name, field_value):
     if field_name == 'tally':
-      return [[a.toJSONDict() for a in q] for q in field_value]    
+      return [[a.toJSONDict() for a in q] for q in field_value]
     if field_name == 'tally_w':
-      return [[a.toJSONDict() for a in q] for q in field_value]    
+      return [[a.toJSONDict() for a in q] for q in field_value]
     if field_name == 'tally_g':
-      return [[a.toJSONDict() for a in q] for q in field_value]    
+      return [[a.toJSONDict() for a in q] for q in field_value]
+    if field_name == 'tally_exp':
+      return [[[a.toJSONDict() for a in q] for q in group] for group in field_value]
         

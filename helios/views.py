@@ -377,14 +377,20 @@ def one_election_view(request, election):
 
   trustees = Trustee.get_by_election(election)
 
-  cursor = connection.cursor()
-  cursor.execute("select encrypted_tally from helios_election where id=1")
-  row = cursor.fetchone()
+  #cursor = connection.cursor()
+  #cursor.execute("select encrypted_tally from helios_election where id=1")
+  #row = cursor.fetchone()
+  abstentions = election.voter_set.filter(vote=None).count()
+  group_abstentions = []
+  for group in election.votergroup_set.order_by('id'):
+    count = election.voter_set.filter(voter_group=group, vote=None).count()
+    group_abstentions.append({'group_name': group.group_name, 'count': count})
   
   return render_template(request, 'election_view',
                          {'election' : election, 'trustees': trustees, 'admin_p': admin_p, 'user': user,
                           'groups' : election.votergroup_set.order_by('id'), 'language' : settings.LANGUAGE_CODE,
                           'voter': voter, 'votes': votes, 'notregistered': notregistered, 'eligible_p': eligible_p,
+                          'abstentions': abstentions, 'group_abstentions': group_abstentions,
                           'can_feature_p': can_feature_p, 'election_url' : election_url, 
                           'vote_url': vote_url, 'election_badge_url' : election_badge_url,
                           'test_cookie_url': test_cookie_url, 'socialbuttons_url' : socialbuttons_url})

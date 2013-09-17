@@ -193,22 +193,25 @@ Tally:<br />
   <td style="padding-right:80px;{% if answer.winner %}font-weight:bold;{% endif %}">
   {% if language == "pt-BR" and answer.answer == "Null vote" %}Votos nulos
   {% else %}
-    {% if language == "pt-BR" and answer.answer == "White vote" %}Votos brancos
+  {% if language == "pt-BR" and answer.answer == "White vote" %}Votos brancos
     {% else %}{{answer.answer}}
     {% endif %}
   {% endif %}
   </td>
   {% for group in groups %}
-    {% if group.group_short_name == "professor" %}
-      <td align="right" style="{% if answer.winner %}font-weight:bold;{% endif %}">{{answer.count_g}}</td>
+    {% for item in answer.count_exp %}
+      {% if item.group_name == group.group_short_name %}
+      <!--{{ item.group_name }} == {{ group.group_short_name }}?<br/>-->
+      <td align="right" style="{% if answer.winner %}font-weight:bold;{% endif %}">{{item.group_count}}</td>
       <td align="right" style="{% if answer.winner %}font-weight:bold;{% endif %}">
-        {% if answer.answer != "Null vote" %}
-        <script>document.write({{answer.count_g}} * {{group.group_weight}})</script>
+        {% if answer.answer == "Null vote" or answer.answer == "White vote" %}
+        --
+        {% else %}
+        <script>document.write({{item.group_count}} * {{group.group_weight}})</script>
         {% endif %}
       </td>
-    {% else %}
-      <td> </td><td> </td>
-    {% endif %}
+      {% endif %}
+    {% endfor %}
   {% endfor %}
   <td align="right" style="{% if answer.winner %}font-weight:bold;{% endif %}">{{answer.count}}</td>
   {% if answer.answer == "Null vote" or answer.answer == "White vote" %}
@@ -220,6 +223,21 @@ Tally:<br />
 {% endfor %}
 </table>
 {% endfor %}
+
+<b>{% trans "Abstentions" %}</b>
+<table class="pretty" style="width: auto; border:3px solid">
+<tr><th>{% trans "Group" %}</th><th>{% trans "# of abstentions" %}</th></tr>
+{% for item in group_abstentions %}
+<tr>
+  <td style="text-align:left;">{{ item.group_name }}</td>
+  <td style="text-align:right;">{{ item.count }}</td>
+</tr>
+{% endfor %}
+<tr>
+  <th style="text-align:left;">Total</th>
+  <td style="text-align:right;">{{ abstentions }}</td>
+</tr>
+</table>
 
 {% else %}
 

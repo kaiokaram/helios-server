@@ -129,6 +129,8 @@ class Election(HeliosModel):
                          null=True)
   result_g = LDObjectField(type_hint = 'legacy/Result',
                          null=True)
+  result_exp = LDObjectField(type_hint = 'legacy/Result',
+                         null=True)
 
   # decryption proof, a JSON object
   # no longer needed since it's all trustees
@@ -351,7 +353,7 @@ class Election(HeliosModel):
         tally.add_vote(voter.vote, voter.voter_group, verify_p=False)
 
     self.encrypted_tally = tally
-    self.save()    
+    self.save()
   
   def ready_for_decryption(self):
     return self.encrypted_tally != None
@@ -376,6 +378,7 @@ class Election(HeliosModel):
     decryption_factors = [t.decryption_factors for t in trustees]
     decryption_factors_w = [t.decryption_factors_w for t in trustees]
     decryption_factors_g = [t.decryption_factors_g for t in trustees]
+    decryption_factors_exp = [t.decryption_factors_exp for t in trustees]
     
     max_weight = 1
     for group in self.votergroup_set.all():
@@ -385,6 +388,10 @@ class Election(HeliosModel):
     self.result = self.encrypted_tally.decrypt_from_factors(decryption_factors, self.public_key)
     self.result_w = self.encrypted_tally.decrypt_from_factors_w(decryption_factors_w, self.public_key, max_weight)
     self.result_g = self.encrypted_tally.decrypt_from_factors_g(decryption_factors_g, self.public_key, max_weight)
+    self.result_exp = []
+    for index, group in enumerate(self.votergroup_set.order_by('id')):
+      result_aux = self.encrypted_tally.decrypt_from_factors_exp(decryption_factors_exp, self.public_key, max_weight, index = index)
+      self.result_exp.append(result_aux)
 
     self.append_log(ElectionLog.DECRYPTIONS_COMBINED)
 
@@ -521,6 +528,14 @@ class Election(HeliosModel):
     factors, proof = tally.decryption_factors_and_proofs(trustee.secret_key)
     factors_w, proof_w = tally.decryption_factors_and_proofs_w(trustee.secret_key)
     factors_g, proof_g = tally.decryption_factors_and_proofs_g(trustee.secret_key)
+    #factors_exp, proof_exp = tally.decryption_factors_and_proofs_exp(trustee.secret_key, 0)
+
+    factors_exp = []
+    proof_exp = []
+    for i, group in enumerate(self.votergroup_set.order_by('id')):
+      factors_aux, proof_aux = tally.decryption_factors_and_proofs_exp(trustee.secret_key, i)
+      factors_exp.append(factors_aux)
+      proof_exp.append(proof_aux)
 
     trustee.decryption_factors = factors
     trustee.decryption_proofs = proof
@@ -531,6 +546,9 @@ class Election(HeliosModel):
     trustee.decryption_factors_g = factors_g
     trustee.decryption_proofs_g = proof_g
 
+    trustee.decryption_factors_exp = factors_exp
+    trustee.decryption_proofs_exp = proof_exp
+    
     trustee.save()
 
   def append_log(self, text):
@@ -603,6 +621,7 @@ class Election(HeliosModel):
     raw_result = self.result
     raw_result_w = self.result_w
     raw_result_g = self.result_g
+    raw_result_exp = self.result_exp
     prettified_result = []
 
     # loop through questions
@@ -616,7 +635,11 @@ class Election(HeliosModel):
         count = raw_result[i][j]
         count_w = raw_result_w[i][j]
         count_g = raw_result_g[i][j]
-        pretty_question.append({'answer': a, 'count': count, 'count_w': count_w, 'count_g': count_g, 'winner': (j in winners[i])})
+        #count_exp = raw_result_exp[i][j]
+        count_exp = []
+        for index, group in enumerate(self.votergroup_set.order_by('id')):
+          count_exp.append({'group_count' : raw_result_exp[index][i][j], 'group_name' : group.group_short_name})
+        pretty_question.append({'answer': a, 'count': count, 'count_w': count_w, 'count_g': count_g, 'count_exp': count_exp, 'winner': (j in winners[i])})
         
       prettified_result.append({'question': q['short_name'], 'answers': pretty_question})
 
@@ -1152,12 +1175,16 @@ class Trustee(HeliosModel):
                                      null=True)
   decryption_factors_g = LDObjectField(type_hint = datatypes.arrayOf(datatypes.arrayOf('core/BigInteger')),
                                      null=True)
+  decryption_factors_exp = LDObjectField(type_hint = datatypes.arrayOf(datatypes.arrayOf(datatypes.arrayOf('core/BigInteger'))),
+                                     null=True)
 
   decryption_proofs = LDObjectField(type_hint = datatypes.arrayOf(datatypes.arrayOf('legacy/EGZKProof')),
                                     null=True)
   decryption_proofs_w = LDObjectField(type_hint = datatypes.arrayOf(datatypes.arrayOf('legacy/EGZKProof')),
                                     null=True)
   decryption_proofs_g = LDObjectField(type_hint = datatypes.arrayOf(datatypes.arrayOf('legacy/EGZKProof')),
+                                    null=True)
+  decryption_proofs_exp = LDObjectField(type_hint = datatypes.arrayOf(datatypes.arrayOf(datatypes.arrayOf('legacy/EGZKProof'))),
                                     null=True)
   
   def save(self, *args, **kwargs):
