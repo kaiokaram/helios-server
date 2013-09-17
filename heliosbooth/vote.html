@@ -33,8 +33,26 @@
 </head>
 <body>
 <div id="wrapper">
-<span style="float:right; padding: 7px 15px 5px 10px;">[<a href="javascript:BOOTH.exit();">exit</a>]</span>
-<div id="banner">Helios Voting Booth</div>
+<span style="float:right; padding: 7px 15px 5px 10px;">[<a href="javascript:BOOTH.exit();">
+  <script language="javascript">
+    var language = $.query.get('LANGUAGE');
+    if (language == 'pt-BR')
+      document.write('fechar');
+    else
+      document.write('exit');
+  </script>
+</a>]</span>
+<!--<div id="banner">Helios Voting Booth</div>-->
+<div id="banner">
+  <script language="javascript">
+    var language = $.query.get('LANGUAGE');
+    if (language == 'pt-BR')
+      document.write('Helios - Votação');
+    else
+      document.write('Helios Voting Booth');
+  </script>
+</div>
+
 <div id="content">
 
 <div id="header">
