@@ -30,12 +30,17 @@
   <script language="javascript" src="js/jscrypto/sha1.js"></script>
   <script language="javascript" src="js/jscrypto/sha2.js"></script>
   <script language="javascript" src="js/jscrypto/helios.js?d=20111004"></script>
+
+  <script language="javascript">
+    var language = $.query.get('LANGUAGE');
+    var correct_group_id = $.query.get('correct_voter_group_id');
+  </script>
+
 </head>
 <body>
 <div id="wrapper">
 <span style="float:right; padding: 7px 15px 5px 10px;">[<a href="javascript:BOOTH.exit();">
   <script language="javascript">
-    var language = $.query.get('LANGUAGE');
     if (language == 'pt-BR')
       document.write('fechar');
     else
@@ -45,9 +50,8 @@
 <!--<div id="banner">Helios Voting Booth</div>-->
 <div id="banner">
   <script language="javascript">
-    var language = $.query.get('LANGUAGE');
     if (language == 'pt-BR')
-      document.write('Helios - Votação');
+      document.write('Votação');
     else
       document.write('Helios Voting Booth');
   </script>
@@ -95,6 +99,8 @@ window.onbeforeunload = function(evt) {
   }
 
   var message = "If you leave this page with an in-progress ballot, your ballot will be lost.";
+  if (language == 'pt-BR')
+      message = "Se você sair desta página com a votação em progresso, sua cédula será perdida.";
 
   if (evt) {
     evt.returnValue = message;
@@ -104,7 +110,10 @@ window.onbeforeunload = function(evt) {
 };
 
 BOOTH.exit = function() {
-    if (confirm("Are you sure you want to exit the booth and lose all information about your current ballot?")) {
+    var message = "Are you sure you want to exit the booth and lose all information about your current ballot?";
+    if (language == 'pt-BR')
+        message = "Tem certeza que quer abandonar a votação sem depositar sua cédula?";
+    if (confirm(message)) {
         BOOTH.started_p = false;
         window.location = BOOTH.election.cast_url;
     }
@@ -237,6 +246,10 @@ BOOTH.show = function(el) {
 
 BOOTH.show_election = function() {
   BOOTH.show($('#election_div')).processTemplate({'election' : BOOTH.election});
+  if (correct_group_id != -1) {
+    aux = '#' + 'id_voter_group_' + correct_group_id;
+    $(aux).attr('checked', true);
+  }
 };
 
 BOOTH.launch_async_encryption_answer = function(question_num) {
@@ -264,7 +277,10 @@ BOOTH.validate_question = function(question_num) {
     if ($(BOOTH.ballot.answers[question_num]).index(null_ans_num) == -1 && 
         $(BOOTH.ballot.answers[question_num]).index(white_ans_num) == -1) {
        if (BOOTH.ballot.answers[question_num].length < BOOTH.election.questions[question_num].min) {
-          alert('You need to select at least ' + BOOTH.election.questions[question_num].min + ' answer(s).');
+          if (language == 'pt-BR')
+            alert('Selecione pelo menos ' + BOOTH.election.questions[question_num].min + ' resposta(s).');
+          else
+            alert('You need to select at least ' + BOOTH.election.questions[question_num].min + ' answer(s).');
           return false;
        }
     }
@@ -436,7 +452,10 @@ BOOTH.click_checkbox = function(question_num, answer_num, checked_p) {
            if (i < BOOTH.election.questions[question_num].answers_length)
               checkbox.disabled = true;
      });
-     $('#warning_box').html("Maximum number of options selected.<br />To change your selection, please de-select a current selection first.");
+     if (language == 'pt-BR')
+       $('#warning_box').html("Máximo de opções selecionadas.<br />Para alterar sua seleção, desmarque alguma das opções.");
+     else
+       $('#warning_box').html("Maximum number of options selected.<br />To change your selection, please de-select a current selection first.");
   } else {
      // enable the other checkboxes
      $('.ballot_answer').each(function(i, checkbox) {
@@ -719,14 +738,22 @@ BOOTH.do_done = function() {
 
 </script>
 <div id="page">
+  <!--
   <div id="progress_div" style="display:none; width: 500px; margin:auto;">
       <table width="100%">
           <tr><td id="progress_1">(1) Select</td><td id="progress_2">(2) Encrypt</td><td id="progress_3">(3) Submit</td></tr>
       </table>
   </div>
+  -->
   <div id="election_div" class="panel">
-    <h3>Checking capabilities and loading election booth...</h3>
-    <div align="center"><img src="loading.gif" /><br />This may take up to 10 seconds</div>
+    <script language="javascript">
+      if (language == 'pt-BR')
+        document.write('<h3>Carregando interface de votação...</h3>');
+        document.write('<div align="center"><img src="loading.gif" /><br />><!--Este processo pode demorar até 10 segundos--></div>');
+      else
+        document.write('<h3>Checking capabilities and loading election booth...</h3>');
+        document.write('<div align="center"><img src="loading.gif" /><br /><!--This may take up to 10 seconds--></div>');
+    </script>
   </div>
 
   <div id="error_div" class="panel" style="display: none;">
@@ -750,10 +777,24 @@ BOOTH.do_done = function() {
   </div>
 
   <div id="encrypting_div" class="panel" style="display:none;">
-      <h3 align="center">Helios is now encrypting your ballot<br />
+      <h3 align="center">
+          <script language="javascript">
+            if (language == 'pt-BR')
+              document.write('Sua cédula está sendo encriptada');
+            else
+              document.write('Helios is now encrypting your ballot');
+          </script>
+          <br />
           <img src="encrypting.gif" /> <span style="font-size:0.7em; display:none;" id="percent_done_container">(<span id="percent_done">0</span>%)</span></h3>
 
-      <p align="center"><b>This may take up to two minutes.</b>
+      <p align="center"><b>
+        <script language="javascript">
+          if (language == 'pt-BR')
+            document.write('Este processo pode levar até 2 minutos.');
+          else
+            document.write('This may take up to two minutes.');
+          </script>
+      </b>
   </div>
 
   <div id="seal_div" class="panel">

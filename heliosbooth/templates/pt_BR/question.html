@@ -2,16 +2,11 @@
 <input type="hidden" name="question_num" value="{$T.question_num}" />
 
 <p>
-<br /> 
-<b>{$T.question.question}</b>
+Questão {$T.fake_num + 1} de {$T.num_allowed_questions}
 <br />
-<span style="font-size: 0.6em;">
-Seu grupo: {$T.group_name}<br/>
-
 <!--Questão {$T.question_num + 1} de {$T.last_question_num + 1} &mdash;-->
-Questão {$T.fake_num + 1} de {$T.num_allowed_questions} &mdash;
-
- selecione 
+<!--Questão {$T.fake_num + 1} de {$T.num_allowed_questions} &mdash;-->
+Selecione 
 {#if $T.question.min && $T.question.min == $T.question.max}
  exatamente {$T.question.min} resposta{#if $T.question.min > 1}s{#/if}
 {#else}
@@ -24,8 +19,11 @@ Questão {$T.fake_num + 1} de {$T.num_allowed_questions} &mdash;
  tantas repostas quantas quiser
  {#/if}
 {#/if}
-</span>
+<br /> 
+<span style="font-size: 1.4em;"><b>{$T.question.question}</b></span>
 </p>
+
+<span style="font-size: 1.2em;">
 
 {#foreach $T.question.answers as answer}
 {#if $T.answer$index == $T.question.answers_length}
@@ -58,23 +56,35 @@ Questão {$T.fake_num + 1} de {$T.num_allowed_questions} &mdash;
 </div>
 {#/for}
 
-<div id="warning_box" style="color: green; text-align:center; font-size: 0.8em; padding-top:10px; padding-bottom: 10px; height:50px;">
+</span>
+<br/>
+<span style="font-size: 0.8em;">
+Seu grupo: {$T.group_name}<br/>
+</span>
+
+<div id="warning_box" style="color: green; text-align:center; font-size: 1.0em; padding-top:10px; padding-bottom: 10px; height:50px;">
 </div>
 
 
 {#if $T.show_reviewall}
 <div style="float: right;">
-<input type="button" onclick="BOOTH.validate_and_confirm({$T.question_num});" value="Proceed" />
+<input type="button" onclick="BOOTH.validate_and_confirm({$T.question_num});" value="Prossiga para conferir seus votos" />
 </div>
 {#/if}
 
 {#if $T.question_num != 0}
-<input type="button" onclick="BOOTH.previous({$T.question_num})" value="Previous" />
+<input type="button" onclick="BOOTH.previous({$T.question_num})" value="Questão anterior" />
+&nbsp;
+{#else}
+<input type="button" style="color:lightgrey;" value="Questão anterior" />
 &nbsp;
 {#/if}
 
 {#if $T.question_num < $T.last_question_num && $T.question_num < $T.last_allowed_question}
-<input type="button" onclick="BOOTH.next({$T.question_num})" value="Next" />
+<input type="button" onclick="BOOTH.next({$T.question_num})" value="Questão seguinte" />
+&nbsp;
+{#else}
+<input type="button" style="color:lightgrey;" value="Questão seguinte" />
 &nbsp;
 {#/if}
 

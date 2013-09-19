@@ -1,4 +1,4 @@
-{% extends TEMPLATE_BASE %}
+{% extends 'base_election_cast_confirm.html' %}
 {% load i18n %}
 
 {% block title %}{% trans "Confirm Vote" %}{% endblock %}
@@ -39,9 +39,11 @@ window.onbeforeunload = function(evt) {
 <h1>{{election.name}} &mdash; {% trans "Submit your Vote" %}</h1>
 
 <p>
+<!--
   {% trans "We have received, <b><u>but not yet recorded</u></b>, your encrypted ballot" %}.<br />
 {% trans "Your smart ballot tracker is" %}:<br /><br />
     <tt style="font-size:1.8em; font-weight: bold; padding-left: 20px;">  {{vote_fingerprint}}</tt>
+-->
 </p>
 
 {% if voter %}
@@ -49,9 +51,14 @@ window.onbeforeunload = function(evt) {
     {% if bad_voter_group %}
 
 <p style="color:red; font-size:1.2em;">
-The <b>voter group</b> of the authenticated user is <b>different</b> from the informed voter group.<br/>
-Please, <b>sign out</b> and try again.
+{% blocktrans %}Your voter group is <b>"{{ voter_group_name_real }}"</b>, 
+but you informed voter group <b>"{{ voter_group_name }}"</b>.{% endblocktrans %}
+<!--{% trans "The <b>voter group</b> of the authenticated user is <b>different</b> from the informed voter group.<br/>" %}-->
 </p>
+<br/>
+<span style="font-size:1.2em;">
+[<a href="{{settings.SECURE_URL_HOST}}{% url helios_auth.views.logout %}?return_url={{restart_url}}?correct_voter_group_id={{voter_group_id_real}}">{% trans "Restart" %}</a>]
+{% trans " and try again" %}.</span>
 
     {% else %}
 
@@ -63,10 +70,12 @@ Please, <b>sign out</b> and try again.
 
 {% if show_password %}
 {% if user %}
+<!--
 <p>
 {% blocktrans %}You are logged in as <u>{{user.display_html_small|safe}}</u>, but this election<br />{% endblocktrans %}
 {% trans "requires election-specific credentials" %}.
 </p>
+-->
 {% endif %}
 {% include "_castconfirm_password.html" %}
 

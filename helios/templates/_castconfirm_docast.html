@@ -16,15 +16,15 @@
 </div>
 <br />
 {% endif %}
-
-    <button type="submit" style="font-size: 1.5em; height: 50px;">{% trans "I am" %} <u>{{voter.display_html_big|safe}}</u>, {% trans "cast this ballot" %}</button>
+    <!--<u>{{voter.display_html_big|safe}}</u>-->
+    <button type="submit" style="font-size: 1.5em; height: 50px;">{% trans "I am" %} <b><u>{{voter.voter_name}}</u></b>, {% trans "cast this ballot" %}</button>
     <span style="display:none; font-size:0.8em;"><br />{% trans "You can cast as many ballots as you want.<br />Only the last one counts." %}</span>
 </form>
 
 <p>
-    <button style="font-size: 1.5em;" onclick="document.location='./view';">cancel</button><br />
-    <span style="font-size:0.8em;">{% blocktrans %}If you cancel now, your ballot will <em>NOT</em> be recorded.<br />
-    You can start the voting process over again, of course.{% endblocktrans %}</span>
+    <button style="font-size: 1.5em;" onclick="document.location='{{settings.SECURE_URL_HOST}}{% url helios_auth.views.logout %}?return_url={{restart_url}}';">{% trans "cancel" %}</button><br />
+    <span style="font-size:1.0em;">{% trans "If you cancel now, your ballot will <em>NOT</em> be recorded." %}<br />
+    <!--{% trans "You can start the voting process over again, of course." %}--></span>
 </p>
 
 </div>

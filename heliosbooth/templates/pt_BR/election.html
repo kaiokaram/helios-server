@@ -1,24 +1,24 @@
 <div id="questions_div">
-<p>
-    Para depositar um voto, você será guiado pelos seguintes passos.<br />
-    Se você ainda não está conectado, deverá conectar-se ao final do processo.
-
 <p style="font-size:120%">
-    Primeiramente, por favor <b>selecione seu grupo</b> para esta eleição:<br/>
+    Para iniciar, <b>selecione seu grupo</b> para esta eleição:<br/>
     <!--<select name="voter_group" id="id_voter_group" style="font-size:70%">
-        <option value="none">--</option>
+        <option value="none">-</option>
         {#foreach $T.election.questions[0].rules as rule}
         <option value="{$T.rule.group_id}">{$T.rule.group_name}</option>
         {#/for}
     </select><br/>-->
     <ul>
         {#foreach $T.election.questions[0].rules as rule}
-        <input type="radio" name="voter_group" id="id_voter_group_{$T.rule.group_id}" value="{$T.rule.group_id}">
+        <input type="radio" name="voter_group" id="id_voter_group_{$T.rule.group_id}" value="{$T.rule.group_id}"/>
         <label for="id_voter_group_{$T.rule.group_id}">{$T.rule.group_name}</label><br/>
         {#/for}
-        <span id="id_select_group_error" style="display:none; font-size:90%; color:red;">Por favor, selecione seu grupo.</span>
-        <span id="id_select_group_error_aux" style="font-size:90%; color:white;">Por favor, selecione seu grupo.</span>
+        <span id="id_select_group_error" style="display:none; font-size:110%; color:red;">Por favor, selecione seu grupo.</span>
+        <span id="id_select_group_error_aux" style="font-size:110%; color:white;">Por favor, selecione seu grupo.</span>
     </ul>
+<!--
+<p>
+    Para depositar um voto, você será guiado pelos seguintes passos.<br />
+    Se você ainda não está conectado, deverá conectar-se ao final do processo.
 
 <p>
     
@@ -41,7 +41,7 @@ Prossiga para a conexão e deposite sua cédula encriptada para ser apurada.
 </span>
 </li>
 </ol>
-
+-->
 <div align="center">
 <button onclick="return(BOOTH.check_group_selection())">Iniciar</button>
 </div>

@@ -164,7 +164,8 @@ def election_shortcut(request, election_short_name):
 # a hidden view behind the shortcut that performs the actual perm check
 @election_view()
 def _election_vote_shortcut(request, election):
-  vote_url = "%s/booth/vote.html?%s" % (settings.SECURE_URL_HOST, urllib.urlencode({'LANGUAGE': settings.LANGUAGE_CODE, 'election_url' : reverse(one_election, args=[election.uuid])}))
+  correct_voter_group_id = request.GET.get('correct_voter_group_id', -1)
+  vote_url = "%s/booth/vote.html?%s" % (settings.SECURE_URL_HOST, urllib.urlencode({'LANGUAGE': settings.LANGUAGE_CODE, 'correct_voter_group_id': correct_voter_group_id, 'election_url' : reverse(one_election, args=[election.uuid])}))
   
   test_cookie_url = "%s?%s" % (reverse(test_cookie), urllib.urlencode({'continue_url' : vote_url}))
 
@@ -173,6 +174,11 @@ def _election_vote_shortcut(request, election):
 def election_vote_shortcut(request, election_short_name):
   election = Election.get_by_short_name(election_short_name)
   if election:
+    # 18/09/2013 - We make sure that, when (re)starting a voting booth, 
+    # no user is previously logged!
+    response = auth_views.do_complete_logout(request)
+    if response:
+      return response
     if (request.session.has_key('voter_group_id')):
       del request.session['voter_group_id']
     return _election_vote_shortcut(request, election_uuid=election.uuid)
@@ -772,23 +778,29 @@ def one_election_cast_confirm(request, election):
       show_password = False
       password_login_form = None
 
-    return_url = reverse(one_election_cast_confirm, args=[election.uuid])
-    login_box = auth_views.login_box_raw(request, return_url=return_url, auth_systems = auth_systems)
-
     if (voter_group_id != None):
       voter_group_name = VoterGroup.objects.get(id=voter_group_id).group_name
     else:
       voter_group_name = ''
       
+    voter_group_name_real = ''
+    voter_group_id_real = 0
     if (voter):
       bad_voter_group = (voter.voter_group_id != long(voter_group_id))
+      voter_group_name_real = voter.voter_group.group_name;
+      voter_group_id_real = voter.voter_group_id;
     
+    return_url = reverse(one_election_cast_confirm, args=[election.uuid])
+    login_box = auth_views.login_box_raw(request, return_url=return_url, auth_systems = auth_systems)
+
+    restart_url = reverse(election_vote_shortcut, args=[election.short_name])
+
     return render_template(request, 'election_cast_confirm', {
         'login_box': login_box, 'election' : election, 'vote_fingerprint': vote_fingerprint,
         'past_votes': past_votes, 'issues': issues, 'voter' : voter,
-        'return_url': return_url,
-        'voter_group_id': voter_group_id,
-        'voter_group_name': voter_group_name.encode('utf-8'),
+        'return_url': return_url, 'restart_url': restart_url,
+        'voter_group_id': voter_group_id, 'voter_group_id_real': voter_group_id_real,
+        'voter_group_name': voter_group_name.encode('utf-8'), 'voter_group_name_real': voter_group_name_real.encode('utf-8'),
         'status_update_label': status_update_label, 'status_update_message': status_update_message,
         'show_password': show_password, 'password_only': password_only, 'password_login_form': password_login_form,
         'bad_voter_login': bad_voter_login, 'bad_voter_group': bad_voter_group})
@@ -808,7 +820,8 @@ def one_election_cast_confirm(request, election):
     # voter already cast a vote for this election
     if voter:
       if (CastVote.objects.filter(voter=voter).count() > 0):
-        return render_template(request, 'cast_done_once', {'election': election, 'voter' : voter})
+        restart_url = reverse(election_vote_shortcut, args=[election.short_name])
+        return render_template(request, 'cast_done_once', {'election': election, 'voter' : voter, 'restart_url': restart_url})
     
     # don't store the vote in the voter's data structure until verification
     cast_vote.save()

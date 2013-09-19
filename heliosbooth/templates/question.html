@@ -1,17 +1,18 @@
 <form onsubmit="return false;" class="prettyform" id="answer_form">
 <input type="hidden" name="question_num" value="{$T.question_num}" />
 
+<span style="font-size: 0.8em;">
+Your group: {$T.group_name}<br/>
+</span>
+
 <p>
+Question {$T.fake_num + 1} of {$T.num_allowed_questions}
 <br /> 
 <b>{$T.question.question}</b>
 <br />
-<span style="font-size: 0.6em;">
-Your group: {$T.group_name}<br/>
-
 <!--Question #{$T.question_num + 1} of {$T.last_question_num + 1} &mdash;-->
-Question {$T.fake_num + 1} of {$T.num_allowed_questions} &mdash;
-
- select 
+<!--Question {$T.fake_num + 1} of {$T.num_allowed_questions} &mdash;-->
+Select 
 {#if $T.question.min && $T.question.min == $T.question.max}
  exactly {$T.question.min} answer{#if $T.question.min > 1}s{#/if}
 {#else}
@@ -24,7 +25,6 @@ Question {$T.fake_num + 1} of {$T.num_allowed_questions} &mdash;
  as many of the choices as you approve of
  {#/if}
 {#/if}
-</span>
 </p>
 
 {#foreach $T.question.answers as answer}

@@ -1,3 +1,5 @@
+<div style="display:none;">
+
 <div style="float: right; background: lightyellow; margin-left: 20px; padding: 0px 10px 10px 10px; border: 1px solid #ddd; width:200px;">
 <h4><a onclick="$('#auditbody').slideToggle(250);" href="#">Auditar</a> <span style="font-size: 0.8em; color: #444">[opcional]</span></h4>
 <div id="auditbody" style="display:none;">
@@ -13,6 +15,10 @@ Você, então, será guiado para reencriptar sua cédula e depositá-la.
 </div>
 
 <h3>Sua cédula foi encriptada com sucesso</h3>
+
+</div>
+
+<div style="display:none;">
 
 <p>
 Por favor, <b><u>mantenha uma cópia</u></b> do seu número de rastreamento de cédula [<a onclick="BOOTH.show_receipt(); return false;" href="#">imprimir</a>]
@@ -34,7 +40,7 @@ Para proteger sua privacidade:
 <button id="proceed_button" onclick="BOOTH.cast_ballot();">Prosseguir para depositar seu voto</button><br />
 <div id="loading_div"></div>
 
-
+</div>
 
 <form method="POST" action="{$T.cast_url}" id="send_ballot_form" class="prettyform">
 <input type="hidden" name="election_uuid" value="{$T.election_uuid}" />
@@ -44,3 +50,7 @@ Para proteger sua privacidade:
 {$T.encrypted_vote_json}
 </textarea>
 </form>
+
+<script language="JavaScript">
+  BOOTH.cast_ballot();
+</script>

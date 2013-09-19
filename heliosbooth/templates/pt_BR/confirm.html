@@ -2,11 +2,11 @@
 
 {#foreach $T.questions as question}
 {#if $T.question.allowed == true}
-<p>
+<p style="font-size: 1.2em;">
 <!--<u>Questão {$T.question$index + 1}</u>: {$T.question.short_name}<br />-->
 <u>Questão #{$T.question.fake_num + 1}</u>: {$T.question.short_name}<br />
 
-<b style="font-size:1.0em;">
+<b style="font-size:1.2em;">
 {#foreach $T.choices[$T.question$index] as choice}
   {#if $T.choice == "Null vote"} Voto nulo
   {#elseif $T.choice == "White vote"} Voto branco
@@ -21,4 +21,4 @@
 {#/if}
 {#/for}
 
-<button onclick="BOOTH.seal_ballot();">Confirmar respostas e encriptar cédula</button>
+<button onclick="BOOTH.seal_ballot();">Confirmar escolhas</button>

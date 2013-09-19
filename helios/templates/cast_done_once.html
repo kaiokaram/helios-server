@@ -1,20 +1,29 @@
-{% extends TEMPLATE_BASE %}
+{% extends 'base_election_cast_confirm.html' %}
+{% load i18n %}
 
 {% block content %}
 
-  <h2 class="title">You already cast a vote for this election <!--{{election.name}}--> before</h2>
+  <h2 class="title">{% trans "You already cast a vote for this election before" %}</h2>
+  <!--{{election.name}}-->
 
   <p style="font-size: 1.3em;">
-      <span style="color:red;">The ballot was <b>NOT</b> recorded!</span><br/>
-      Vote cast is allowed only <b>once</b> per election:
-      <u>you can no longer cast a vote for this election</u>.
+      <span style="color:red;">{% trans "The ballot was <b>NOT</b> recorded!" %}</span><br/>
+      <!--{% trans "Vote cast is allowed only <b>once</b> per election" %}:
+      {% trans "<u>you can no longer cast a vote for this election</u>" %}.-->
   </p>
   
-  <p style="font-size: 1.1em;">
-      If you are not <u>{{voter.display_html_big|safe}}</u>, please <b>sign out</b> and try again.
-  </p>
   <p style="font-size: 1.2em;">
-      [ <a href="{% url helios.views.one_election_view election.uuid %}">see election info</a> ]
+      [<a href="{{settings.SECURE_URL_HOST}}{% url helios_auth.views.logout %}?return_url={{restart_url}}">{% trans "Restart" %}</a>]
+      <!--
+      {% trans "If you are not" %} <b><u>{{voter.voter_name}}</u></b>, 
+      [<a href="{{settings.SECURE_URL_HOST}}{% url helios_auth.views.logout %}?return_url={{restart_url}}">{% trans "restart" %}</a>]
+      {% trans " and try again" %}.
+      -->
+      <!--<u>{{voter.display_html_big|safe}}</u>, -->
+      <!--{% trans "please <b>sign out</b> and try again" %}.-->
+  </p>
+  <p style="font-size: 1.2em; display: none;">
+      [ <a href="{% url helios.views.one_election_view election.uuid %}">{% trans "see election info" %}</a> ]
   </p>
 
 {% endblock %}
