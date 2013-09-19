@@ -19,7 +19,7 @@
 {% if voter_groups %}
   <ul style="margin:0;">
   {% for group in voter_groups %}
-  <li><em>{{ group.group_short_name }} ({{ group.group_name }}) - {% trans "weight" %}: {{ group.group_weight }}</em></li>
+  <li><em>{{ group.group_name }} ({{ group.group_short_name }}) - {% trans "weight" %}: {{ group.group_weight }}</em></li>
   {% endfor %}
   </ul>
 {% else %}
