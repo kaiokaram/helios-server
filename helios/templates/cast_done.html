@@ -1,14 +1,15 @@
-{% extends TEMPLATE_BASE %}
+{% extends 'base_election_cast_confirm.html' %}
 {% load i18n %}
 {% block title %}Confirm Vote{% endblock %}
 
 {% block content %}
 <h1>{{election.name}} &mdash; {% trans "Vote Successfully Cast" %}!</h1>
 
-<p>
+<p style="font-size:1.2em;">
     {% blocktrans %}Congratulations, your vote has been <b><u>successfully cast</u></b>!{% endblocktrans %}
 </p>
 
+<!--
 <p>
   {% trans "Your smart ballot tracker is:" %}<br /><br />
     <tt style="font-size:1.8em; font-weight: bold; padding-left: 20px;">  {{vote_hash}}</tt>
@@ -17,6 +18,7 @@
 <p>
 <iframe src="{{socialbuttons_url}}" frameborder="0" border="0" style="display:none; width: 300px; height:35px;" scrolling="no" align="middle"></iframe>
 </p>
+-->
 
 {% if logout %}
 <p><b>{% trans "For your safety, we have logged you out." %}</b></p>
@@ -24,8 +26,10 @@
 </iframe>
 {% endif %}
 
+<!--
 <p style="font-size: 1.4em;">
 [ <a href="{% url helios.views.one_election_view election.uuid %}">{% trans "return to election info" %}</a> ]
 </p>
+-->
 
 {% endblock %}
