@@ -634,9 +634,9 @@ msgid ""
 "election progresses"
 msgstr ""
 "Inscrição para sua eleição está <b>fechada</b>, desta forma apenas "
-"oseleitores autorizados por você terão autorização para votar. "
-"Comoadministrador, você terá autorização para modificar a lista de "
-"eleitoresdurante a eleição"
+"os eleitores autorizados por você terão autorização para votar. "
+"Como administrador, você terá autorização para modificar a lista de "
+"eleitores durante a eleição"
 
 #: helios/templates/election_freeze.html:21
 msgid "You must freeze the ballot before you can contact voters"
