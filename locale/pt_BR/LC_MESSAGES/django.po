@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-18 16:24-0300\n"
+"POT-Creation-Date: 2013-09-19 01:52-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -130,15 +130,15 @@ msgstr "Seu usuário"
 msgid "Password"
 msgstr "Sua senha"
 
-#: helios/views.py:1357
+#: helios/views.py:1359
 msgid "Time to Vote"
 msgstr "Hora de votar"
 
-#: helios/views.py:1358
+#: helios/views.py:1360
 msgid "Additional Info"
 msgstr "Informação adicional"
 
-#: helios/views.py:1359
+#: helios/views.py:1361
 msgid "Election Result"
 msgstr "Resultado da eleição"
 
@@ -279,23 +279,28 @@ msgid "<u>you can no longer cast a vote for this election</u>"
 msgstr "você não pode votar nesta eleição novamente."
 
 #: helios/templates/cast_done_once.html:16
+#: helios/templates/election_cast_confirm.html:60
+msgid "Restart"
+msgstr "Reinicie"
+
+#: helios/templates/cast_done_once.html:18
 msgid "If you are not"
 msgstr "Se você não é"
 
-#: helios/templates/cast_done_once.html:17
-msgid "please <b>sign out</b> and try again"
-msgstr "<b>desconecte-se</b> e tente novamente"
-
-#: helios/templates/cast_done_once.html:18
+#: helios/templates/cast_done_once.html:19
 msgid "restart"
 msgstr "reinicie"
 
-#: helios/templates/cast_done_once.html:19
+#: helios/templates/cast_done_once.html:20
 #: helios/templates/election_cast_confirm.html:61
 msgid " and try again"
 msgstr " e tente novamente"
 
-#: helios/templates/cast_done_once.html:22
+#: helios/templates/cast_done_once.html:23
+msgid "please <b>sign out</b> and try again"
+msgstr "<b>desconecte-se</b> e tente novamente"
+
+#: helios/templates/cast_done_once.html:26
 msgid "see election info"
 msgstr "voltar à eleição"
 
@@ -502,10 +507,6 @@ msgstr ""
 "O seu <b>grupo de eleitor</b> é <b>diferente</b> do grupo de eleitor "
 "informado.<br/>"
 
-#: helios/templates/election_cast_confirm.html:60
-msgid "Restart"
-msgstr "Reinicie"
-
 #: helios/templates/election_cast_confirm.html:75
 #, python-format
 msgid ""
@@ -648,6 +649,10 @@ msgstr "Antes de congelar a eleição, você deverá"
 #: helios/templates/election_freeze.html:33
 msgid "go back to the election"
 msgstr "voltar à eleição"
+
+#: helios/templates/election_freeze.html:39
+msgid "Freeze the ballot"
+msgstr "Congelar Cédula"
 
 #: helios/templates/election_keygenerator.html:95
 msgid "As a trustee, it's time to set up your key for this election"
