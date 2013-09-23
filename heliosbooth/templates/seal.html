@@ -1,3 +1,5 @@
+<div style="display:none;">
+
 <div style="float: right; background: lightyellow; margin-left: 20px; padding: 0px 10px 10px 10px; border: 1px solid #ddd; width:200px;">
 <h4><a onclick="$('#auditbody').slideToggle(250);" href="#">Audit</a> <span style="font-size: 0.8em; color: #444">[optional]</span></h4>
 <div id="auditbody" style="display:none;">
@@ -13,6 +15,10 @@ You will then be guided to re-encrypt your choices for final casting.
 </div>
 
 <h3>Your ballot was successfully encrypted</h3>
+
+</div>
+
+<div style="display:none;">
 
 <p>
 Please <b><u>keep a record</u></b> of your smart ballot tracker [<a onclick="BOOTH.show_receipt(); return false;" href="#">print</a>]
@@ -34,7 +40,7 @@ To protect your privacy:
 <button id="proceed_button" onclick="BOOTH.cast_ballot();">Proceed to Cast</button><br />
 <div id="loading_div"></div>
 
-
+</div>
 
 <form method="POST" action="{$T.cast_url}" id="send_ballot_form" class="prettyform">
 <input type="hidden" name="election_uuid" value="{$T.election_uuid}" />

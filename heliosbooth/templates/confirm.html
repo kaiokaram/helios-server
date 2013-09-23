@@ -2,13 +2,14 @@
 
 {#foreach $T.questions as question}
 {#if $T.question.allowed == true}
-<p>
+<p style="font-size: 1.2em;">
 <!--<u>Question #{$T.question$index + 1}</u>: {$T.question.short_name}<br />-->
 <u>Question #{$T.question.fake_num + 1}</u>: {$T.question.short_name}<br />
 
-<b style="font-size:1.0em;">
+<b style="font-size:1.2em;">
 {#foreach $T.choices[$T.question$index] as choice}
-  {$T.choice}{#if !$T.choice$last}, {#/if}
+  {$T.choice}
+  {#if !$T.choice$last}, {#/if}
 {#/for}
 </b>
 &nbsp;&nbsp;&nbsp;
