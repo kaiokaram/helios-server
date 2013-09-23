@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-19 01:52-0300\n"
+"POT-Creation-Date: 2013-09-23 00:01-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -250,15 +250,15 @@ msgstr "Voto enviado com sucesso"
 msgid "Congratulations, your vote has been <b><u>successfully cast</u></b>!"
 msgstr "Parabéns, seu voto foi processado com <b><u>sucesso</u></b>!"
 
-#: helios/templates/cast_done.html:13
+#: helios/templates/cast_done.html:14
 msgid "Your smart ballot tracker is:"
 msgstr "Seu smart ballot tracker (resumo da cedula) é:"
 
-#: helios/templates/cast_done.html:22
+#: helios/templates/cast_done.html:24
 msgid "For your safety, we have logged you out."
 msgstr "Para sua segurança, nós desconectamos seu usuário"
 
-#: helios/templates/cast_done.html:28
+#: helios/templates/cast_done.html:31
 msgid "return to election info"
 msgstr "voltar à eleição"
 
@@ -570,25 +570,30 @@ msgstr "Processe a apuração para"
 
 #: helios/templates/election_compute_tally.html:7
 msgid "Compute Tally for Election"
-msgstr "Execute a apuração para esta eleição"
+msgstr "Executar apuração para eleição"
 
 #: helios/templates/election_compute_tally.html:12
-#, python-format
-msgid ""
-"You are about to compute the encrypted tally for election <b>%(election.name)"
-"s</b>"
-msgstr "Você está prestes a executar a apuração para <b>%(election.name)s</b>"
+msgid "You are about to compute the encrypted tally for election"
+msgstr "Você está prestes a executar a apuração para a eleição"
 
 #: helios/templates/election_compute_tally.html:16
 msgid "Once you do this, voters will no longer be able to cast a ballot"
 msgstr ""
-"Assim que você fechar a eleição, eleitores não terão permissãopara continuar "
-"votando "
+"Assim que você fechar a eleição, eleitores não terão permissão para "
+"continuar votando"
+
+#: helios/templates/election_compute_tally.html:19
+msgid "ok, tally has begun"
+msgstr "Apuração iniciada!"
+
+#: helios/templates/election_compute_tally.html:22
+msgid "compute encrypted tally!"
+msgstr "Executar apuração dos votos"
 
 #: helios/templates/election_compute_tally.html:23
 #: helios/templates/election_freeze.html:40
 msgid "never mind"
-msgstr "cancelar"
+msgstr "Cancelar"
 
 #: helios/templates/election_compute_tally.html:27
 msgid ""
@@ -633,10 +638,10 @@ msgid ""
 "administrator, you will still be able to modify that voter list as the "
 "election progresses"
 msgstr ""
-"Inscrição para sua eleição está <b>fechada</b>, desta forma apenas "
-"os eleitores autorizados por você terão autorização para votar. "
-"Como administrador, você terá autorização para modificar a lista de "
-"eleitores durante a eleição"
+"Inscrição para sua eleição está <b>fechada</b>, desta forma apenas os "
+"eleitores autorizados por você terão autorização para votar. Como "
+"administrador, você terá autorização para modificar a lista de eleitores "
+"durante a eleição"
 
 #: helios/templates/election_freeze.html:21
 msgid "You must freeze the ballot before you can contact voters"
