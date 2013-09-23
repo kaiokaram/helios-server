@@ -10,7 +10,7 @@
 {% trans "Your password:" %} {{voter.voter_password}}
 {% trans "Your group:" %} {{voter.voter_group}}
 {% else %}
-{% trans "Log in with your" %} {{voter.voter_type}} account.
+{% trans "Log in with your {{voter.voter_type}} account." %}
 {% endifequal %}{% if voter.vote_hash %}
 {% trans "We have recorded your vote with smart tracker:" %}
 

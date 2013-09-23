@@ -1376,19 +1376,20 @@ def voters_email(request, election):
   election_vote_url = get_election_govote_url(election)
 
   default_subject = render_template_raw(None, 'email/%s_subject.txt' % template, {
-      'custom_subject': "&lt;SUBJECT&gt;"
+      'custom_subject': _("&lt;SUBJECT&gt;")
 })
   default_body = render_template_raw(None, 'email/%s_body.txt' % template, {
       'election' : election,
       'election_url' : election_url,
       'election_vote_url' : election_vote_url,
       'custom_subject' : default_subject,
-      'custom_message': '&lt;BODY&gt;',
-      'voter': {'vote_hash' : '<SMART_TRACKER>',
-                'name': '<VOTER_NAME>',
-                'voter_login_id': '<VOTER_LOGIN_ID>',
-                'voter_password': '<VOTER_PASSWORD>',
-                'voter_group': '<VOTER_GROUP>',
+      'custom_message': _('&lt;BODY&gt;'),
+      'voter': {'vote_hash' : _('<SMART_TRACKER>'),
+                'name':  _('<VOTER_NAME>'),
+                'voter_login_id':  _('<VOTER_LOGIN_ID>'),
+                'voter_password':  _('<VOTER_PASSWORD>'),
+                'voter_group':  _('<VOTER_GROUP>'),
+                'alias':  _('<VOTER_ALIAS>'),
                 'voter_type' : election.voter_set.all()[0].voter_type,
                 'election' : election}
       })
