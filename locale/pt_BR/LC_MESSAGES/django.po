@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-24 15:38-0300\n"
+"POT-Creation-Date: 2013-09-24 16:48-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1735,12 +1735,13 @@ msgid "previous %(limit)s"
 msgstr "%(limit)s anteriores"
 
 #: helios/templates/voters_list.html:112
-msgid "cast vote"
-msgstr "deposite o voto"
+#, fuzzy
+msgid "cast vote "
+msgstr "votou "
 
 #: helios/templates/voters_list.html:112
-msgid "s"
-msgstr "s"
+msgid "cast votes "
+msgstr "votaram "
 
 #: helios/templates/voters_list.html:114 server_ui/templates/index.html:42
 msgid "no votes yet"
@@ -1957,7 +1958,7 @@ msgstr "mostrar seu ID de eleitor, nome, ou endereço eletrônico ao público."
 msgid "Instead, the ballot tracking center will only display your alias."
 msgstr "O centro de rastreamento de cédulas mostrará apenas seu pseudônimo."
 
-#: helios/templates/email/vote_body.txt:22
+#: helios/templates/email/vote_body.txt:22 server_ui/glue.py:36
 msgid "Your voter alias is"
 msgstr "Seu pseudônimo é"
 
@@ -1972,6 +1973,22 @@ msgstr "por favor use seu *usuário (ID de eleitor)*, não seu pseudônimo."
 #: helios/templates/email/vote_subject.txt:1
 msgid "Vote:"
 msgstr "Vote:"
+
+#: server_ui/glue.py:17
+msgid "vote cast"
+msgstr "Voto depositado"
+
+#: server_ui/glue.py:27
+msgid "You have successfully cast a vote in"
+msgstr "Você depositou seu voto com sucesso para a eleição"
+
+#: server_ui/glue.py:28
+msgid "Your ballot is archived at:"
+msgstr "Sua cédula está armazenada em:"
+
+#: server_ui/glue.py:35
+msgid "This election uses voter aliases to protect your privacy."
+msgstr "Para proteger sua privacidade, esta eleição utiliza pseudônimos."
 
 #: server_ui/templates/index.html:18
 msgid "Administration"
@@ -2004,6 +2021,9 @@ msgstr "Eleições atuais"
 #: server_ui/templates/index.html:68
 msgid "no featured elections at the moment"
 msgstr "Sem eleições no momento"
+
+#~ msgid "s"
+#~ msgstr "s"
 
 #~ msgid "You may re-vote if you wish: only your last vote counts."
 #~ msgstr ""

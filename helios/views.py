@@ -836,7 +836,7 @@ def one_election_cast_confirm(request, election):
     # launch the verification task
     tasks.cast_vote_verify_and_store.delay(
       cast_vote_id = cast_vote.id,
-      status_update_message = status_update_message)
+      status_update_message = status_update_message, language = translation.get_language())
     
     # remove the vote from the store
     del request.session['encrypted_vote']

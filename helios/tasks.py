@@ -17,7 +17,10 @@ import copy
 
 
 @task()
-def cast_vote_verify_and_store(cast_vote_id, status_update_message=None, **kwargs):
+def cast_vote_verify_and_store(cast_vote_id, status_update_message=None, language=None, **kwargs):
+    previous_language = translation.get_language()
+    translation.activate(language)
+
     cast_vote = CastVote.objects.get(id = cast_vote_id)
     result = cast_vote.verify_and_store()
 
@@ -36,6 +39,8 @@ def cast_vote_verify_and_store(cast_vote_id, status_update_message=None, **kwarg
     else:
         logger = cast_vote_verify_and_store.get_logger(**kwargs)
         logger.error("Failed to verify and store %d" % cast_vote_id)
+
+    translation.activate(previous_language)
     
 @task()
 def voters_email(election_id, subject_template, body_template, extra_vars={},
