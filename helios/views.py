@@ -12,6 +12,7 @@ from django.http import *
 from django.db import transaction
 from django.db import connection
 from django.forms.formsets import formset_factory
+from django.utils import translation
 
 from mimetypes import guess_type
 
@@ -1419,7 +1420,7 @@ def voters_email(request, election):
       voter_constraints_exclude = None
 
       if voter:
-        tasks.single_voter_email.delay(voter_uuid = voter.uuid, subject_template = subject_template, body_template = body_template, extra_vars = extra_vars)
+        tasks.single_voter_email.delay(voter_uuid = voter.uuid, subject_template = subject_template, body_template = body_template, extra_vars = extra_vars, language = translation.get_language())
       else:
         # exclude those who have not voted
         if email_form.cleaned_data['send_to'] == 'voted':
@@ -1429,7 +1430,7 @@ def voters_email(request, election):
         if email_form.cleaned_data['send_to'] == 'not-voted':
           voter_constraints_include = {'vote_hash': None}
 
-        tasks.voters_email.delay(election_id = election.id, subject_template = subject_template, body_template = body_template, extra_vars = extra_vars, voter_constraints_include = voter_constraints_include, voter_constraints_exclude = voter_constraints_exclude)
+        tasks.voters_email.delay(election_id = election.id, subject_template = subject_template, body_template = body_template, extra_vars = extra_vars, voter_constraints_include = voter_constraints_include, voter_constraints_exclude = voter_constraints_exclude, language = translation.get_language())
 
       # this batch process is all async, so we can return a nice note
       return HttpResponseRedirect(reverse(one_election_view, args=[election.uuid]))

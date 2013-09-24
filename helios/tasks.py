@@ -11,6 +11,7 @@ from celery.decorators import task
 from models import *
 from view_utils import render_template_raw
 import signals
+from django.utils import translation
 
 import copy
 
@@ -38,7 +39,7 @@ def cast_vote_verify_and_store(cast_vote_id, status_update_message=None, **kwarg
     
 @task()
 def voters_email(election_id, subject_template, body_template, extra_vars={},
-                 voter_constraints_include=None, voter_constraints_exclude=None):
+                 voter_constraints_include=None, voter_constraints_exclude=None, language=None):
     """
     voter_constraints_include are conditions on including voters
     voter_constraints_exclude are conditions on excluding voters
@@ -53,7 +54,7 @@ def voters_email(election_id, subject_template, body_template, extra_vars={},
         voters = voters.exclude(**voter_constraints_exclude)
 
     for voter in voters:
-        single_voter_email.delay(voter.uuid, subject_template, body_template, extra_vars)
+        single_voter_email.delay(voter.uuid, subject_template, body_template, extra_vars, language)
 
 @task()
 def voters_notify(election_id, notification_template, extra_vars={}):
@@ -62,14 +63,19 @@ def voters_notify(election_id, notification_template, extra_vars={}):
         single_voter_notify.delay(voter.uuid, notification_template, extra_vars)
 
 @task()
-def single_voter_email(voter_uuid, subject_template, body_template, extra_vars={}):
+def single_voter_email(voter_uuid, subject_template, body_template, extra_vars={}, language=None):
     voter = Voter.objects.get(uuid = voter_uuid)
 
     the_vars = copy.copy(extra_vars)
     the_vars.update({'voter' : voter})
 
-    subject = render_template_raw(None, subject_template, the_vars)
-    body = render_template_raw(None, body_template, the_vars)
+    previous_language = translation.get_language()
+    translation.activate(language)
+    try:
+        subject = render_template_raw(None, subject_template, the_vars)
+        body = render_template_raw(None, body_template, the_vars)
+    finally:
+        translation.activate(previous_language)
 
     voter.user.send_message(subject, body)
 
