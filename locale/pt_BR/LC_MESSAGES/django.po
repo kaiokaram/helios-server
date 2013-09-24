@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-23 09:12-0300\n"
+"POT-Creation-Date: 2013-09-24 15:38-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -130,47 +130,47 @@ msgstr "Seu usuário"
 msgid "Password"
 msgstr "Sua senha"
 
-#: helios/views.py:1359
+#: helios/views.py:1360
 msgid "Time to Vote"
 msgstr "Hora de votar"
 
-#: helios/views.py:1360
+#: helios/views.py:1361
 msgid "Additional Info"
 msgstr "Informação adicional"
 
-#: helios/views.py:1361
+#: helios/views.py:1362
 msgid "Election Result"
 msgstr "Resultado da eleição"
 
-#: helios/views.py:1379
+#: helios/views.py:1380
 msgid "&lt;SUBJECT&gt;"
 msgstr "&lt;ASSUNTO&gt;"
 
-#: helios/views.py:1386
+#: helios/views.py:1387
 msgid "&lt;BODY&gt;"
 msgstr "&lt;TEXTO_DO_EMAIL&gt;"
 
-#: helios/views.py:1387
+#: helios/views.py:1388
 msgid "<SMART_TRACKER>"
 msgstr "<NUMERO_RASTREAMENTO>"
 
-#: helios/views.py:1388
+#: helios/views.py:1389
 msgid "<VOTER_NAME>"
 msgstr "<NOME_ELEITOR>"
 
-#: helios/views.py:1389
+#: helios/views.py:1390
 msgid "<VOTER_LOGIN_ID>"
 msgstr "<LOGIN_ID_ELEITOR>"
 
-#: helios/views.py:1390
+#: helios/views.py:1391
 msgid "<VOTER_PASSWORD>"
 msgstr "<SENHA_ELEITOR>"
 
-#: helios/views.py:1391
+#: helios/views.py:1392
 msgid "<VOTER_GROUP>"
 msgstr "<GRUPO_ELEITOR>"
 
-#: helios/views.py:1392
+#: helios/views.py:1393
 msgid "<VOTER_ALIAS>"
 msgstr "<PSEUDONIMO_ELEITOR>"
 
@@ -1872,13 +1872,13 @@ msgstr ""
 msgid "no, let me upload a different file"
 msgstr "não, deixe-me carregar um arquivo diferente"
 
-#: helios/templates/email/info_body.txt:2
-#: helios/templates/email/result_body.txt:2
-#: helios/templates/email/vote_body.txt:2
+#: helios/templates/email/info_body.txt:1
+#: helios/templates/email/result_body.txt:1
+#: helios/templates/email/vote_body.txt:1
 msgid "Dear"
 msgstr "Caro(a)"
 
-#: helios/templates/email/info_body.txt:6
+#: helios/templates/email/info_body.txt:5
 msgid "Election Link:"
 msgstr "Link da eleição:"
 
@@ -1886,29 +1886,29 @@ msgstr "Link da eleição:"
 msgid "Additional Information"
 msgstr "Informação adicional"
 
-#: helios/templates/email/result_body.txt:4
+#: helios/templates/email/result_body.txt:3
 msgid "The tally for"
 msgstr "A apuração para a eleição"
 
-#: helios/templates/email/result_body.txt:4
+#: helios/templates/email/result_body.txt:3
 msgid "has been computed and released"
 msgstr "foi processada e disponibilizada"
 
-#: helios/templates/email/result_body.txt:10
+#: helios/templates/email/result_body.txt:9
 msgid "Your smart ballot tracker in this election was:"
 msgstr "Seu número de rastreamento de cédula nesta eleição foi:"
 
-#: helios/templates/email/result_body.txt:14
+#: helios/templates/email/result_body.txt:13
 msgid "If you believe this tracker to be in error, please contact us."
 msgstr ""
 "Se você acredita que seu número de rastreamento está errado, por favor, "
 "entre em contato conosco"
 
-#: helios/templates/email/result_body.txt:16
+#: helios/templates/email/result_body.txt:15
 msgid "It appears you did not cast a vote in this election."
 msgstr "Parece que você não votou nesta eleição."
 
-#: helios/templates/email/result_body.txt:17
+#: helios/templates/email/result_body.txt:16
 msgid "Please contact us if you believe you did."
 msgstr "Por favor, entre em contato conosco se você acredita ter votado."
 
@@ -1916,62 +1916,56 @@ msgstr "Por favor, entre em contato conosco se você acredita ter votado."
 msgid "Tally Released"
 msgstr "Apuracão disponível"
 
-#: helios/templates/email/vote_body.txt:6
+#: helios/templates/email/vote_body.txt:5
 msgid "Election URL:"
 msgstr "URL da eleição:"
 
-#: helios/templates/email/vote_body.txt:7
+#: helios/templates/email/vote_body.txt:6
 msgid "Election Fingerprint:"
 msgstr "Assinatura da eleição:"
 
-#: helios/templates/email/vote_body.txt:9
+#: helios/templates/email/vote_body.txt:8
 msgid "Your voter ID:"
 msgstr "Seu usuário (ID de eleitor):"
 
-#: helios/templates/email/vote_body.txt:10
+#: helios/templates/email/vote_body.txt:9
 msgid "Your password:"
 msgstr "Sua senha:"
 
-#: helios/templates/email/vote_body.txt:11
+#: helios/templates/email/vote_body.txt:10
 msgid "Your group:"
 msgstr "Seu grupo:"
 
-#: helios/templates/email/vote_body.txt:13
+#: helios/templates/email/vote_body.txt:12
 msgid "Log in with your {{voter.voter_type}} account."
 msgstr ""
 
-#: helios/templates/email/vote_body.txt:15
+#: helios/templates/email/vote_body.txt:14
 msgid "We have recorded your vote with smart tracker:"
-msgstr "Nós registramos seu voto com número de rastreamento:"
+msgstr "Seu voto foi registrado com número de rastreamento:"
 
-#: helios/templates/email/vote_body.txt:19
-msgid "You may re-vote if you wish: only your last vote counts."
-msgstr ""
-"Você pode votar novamente se desejar, mas apenas seu último voto será "
-"contado."
-
-#: helios/templates/email/vote_body.txt:21
+#: helios/templates/email/vote_body.txt:18
 msgid "In order to protect your privacy, this election is configured"
 msgstr "Para proteger sua privacidade, esta eleição foi configurada para nunca"
 
-#: helios/templates/email/vote_body.txt:22
+#: helios/templates/email/vote_body.txt:19
 msgid ""
 "to never display your voter login ID, name, or email address to the public."
 msgstr "mostrar seu ID de eleitor, nome, ou endereço eletrônico ao público."
 
-#: helios/templates/email/vote_body.txt:23
+#: helios/templates/email/vote_body.txt:20
 msgid "Instead, the ballot tracking center will only display your alias."
 msgstr "O centro de rastreamento de cédulas mostrará apenas seu pseudônimo."
 
-#: helios/templates/email/vote_body.txt:25
+#: helios/templates/email/vote_body.txt:22
 msgid "Your voter alias is"
 msgstr "Seu pseudônimo é"
 
-#: helios/templates/email/vote_body.txt:27
+#: helios/templates/email/vote_body.txt:24
 msgid "IMPORTANTLY, when you are prompted to log in to vote,"
 msgstr "ATENÇÃO, quando for solicitado que você conecte-se para votar,"
 
-#: helios/templates/email/vote_body.txt:28
+#: helios/templates/email/vote_body.txt:25
 msgid "please use your *voter ID*, not your alias."
 msgstr "por favor use seu *usuário (ID de eleitor)*, não seu pseudônimo."
 
@@ -2010,6 +2004,11 @@ msgstr "Eleições atuais"
 #: server_ui/templates/index.html:68
 msgid "no featured elections at the moment"
 msgstr "Sem eleições no momento"
+
+#~ msgid "You may re-vote if you wish: only your last vote counts."
+#~ msgstr ""
+#~ "Você pode votar novamente se desejar, mas apenas seu último voto será "
+#~ "contado."
 
 #~ msgid "Link da eleição:"
 #~ msgstr "Link da eleicão:"
