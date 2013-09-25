@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-24 16:48-0300\n"
+"POT-Creation-Date: 2013-09-24 22:34-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1036,29 +1036,28 @@ msgid "Groups"
 msgstr "Grupos"
 
 #: helios/templates/election_view.html:182
-msgid "Total"
-msgstr "Total"
+msgid "Total votes"
+msgstr "Total de Votos"
 
 #: helios/templates/election_view.html:183
-msgid "Weighted Total"
-msgstr "Total Peso"
+msgid "Total with weight"
+msgstr "Total com Peso"
 
 #: helios/templates/election_view.html:186
 msgid "Answers"
 msgstr "Respostas"
 
 #: helios/templates/election_view.html:188
-msgid "total"
-msgstr "total"
+msgid "Votes"
+msgstr "Votos"
 
 #: helios/templates/election_view.html:188
-msgid "weighted"
-msgstr "total peso"
+msgid "Votes with weight"
+msgstr "Votos com peso"
 
 #: helios/templates/election_view.html:227
-#, fuzzy
 msgid "Abstentions"
-msgstr "Sobre o Helios"
+msgstr "Abstenções"
 
 #: helios/templates/election_view.html:229
 #: helios/templates/voters_list.html:131
@@ -1067,9 +1066,8 @@ msgid "Group"
 msgstr "Grupo"
 
 #: helios/templates/election_view.html:229
-#, fuzzy
 msgid "# of abstentions"
-msgstr "Sobre o Helios"
+msgstr "Abstenções"
 
 #: helios/templates/election_view.html:246
 msgid "Election closed. Tally will be computed soon"
@@ -2021,6 +2019,18 @@ msgstr "Eleições atuais"
 #: server_ui/templates/index.html:68
 msgid "no featured elections at the moment"
 msgstr "Sem eleições no momento"
+
+#~ msgid "Total"
+#~ msgstr "Total"
+
+#~ msgid "Weighted Total"
+#~ msgstr "Total Peso"
+
+#~ msgid "total"
+#~ msgstr "total"
+
+#~ msgid "weighted"
+#~ msgstr "total peso"
 
 #~ msgid "s"
 #~ msgstr "s"
