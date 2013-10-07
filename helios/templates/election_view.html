@@ -230,18 +230,32 @@ Tally:<br />
 -->
 </table>
 
-<!--Peso total: {{info_total.weight}}<br/><br/>-->
-<!--{{election.questions.0.rules}}<br/>-->
+<!--Total weight: {{info_total.weight}}<br/><br/>-->
 
+<!--*****************
+For each question, the table showed must show ONLY the groups that were allowed to 
+answer this question. Thus, each time information about a group is to be displayed, 
+we search for the entry in question.rules corresponding to the group. Then, we check 
+whether the 'allow' field of the entry is True. In case it is True, we display group 
+informatio.
+
+In looking for the matching entries in groups and question.rules, we must not compare 
+group_id, because this field is integer in groups and string in question.rules. Thus, 
+we compare group_short_name.
+******************-->
 {% for question in election.pretty_result %}
-<!--{{question.rules}}-->
+<!--{{question.rules}}<br/>-->
 <b><span style="font-size:1.0em;">{% trans "Question" %} #{{forloop.counter}}</span><br />
 <span style="font-size:1.2em;">{{question.question}}</span></b><br />
 <table class="pretty" style="width: 100%; border: 4px solid black;">
 <tr>
   <th rowspan="1" style="vertical-align:top; text-align:right; border: 4px solid black;">{% trans "Groups" %}</th>
 {% for group in groups %}
-  <th colspan="2" style="text-align:center; border: 4px solid black;">{{group.group_name}} <!--(peso: {{group.group_weight}}/{{info_total.weight}})--></th>
+  {% for rule in question.rules %}
+    {% if rule.group_short_name == group.group_short_name and rule.allow %}
+    <th colspan="2" style="text-align:center; border: 4px solid black;">{{group.group_name}} <!--(peso: {{group.group_weight}}/{{info_total.weight}})--></th>
+    {% endif %}
+  {% endfor %}
 {% endfor %}
   <th rowspan="2" style="vertical-align:middle; border: 4px solid black;">{% trans "Total votes" %}</th>
   <th rowspan="2" style="vertical-align:middle; border: 4px solid black;">{% trans "Total with weight" %}</th>
@@ -250,8 +264,12 @@ Tally:<br />
 <tr>
   <th rowspan="1" style="vertical-align:bottom; text-align:left; border: 4px solid black;">{% trans "Answers" %}</th>
   {% for group in groups %}
-  <th style="vertical-align:top; text-align:center; border: 4px solid black;">{% trans "Votes" %}</th>
-  <th style="vertical-align:top; text-align:center; border: 4px solid black;">{% trans "Votes with weight" %}</th>
+    {% for rule in question.rules %}
+      {% if rule.group_short_name == group.group_short_name and rule.allow %}
+      <th style="vertical-align:top; text-align:center; border: 4px solid black;">{% trans "Votes" %}</th>
+      <th style="vertical-align:top; text-align:center; border: 4px solid black;">{% trans "Votes with weight" %}</th>
+      {% endif %}
+    {% endfor %}
   {% endfor %}
 </tr>
 {% for answer in question.answers %}
@@ -265,20 +283,24 @@ Tally:<br />
   {% endif %}
   </td>
   {% for group in group_info %}
-    {% for item in answer.count_per_group %}
-      {% if item.group_name == group.group_short_name %}
-      <!--{{ item.group_name }} == {{ group.group_short_name }}?<br/>-->
-      <td align="right" style="{% if answer.winner %}font-weight:bold;{% endif %} border: 2px solid black;">{{item.group_count}}</td>
-      <td align="right" style="{% if answer.winner %}font-weight:bold;{% endif %} border: 2px solid black;">
-        {% if answer.answer == "Null vote" or answer.answer == "White vote" %}
-        --
-        {% else %}
-        {{item.group_count_weight}}
-        <script>//var aux = ({{item.group_count}} / {{group.voters}}) * ({{group.group_weight}} / {{info_total.weight}});
-        		//document.write(aux.toFixed(4))</script>
+    {% for rule in question.rules %}
+    {% if rule.group_short_name == group.group_short_name and rule.allow %}
+      {% for item in answer.count_per_group %}
+        {% if item.group_name == group.group_short_name %}
+        <!--{{ item.group_name }} == {{ group.group_short_name }}?<br/>-->
+        <td align="right" style="{% if answer.winner %}font-weight:bold;{% endif %} border: 2px solid black;">{{item.group_count}}</td>
+        <td align="right" style="{% if answer.winner %}font-weight:bold;{% endif %} border: 2px solid black;">
+          {% if answer.answer == "Null vote" or answer.answer == "White vote" %}
+          --
+          {% else %}
+          {{item.group_count_weight}}
+          <script>//var aux = ({{item.group_count}} / {{group.voters}}) * ({{group.group_weight}} / {{info_total.weight}});
+        		  //document.write(aux.toFixed(4))</script>
+          {% endif %}
+        </td>
         {% endif %}
-      </td>
-      {% endif %}
+      {% endfor %}
+    {% endif %}
     {% endfor %}
   {% endfor %}
   <td align="right" style="{% if answer.winner %}font-weight:bold;{% endif %} border: 2px solid black;">{{answer.count}}</td>
