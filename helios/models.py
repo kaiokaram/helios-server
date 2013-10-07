@@ -624,24 +624,61 @@ class Election(HeliosModel):
     raw_result_exp = self.result_exp
     prettified_result = []
 
+    # compute the sum of the weights
+    total_weight = 0
+    for group in self.votergroup_set.all():
+      total_weight = total_weight + group.group_weight
+    
     # loop through questions
     for i in range(len(self.questions)):
       q = self.questions[i]
       pretty_question = []
       
+      total_weighted_count = 0.0000
+      
       # go through answers
       for j in range(len(q['answers'])):
         a = q['answers'][j]
+
+        # number of times this answer was selected
         count = raw_result[i][j]
-        count_w = raw_result_w[i][j]
-        count_g = raw_result_g[i][j]
-        #count_exp = raw_result_exp[i][j]
-        count_exp = []
-        for index, group in enumerate(self.votergroup_set.order_by('id')):
-          count_exp.append({'group_count' : raw_result_exp[index][i][j], 'group_name' : group.group_short_name})
-        pretty_question.append({'answer': a, 'count': count, 'count_w': count_w, 'count_g': count_g, 'count_exp': count_exp, 'winner': (j in winners[i])})
         
-      prettified_result.append({'question': q['short_name'], 'answers': pretty_question})
+        # number of times this answer was selected, 
+        # considering the raw weight of the group
+        count_w = raw_result_w[i][j]
+        
+        # just experimenting...
+        count_g = raw_result_g[i][j]
+
+        count_per_group = []
+        answer_weighted_count = 0.0000
+
+        # go through groups
+        for index, group in enumerate(self.votergroup_set.order_by('id')):
+          # number of people from this group who selected this question
+          group_count = raw_result_exp[index][i][j]
+          
+          # computation of votes in this answer from this category
+          group_count_weight = (float(group_count) / group.voter_set.count()) * (group.group_weight / float(total_weight))
+          
+          # computation of total of votes for this answer (from all categories)
+          answer_weighted_count += group_count_weight
+
+          count_per_group.append({'group_count' : group_count, 
+          						  'group_name' : group.group_short_name, 
+          						  'group_count_weight' : "%.4f" % group_count_weight})
+        
+        if (a != 'Null vote' and a != 'White vote'):
+          total_weighted_count += answer_weighted_count
+        pretty_question.append({'answer': a, 'count': count, 
+        						'count_w': count_w, 'count_g': count_g, 
+        						'count_per_group': count_per_group, 
+        						'weighted_count': "%.4f" % answer_weighted_count, 
+        						'winner': (j in winners[i])})
+      
+      prettified_result.append({'question': q['short_name'], 'answers': pretty_question, 
+      							'weighted_count': total_weighted_count,
+      							'rules': q['rules']})
 
     return prettified_result
     

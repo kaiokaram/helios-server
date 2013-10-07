@@ -389,16 +389,40 @@ def one_election_view(request, election):
   #row = cursor.fetchone()
   abstentions = election.voter_set.filter(vote=None).count()
   group_abstentions = []
+
+  info_total = {}
+  info_total['num_voters'] = 0
+  info_total['num_votes'] = 0
+  info_total['abstentions'] = 0
+  info_total['weight'] = 0
+
+  group_info = []
   for group in election.votergroup_set.order_by('id'):
+    info_total['weight'] += group.group_weight;
     count = election.voter_set.filter(voter_group=group, vote=None).count()
     group_abstentions.append({'group_name': group.group_name, 'count': count})
+    
+    info = {}
+    info['group_name'] = group.group_name
+    info['group_short_name'] = group.group_short_name
+    info['num_voters'] = group.voter_set.count()
+    info['num_votes'] = group.voter_set.filter(vote__isnull=False).count()
+    info['abstentions'] = group.voter_set.filter(vote__isnull=True).count()
+    info['group_weight'] = group.group_weight
+    
+    info_total['num_voters'] += info['num_voters']
+    info_total['num_votes'] += info['num_votes']
+    info_total['abstentions'] += info['abstentions']
+
+    group_info.append(info)
   
   return render_template(request, 'election_view',
                          {'election' : election, 'trustees': trustees, 'admin_p': admin_p, 'user': user,
                           'groups' : election.votergroup_set.order_by('id'), 'language' : settings.LANGUAGE_CODE,
                           'voter': voter, 'votes': votes, 'notregistered': notregistered, 'eligible_p': eligible_p,
-                          'abstentions': abstentions, 'group_abstentions': group_abstentions,
-                          'can_feature_p': can_feature_p, 'election_url' : election_url, 
+                          'abstentions': abstentions, 'group_info': group_info,
+                          'info_total': info_total, 'group_abstentions': group_abstentions,
+                          'can_feature_p': can_feature_p, 'election_url' : election_url,
                           'vote_url': vote_url, 'election_badge_url' : election_badge_url,
                           'test_cookie_url': test_cookie_url, 'socialbuttons_url' : socialbuttons_url})
 

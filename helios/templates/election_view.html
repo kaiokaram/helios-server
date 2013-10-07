@@ -171,37 +171,101 @@ Tally:<br />
 -->
 
 <h3 class="highlight-box">{% trans "Tally" %}</h3>
+
+<table class="pretty" style="width: auto; border: 4px solid black;">
+<tr>
+  <th></th>
+  {% for group in group_info %}
+  <th style="text-align:center; border: 4px solid black;">{{group.group_name}}</th>
+  {% endfor %}
+  <th style="text-align:center; border: 4px solid black;">{% trans "Total" %}</th>
+</tr>
+<tr>
+  <th style="text-align:center; border: 4px solid black;">{% trans "Factor" %}</th>
+  {% for group in group_info %}
+  <td style="text-align:center; border: 4px solid black;">{{group.group_weight}}/{{info_total.weight}}</td>
+  {% endfor %}
+  <td style="text-align:center; border: 4px solid black;">--</td>
+</tr>
+<tr>
+  <th style="text-align:center; border: 4px solid black;">{% trans "Number of voters" %}</th>
+  {% for group in group_info %}
+  <td style="text-align:center; border: 4px solid black;">{{group.num_voters}}</td>
+  {% endfor %}
+  <td style="text-align:center; border: 4px solid black;">{{info_total.num_voters}}</td>
+</tr>
+<tr>
+  <th style="text-align:center; border: 4px solid black;">{% trans "Number of cast votes" %}</th>
+  {% for group in group_info %}
+  <td style="text-align:center; border: 4px solid black;">{{group.num_votes}}</td>
+  {% endfor %}
+  <td style="text-align:center; border: 4px solid black;">{{info_total.num_votes}}</td>
+</tr>
+<!--
+<tr>
+  <th style="text-align:center; border: 4px solid black;">{% trans "Abstentions" %}</th>
+  {% for group in group_info %}
+  <td style="text-align:center; border: 4px solid black;">{{group.abstentions}}</td>
+  {% endfor %}
+  <td style="text-align:center; border: 4px solid black;">{{info_total.abstentions}}</td>
+</tr>
+-->
+<tr>
+  <th style="text-align:center; border: 4px solid black;">{% trans "Abstentions" %}</th>
+  {% for group in group_info %}
+  <td style="text-align:center; border: 4px solid black;">
+  <script>aux = ({{group.abstentions}} / {{group.num_voters}})*100;
+  		  document.write(aux.toFixed(2));</script>%
+  </td>
+  {% endfor %}
+  <td style="text-align:center; border: 4px solid black;">{{info_total.abstentions}}</td>
+</tr>
+<!--
+<tr>
+  <th>Branco</th>
+</tr>
+<tr>
+  <th>Nulo</th>
+</tr>
+-->
+</table>
+
+<!--Peso total: {{info_total.weight}}<br/><br/>-->
+<!--{{election.questions.0.rules}}<br/>-->
+
 {% for question in election.pretty_result %}
+<!--{{question.rules}}-->
 <b><span style="font-size:1.0em;">{% trans "Question" %} #{{forloop.counter}}</span><br />
 <span style="font-size:1.2em;">{{question.question}}</span></b><br />
-<table class="pretty" style="width: auto; border: 4px solid black;">
+<table class="pretty" style="width: 100%; border: 4px solid black;">
 <tr>
   <th rowspan="1" style="vertical-align:top; text-align:right; border: 4px solid black;">{% trans "Groups" %}</th>
 {% for group in groups %}
-  <th colspan="2" style="text-align:center; border: 4px solid black;">{{group.group_name}} (peso: {{group.group_weight}})</th>
+  <th colspan="2" style="text-align:center; border: 4px solid black;">{{group.group_name}} <!--(peso: {{group.group_weight}}/{{info_total.weight}})--></th>
 {% endfor %}
   <th rowspan="2" style="vertical-align:middle; border: 4px solid black;">{% trans "Total votes" %}</th>
   <th rowspan="2" style="vertical-align:middle; border: 4px solid black;">{% trans "Total with weight" %}</th>
+  <th rowspan="2" style="vertical-align:middle; border: 4px solid black;">{% trans "% of weighted votes" %}</th>
 </tr>
 <tr>
   <th rowspan="1" style="vertical-align:bottom; text-align:left; border: 4px solid black;">{% trans "Answers" %}</th>
   {% for group in groups %}
-  <th style="vertical-align:top; text-align:right; border: 4px solid black;">{% trans "Votes" %}</th>
-  <th style="vertical-align:top; text-align:right; border: 4px solid black;">{% trans "Votes with weight" %}</th>
+  <th style="vertical-align:top; text-align:center; border: 4px solid black;">{% trans "Votes" %}</th>
+  <th style="vertical-align:top; text-align:center; border: 4px solid black;">{% trans "Votes with weight" %}</th>
   {% endfor %}
 </tr>
 {% for answer in question.answers %}
 <tr>
   <td style="padding-right:80px;{% if answer.winner %}font-weight:bold;{% endif %} border: 2px solid black;">
-  {% if language == "pt-BR" and answer.answer == "Null vote" %}Votos nulos
+  {% if language == "pt-BR" and answer.answer == "Null vote" %}Nulos
   {% else %}
-  {% if language == "pt-BR" and answer.answer == "White vote" %}Votos brancos
+  {% if language == "pt-BR" and answer.answer == "White vote" %}Brancos
     {% else %}{{answer.answer}}
     {% endif %}
   {% endif %}
   </td>
-  {% for group in groups %}
-    {% for item in answer.count_exp %}
+  {% for group in group_info %}
+    {% for item in answer.count_per_group %}
       {% if item.group_name == group.group_short_name %}
       <!--{{ item.group_name }} == {{ group.group_short_name }}?<br/>-->
       <td align="right" style="{% if answer.winner %}font-weight:bold;{% endif %} border: 2px solid black;">{{item.group_count}}</td>
@@ -209,7 +273,9 @@ Tally:<br />
         {% if answer.answer == "Null vote" or answer.answer == "White vote" %}
         --
         {% else %}
-        <script>document.write({{item.group_count}} * {{group.group_weight}})</script>
+        {{item.group_count_weight}}
+        <script>//var aux = ({{item.group_count}} / {{group.voters}}) * ({{group.group_weight}} / {{info_total.weight}});
+        		//document.write(aux.toFixed(4))</script>
         {% endif %}
       </td>
       {% endif %}
@@ -218,15 +284,20 @@ Tally:<br />
   <td align="right" style="{% if answer.winner %}font-weight:bold;{% endif %} border: 2px solid black;">{{answer.count}}</td>
   {% if answer.answer == "Null vote" or answer.answer == "White vote" %}
     <td align="right" style="border: 2px solid black;">--</td>
+    <td align="right" style="border: 2px solid black;">--</td>
   {% else %}
-    <td align="right" style="{% if answer.winner %}font-weight:bold;{% endif %} border: 2px solid black;">{{answer.count_w}}</td>
+    <td align="right" style="{% if answer.winner %}font-weight:bold;{% endif %} border: 2px solid black;">
+    {{answer.weighted_count}}<!--{{answer.count_w}}--></td>
+    <td align="right" style="{% if answer.winner %}font-weight:bold;{% endif %} border: 2px solid black;">
+    <script>aux = ({{answer.weighted_count}} / {{question.weighted_count}})*100;
+    		document.write(aux.toFixed(2));</script>%</td>
   {% endif %}
 </tr>
 {% endfor %}
-</table>
-<br/>
+</table><br/>
 {% endfor %}
 
+<!--
 <b>{% trans "Abstentions" %}</b>
 <table class="pretty" style="width: auto; border: 4px solid">
 <tr><th style="border: 4px solid black;">{% trans "Group" %}</th>
@@ -242,7 +313,7 @@ Tally:<br />
   <td style="text-align:right; border: 4px solid black;">{{ abstentions }}</td>
 </tr>
 </table>
-
+-->
 {% else %}
 
 {% if election.voting_has_stopped %}
