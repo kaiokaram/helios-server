@@ -329,11 +329,11 @@ BOOTH.get_rule = function(question_num, voter_group_id) {
   }
   
   return null;
-}
+};
 
 BOOTH.voter_group_id = '';
 
-BOOTH.show_question = function(question_num, op = 'next') {
+BOOTH.show_question = function(question_num, op) {
   //alert(':'+BOOTH.ballot.null_or_white[question_num]+':');
   BOOTH.started_p = true;
 
@@ -407,10 +407,10 @@ BOOTH.check_group_selection = function() {
   }
   else {
     BOOTH.setup_allowed_questions();
-    BOOTH.show_question(0);
+    BOOTH.show_question(0, 'next');
   }
   return false;
-}
+};
 
 
 BOOTH.click_checkbox_script = function(question_num, answer_num) {
@@ -747,12 +747,14 @@ BOOTH.do_done = function() {
   -->
   <div id="election_div" class="panel">
     <script language="javascript">
-      if (language == 'pt-BR')
+      if (language == 'pt-BR') {
         document.write('<h3>Carregando interface de votação...</h3>');
         document.write('<div align="center"><img src="loading.gif" /><br />><!--Este processo pode demorar até 10 segundos--></div>');
-      else
+      }
+      else {
         document.write('<h3>Checking capabilities and loading election booth...</h3>');
         document.write('<div align="center"><img src="loading.gif" /><br /><!--This may take up to 10 seconds--></div>');
+      }
     </script>
   </div>
 
